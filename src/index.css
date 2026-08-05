@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --font-oswald: 'Oswald', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #1A1A1A;
+  color: #F5F5F0;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sharp focus outlines for accessibility */
+*:focus-visible {
+  outline: 3px solid #FFC300 !important;
+  outline-offset: 2px !important;
+}
+
+/* Disable smooth scrolling on anchor links for instant jump */
+html {
+  scroll-behavior: auto;
+}

@@ -5,7 +5,7 @@ export function Privacy() {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | Ironclad Plumbing</title>
+        <title>Privacy Policy | SOLO Plumbing & Heating</title>
         <meta name="description" content="Privacy policy and data collection practices." />
       </Helmet>
 
@@ -55,7 +55,7 @@ export function Privacy() {
 
           <div className="flex flex-col gap-4">
             <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Contact Us</h3>
-            <p>If you have questions or comments about this notice, you may email us at <a href="mailto:dispatch@ironcladplumbing.com" className="text-[#FFC300] underline">dispatch@ironcladplumbing.com</a>.</p>
+            <p>If you have questions or comments about this notice, you may email us at <a href="mailto:dispatch@ironcladplumbing.com" className="text-[#1F46B4] underline">dispatch@ironcladplumbing.com</a>.</p>
           </div>
 
         </div>

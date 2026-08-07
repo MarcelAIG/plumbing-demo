@@ -7,13 +7,13 @@ export function Services() {
   return (
     <>
       <Helmet>
-        <title>Emergency Plumbing Services — 24/7 Dispatch | Ironclad Plumbing</title>
+        <title>Emergency Plumbing Services — 24/7 Dispatch | SOLO Plumbing & Heating</title>
         <meta name="description" content="We handle five core plumbing emergencies across Portland: Burst pipes, sewer backups, flooding, no heat, and emergency drain clearing." />
       </Helmet>
 
       {/* 7.1 Compact Hero */}
       <section className="bg-[#1A1A1A] py-[80px] lg:py-[100px] px-4 text-center min-h-[340px] lg:min-h-[420px] flex flex-col justify-center items-center">
-        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#FFC300]">WHAT WE HANDLE</span>
+        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">WHAT WE HANDLE</span>
         <h1 className="text-[42px] lg:text-[52px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.1] mt-2 max-w-[800px]">
           Five emergencies. Every truck, every night.
         </h1>
@@ -35,17 +35,17 @@ export function Services() {
               <ul className="mt-6 flex flex-col gap-3">
                 {s.included.slice(0, 5).map((item, i) => (
                   <li key={i} className="flex gap-3 text-[15px] text-[#F5F5F0]">
-                    <span className="text-[#FFC300] shrink-0 mt-0.5">■</span>
+                    <span className="text-[#1F46B4] shrink-0 mt-0.5">■</span>
                     <span className="leading-snug">{item}</span>
                   </li>
                 ))}
               </ul>
               
               <div className="mt-8 border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div className="bg-[#FFC300] text-[#1A1A1A] font-[800] px-4 py-2 text-[13px] tracking-wide uppercase rounded-[2px]">
+                <div className="bg-[#1F46B4] text-white font-[800] px-4 py-2 text-[13px] tracking-wide uppercase rounded-[2px]">
                   {s.pricing.callout.split(':')[0]}: {s.pricing.callout.split(':')[1]} &middot; Fixed on the call
                 </div>
-                <Link to={`/services/${s.id}`} className="text-[16px] font-[600] text-[#F5F5F0] hover:text-[#FFC300] underline transition-colors shrink-0">
+                <Link to={`/services/${s.id}`} className="text-[16px] font-[600] text-[#F5F5F0] hover:text-[#1F46B4] underline transition-colors shrink-0">
                   See full details &rarr;
                 </Link>
               </div>

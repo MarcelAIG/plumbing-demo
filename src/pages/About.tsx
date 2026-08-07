@@ -6,14 +6,14 @@ export function About() {
   return (
     <>
       <Helmet>
-        <title>About Us — 24/7 Dispatch | Ironclad Plumbing</title>
+        <title>About Us — 24/7 Dispatch | SOLO Plumbing & Heating</title>
         <meta name="description" content="A dispatch-first emergency plumbing operation serving Portland. Every truck stocked, every technician licensed, every dispatcher awake." />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "Ironclad Plumbing",
+              "name": "SOLO Plumbing & Heating",
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
@@ -28,7 +28,7 @@ export function About() {
       <section className="w-full bg-[#1A1A1A] min-h-[500px] flex items-center px-4 py-16">
         <div className="max-w-[1280px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
           <div>
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#FFC300]">ABOUT IRONCLAD PLUMBING</span>
+            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">ABOUT IRONCLAD PLUMBING</span>
             <h1 className="text-[42px] lg:text-[60px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.05] mt-2">
               We built this for the 2am calls.
             </h1>
@@ -64,7 +64,7 @@ export function About() {
       <section className="bg-[#1A1A1A] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[1280px] mx-auto">
           <div className="text-center mb-12 flex flex-col items-center">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#FFC300]">THE TEAM</span>
+            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">THE TEAM</span>
             <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mt-2">Who answers when you call.</h2>
             <p className="text-[17px] text-[#9C9C96] max-w-[600px] mt-4 leading-[1.6]">
               Every dispatcher and technician is directly employed — no call center, no subcontracted labor.
@@ -86,27 +86,27 @@ export function About() {
       <section className="bg-[#242424] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#FFC300] flex items-center justify-center rounded-full"><Award size={20} /></div>
+            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Award size={20} /></div>
             <span className="text-[16px] font-[700] text-[#F5F5F0]">Master Plumber License #MP-78291</span>
           </div>
           <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#FFC300] flex items-center justify-center rounded-full"><Shield size={20} /></div>
+            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Shield size={20} /></div>
             <span className="text-[16px] font-[700] text-[#F5F5F0]">Full liability & workers' comp insurance</span>
           </div>
           <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#FFC300] flex items-center justify-center rounded-full"><CheckCircle size={20} /></div>
+            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><CheckCircle size={20} /></div>
             <span className="text-[16px] font-[700] text-[#F5F5F0]">State-certified backflow prevention</span>
           </div>
           <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#FFC300] flex items-center justify-center rounded-full"><Droplets size={20} /></div>
+            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Droplets size={20} /></div>
             <span className="text-[16px] font-[700] text-[#F5F5F0]">EPA-compliant water damage protocols</span>
           </div>
           <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#FFC300] flex items-center justify-center rounded-full"><Target size={20} /></div>
+            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Target size={20} /></div>
             <span className="text-[16px] font-[700] text-[#F5F5F0]">Better Business Bureau accredited</span>
           </div>
           <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#FFC300] flex items-center justify-center rounded-full"><Clock size={20} /></div>
+            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Clock size={20} /></div>
             <span className="text-[16px] font-[700] text-[#F5F5F0]">24/7 dispatch certification (internal SLA)</span>
           </div>
         </div>
@@ -117,16 +117,16 @@ export function About() {
         <div className="max-w-[1280px] mx-auto text-center">
           <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mb-12">What we won't compromise on</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-[#242424] p-8 border-t-4 border-[#FFC300] rounded-[2px]">
+            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
               <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Answer every call live.</span>
             </div>
-            <div className="bg-[#242424] p-8 border-t-4 border-[#FFC300] rounded-[2px]">
+            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
               <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Quote the price before we dispatch.</span>
             </div>
-            <div className="bg-[#242424] p-8 border-t-4 border-[#FFC300] rounded-[2px]">
+            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
               <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Staff our own trucks — no subcontractors.</span>
             </div>
-            <div className="bg-[#242424] p-8 border-t-4 border-[#FFC300] rounded-[2px]">
+            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
               <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Show up in the window we promise.</span>
             </div>
           </div>
@@ -145,7 +145,7 @@ function TeamMember({ name, role, tenure, imgUrl }: { name: string, role: string
         <img src={imgUrl} alt={name} className="w-full h-full object-cover grayscale" />
       </div>
       <span className="text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase">{name}</span>
-      <span className="text-[15px] font-[600] text-[#FFC300] mt-1">{role}</span>
+      <span className="text-[15px] font-[600] text-[#1F46B4] mt-1">{role}</span>
       <span className="text-[14px] text-[#9C9C96] mt-2">{tenure} tenure</span>
     </div>
   );

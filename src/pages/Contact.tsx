@@ -6,13 +6,13 @@ export function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact Us — Request Dispatch | Ironclad Plumbing</title>
+        <title>Contact Us — Request Dispatch | SOLO Plumbing & Heating</title>
         <meta name="description" content="Call now, or request dispatch online. For active emergencies, always call. The form is for non-urgent scheduling." />
       </Helmet>
 
       {/* 13.1 Compact Hero */}
       <section className="bg-[#1A1A1A] py-[80px] lg:py-[100px] px-4 text-center min-h-[340px] lg:min-h-[420px] flex flex-col justify-center items-center">
-        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#FFC300]">GET IN TOUCH</span>
+        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">GET IN TOUCH</span>
         <h1 className="text-[42px] lg:text-[52px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.1] mt-2 max-w-[800px]">
           Call now, or request dispatch.
         </h1>
@@ -24,14 +24,14 @@ export function Contact() {
       {/* 13.2 Three-Way Contact */}
       <section className="bg-[#242424] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#1A1A1A] border-t-4 border-[#D64541] rounded-[2px] p-8 flex flex-col items-start gap-4">
-            <Phone size={32} className="text-[#D64541]" />
+          <div className="bg-[#1A1A1A] border-t-4 border-[#F2131A] rounded-[2px] p-8 flex flex-col items-start gap-4">
+            <Phone size={32} className="text-[#F2131A]" />
             <h3 className="text-[24px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Call (Primary)</h3>
-            <a href="tel:5552020199" className="text-[32px] font-[800] text-[#D64541] font-oswald">555-202-0199</a>
+            <a href="tel:5552020199" className="text-[32px] font-[800] text-[#F2131A] font-oswald">555-202-0199</a>
           </div>
           
-          <div className="bg-[#1A1A1A] border-t-4 border-[#FFC300] rounded-[2px] p-8 flex flex-col items-start gap-4">
-            <MousePointerClick size={32} className="text-[#FFC300]" />
+          <div className="bg-[#1A1A1A] border-t-4 border-[#1F46B4] rounded-[2px] p-8 flex flex-col items-start gap-4">
+            <MousePointerClick size={32} className="text-[#1F46B4]" />
             <h3 className="text-[24px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Online</h3>
             <a href="#dispatch-form" className="text-[18px] font-[600] text-[#F5F5F0] underline">Request dispatch online &rarr;</a>
           </div>
@@ -48,49 +48,49 @@ export function Contact() {
       <section id="dispatch-form" className="bg-[#1A1A1A] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[800px] mx-auto bg-[#242424] p-[32px] lg:p-[48px] rounded-[4px] border border-white/5">
           <h2 className="text-[30px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mb-2">Request Dispatch</h2>
-          <p className="text-[15px] font-[600] text-[#D64541] mb-8">Note: For active flooding or gas smell, call 555-202-0199 directly — do not wait for a form response.</p>
+          <p className="text-[15px] font-[600] text-[#F2131A] mb-8">Note: For active flooding or gas smell, call 555-202-0199 directly — do not wait for a form response.</p>
           
           <form className="flex flex-col gap-6" onSubmit={e => e.preventDefault()}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
                 <label className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Name</label>
-                <input type="text" className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#FFC300] outline-none" required />
+                <input type="text" className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#1F46B4] outline-none" required />
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Phone Number</label>
-                <input type="tel" className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#FFC300] outline-none" required />
+                <input type="tel" className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#1F46B4] outline-none" required />
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Address</label>
-              <input type="text" className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#FFC300] outline-none" required />
+              <input type="text" className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#1F46B4] outline-none" required />
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">What's happening?</label>
-              <textarea rows={4} className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#FFC300] outline-none resize-y" required></textarea>
+              <textarea rows={4} className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-3 text-[#F5F5F0] focus:border-[#1F46B4] outline-none resize-y" required></textarea>
             </div>
 
             <div className="flex flex-col gap-3">
               <label className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Is this active right now?</label>
               <div className="flex flex-col gap-3">
                 <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="urgency" value="water_spreading" className="w-5 h-5 accent-[#FFC300]" required />
+                  <input type="radio" name="urgency" value="water_spreading" className="w-5 h-5 accent-[#1F46B4]" required />
                   <span className="text-[16px] text-[#F5F5F0]">Yes, water is spreading</span>
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="urgency" value="no_heat" className="w-5 h-5 accent-[#FFC300]" />
+                  <input type="radio" name="urgency" value="no_heat" className="w-5 h-5 accent-[#1F46B4]" />
                   <span className="text-[16px] text-[#F5F5F0]">No heat or hot water</span>
                 </label>
                 <label className="flex items-center gap-3 cursor-pointer">
-                  <input type="radio" name="urgency" value="scheduled" className="w-5 h-5 accent-[#FFC300]" />
+                  <input type="radio" name="urgency" value="scheduled" className="w-5 h-5 accent-[#1F46B4]" />
                   <span className="text-[16px] text-[#F5F5F0]">Scheduled, non-urgent</span>
                 </label>
               </div>
             </div>
 
-            <button type="submit" className="mt-4 bg-[#FFC300] text-[#1A1A1A] font-[800] py-4 rounded-[2px] text-[16px] uppercase tracking-wide border-2 border-[#FFC300] hover:bg-transparent hover:text-[#FFC300] transition-colors self-start px-8">
+            <button type="submit" className="mt-4 bg-[#1F46B4] text-white font-[800] py-4 rounded-[2px] text-[16px] uppercase tracking-wide border-2 border-[#1F46B4] hover:bg-transparent hover:text-[#1F46B4] transition-colors self-start px-8">
               Request dispatch &rarr;
             </button>
           </form>

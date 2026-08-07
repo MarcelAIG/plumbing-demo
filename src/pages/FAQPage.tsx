@@ -10,7 +10,7 @@ export function FAQPage() {
   return (
     <>
       <Helmet>
-        <title>FAQ — Emergency Plumbing Questions | Ironclad Plumbing</title>
+        <title>FAQ — Emergency Plumbing Questions | SOLO Plumbing & Heating</title>
         <meta name="description" content="Common questions about our 24/7 plumbing dispatch. If your question isn't here, call us — a real dispatcher will answer." />
         <script type="application/ld+json">
           {`
@@ -36,7 +36,7 @@ export function FAQPage() {
 
       {/* 12.1 Hero */}
       <section className="bg-[#1A1A1A] py-[80px] lg:py-[100px] px-4 text-center min-h-[340px] lg:min-h-[420px] flex flex-col justify-center items-center">
-        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#FFC300]">QUESTIONS</span>
+        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">QUESTIONS</span>
         <h1 className="text-[42px] lg:text-[52px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.1] mt-2 max-w-[800px]">
           Everything you might want to know.
         </h1>
@@ -65,7 +65,7 @@ export function FAQPage() {
                         aria-controls={`faq-answer-${faqId}`}
                       >
                         <span className="text-[16px] font-[700] text-[#F5F5F0] pr-4">{faq.q}</span>
-                        {isOpen ? <ChevronUp className="text-[#FFC300] shrink-0" /> : <ChevronDown className="text-[#FFC300] shrink-0" />}
+                        {isOpen ? <ChevronUp className="text-[#1F46B4] shrink-0" /> : <ChevronDown className="text-[#1F46B4] shrink-0" />}
                       </button>
                       {isOpen && (
                         <div id={`faq-answer-${faqId}`} className="px-6 pb-5 pt-0 text-[16px] text-[#9C9C96] leading-[1.6]">

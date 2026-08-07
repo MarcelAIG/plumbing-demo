@@ -5,7 +5,7 @@ export function Terms() {
   return (
     <>
       <Helmet>
-        <title>Terms of Service | Ironclad Plumbing</title>
+        <title>Terms of Service | SOLO Plumbing & Heating</title>
         <meta name="description" content="Terms of service, pricing disclosure, and guarantees." />
       </Helmet>
 
@@ -25,7 +25,7 @@ export function Terms() {
           
           <div className="flex flex-col gap-4">
             <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Service Agreement</h3>
-            <p>These terms constitute a legally binding agreement made between you and Ironclad Plumbing concerning your access to and use of our emergency plumbing dispatch services. By requesting a dispatch, you agree that you have read, understood, and agreed to be bound by all of these Terms of Service.</p>
+            <p>These terms constitute a legally binding agreement made between you and SOLO Plumbing & Heating concerning your access to and use of our emergency plumbing dispatch services. By requesting a dispatch, you agree that you have read, understood, and agreed to be bound by all of these Terms of Service.</p>
           </div>
 
           <div className="flex flex-col gap-4">

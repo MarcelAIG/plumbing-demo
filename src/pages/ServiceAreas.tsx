@@ -8,13 +8,13 @@ export function ServiceAreas() {
   return (
     <>
       <Helmet>
-        <title>Service Areas — 24/7 Dispatch | Ironclad Plumbing</title>
+        <title>Service Areas — 24/7 Dispatch | SOLO Plumbing & Heating</title>
         <meta name="description" content="Dispatched across Portland, every night. Check out our six core neighborhoods and local response times." />
       </Helmet>
 
       {/* 9.1 Compact Hero */}
       <section className="bg-[#1A1A1A] py-[80px] lg:py-[100px] px-4 text-center min-h-[340px] lg:min-h-[420px] flex flex-col justify-center items-center">
-        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#FFC300]">AREAS COVERED</span>
+        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">AREAS COVERED</span>
         <h1 className="text-[42px] lg:text-[52px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.1] mt-2 max-w-[800px]">
           Dispatched across Portland, every night.
         </h1>
@@ -29,13 +29,13 @@ export function ServiceAreas() {
       <section className="bg-[#242424] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {NEIGHBORHOODS.map(n => (
-            <Link key={n.id} to={`/service-areas/${n.id}`} className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-[28px] hover:border-[#FFC300] transition-colors flex flex-col group block">
-              <MapPin className="text-[#FFC300] mb-4" size={28} />
+            <Link key={n.id} to={`/service-areas/${n.id}`} className="bg-[#1A1A1A] border border-white/10 rounded-[2px] p-[28px] hover:border-[#1F46B4] transition-colors flex flex-col group block">
+              <MapPin className="text-[#1F46B4] mb-4" size={28} />
               <h3 className="text-[20px] lg:text-[26px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.1] mb-3">{n.title}</h3>
               <div className="bg-[#242424] text-[#F5F5F0] font-[600] text-[14px] px-3 py-1.5 rounded-[2px] self-start border border-white/5 mb-6">
                 {n.responseTime}
               </div>
-              <span className="text-[15px] font-[600] text-[#FFC300] mt-auto">See {n.title} page &rarr;</span>
+              <span className="text-[15px] font-[600] text-[#1F46B4] mt-auto">See {n.title} page &rarr;</span>
             </Link>
           ))}
         </div>

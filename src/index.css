@@ -25,3 +25,12 @@ body {
 html {
   scroll-behavior: auto;
 }
+
+/* Chat widget mobile adjustments */
+@media (max-width: 1024px) {
+  #chat-widget-container, div[id*="chat-widget"], iframe[id*="chat-widget"] {
+    transform: scale(0.85);
+    transform-origin: bottom right;
+    bottom: 84px !important; margin-bottom: 0 !important;
+  }
+}

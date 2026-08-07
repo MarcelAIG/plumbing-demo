@@ -27,13 +27,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <HelmetProvider>
-      <div className="flex flex-col min-h-screen bg-[#1A1A1A] text-[#F5F5F0]">
+      <div className="flex flex-col min-h-screen pb-[74px] lg:pb-0 bg-[#1A1A1A] text-[#F5F5F0]">
         
         {/* 5.2 Main Navigation */}
         <nav className={`sticky top-0 z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5 shadow-lg' 
-            : 'bg-[#1A1A1A]/0'
+            ? 'bg-[#1A1A1A]/95 backdrop-blur-md border-b border-white/5 shadow-lg' 
+            : 'bg-[#1A1A1A] lg:bg-[#1A1A1A]/0'
         }`}>
           <div className="w-full max-w-[1280px] mx-auto h-[64px] lg:h-[80px] px-4 lg:px-8 flex items-center justify-between">
             <Link to="/" className="flex items-center -ml-5 lg:-ml-[48px]" aria-label="Home">
@@ -95,21 +95,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-40 bg-[#1A1A1A] pt-[80px] px-6 flex flex-col gap-6 overflow-y-auto pb-10">
+          <div className="fixed inset-0 z-40 bg-[#1A1A1A] pt-[80px] px-6 flex flex-col gap-6 overflow-y-auto pb-[100px]">
             <MobileNavLink to="/">Home</MobileNavLink>
             <MobileNavLink to="/services">Services</MobileNavLink>
             <MobileNavLink to="/service-areas">Service Areas</MobileNavLink>
             <MobileNavLink to="/about">About</MobileNavLink>
             <MobileNavLink to="/faq">FAQ</MobileNavLink>
             <MobileNavLink to="/contact">Contact</MobileNavLink>
-            <div className="mt-8 flex flex-col gap-4">
-              <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="w-full text-center bg-[#F2131A] text-[#F5F5F0] font-[800] text-[16px] py-4 rounded-[2px] uppercase hover:bg-[#D91117] active:scale-[0.98] transition-all">
-                CALL NOW
-              </a>
-              <Link to="/contact" className="w-full text-center border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] text-[16px] py-4 rounded-[2px] uppercase hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors">
-                REQUEST SERVICE
-              </Link>
-            </div>
           </div>
         )}
 
@@ -118,6 +110,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </main>
 
         <Footer />
+
+        {/* Mobile Sticky Action Buttons */}
+        <div className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden bg-[#1A1A1A] border-t-2 border-[#1F46B4] p-3 gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+          <a href="tel:6504871907" className="flex-1 bg-[#F2131A] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center gap-2 hover:bg-[#D91117] active:scale-[0.98] transition-all">
+            <Phone size={16} />
+            CALL NOW
+          </a>
+          <Link to="/contact" className="flex-1 border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center uppercase hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors">
+            REQUEST SERVICE
+          </Link>
+        </div>
       </div>
     </HelmetProvider>
   );

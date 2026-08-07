@@ -223,7 +223,7 @@ export function Home() {
               <div className="text-[16px] text-[#9C9C96] font-[600] mt-2">when you need us</div>
             </div>
             <div className="bg-[#242424] p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[40px] lg:text-[56px] font-[800] text-[#F5F5F0] font-oswald leading-none">4.9<span className="text-[#FFC300]">★</span></div>
+              <div className="text-[40px] lg:text-[56px] font-[800] text-[#F5F5F0] font-oswald leading-none">4.9<span className="text-[#FFC300] relative -top-[6px] text-[0.85em]">★</span></div>
               <div className="text-[16px] text-[#F5F5F0] font-[600] mt-2">average rating</div>
             </div>
           </div>
@@ -231,7 +231,7 @@ export function Home() {
           <div className="mt-[80px] max-w-[1000px] mx-auto">
             <h3 className="text-center text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald mb-2">What Portland Locals Say</h3>
             <div className="text-center mb-8 flex items-center justify-center gap-2">
-              <span className="text-[20px] font-[700] text-[#F5F5F0]">4.9<span className="text-[#FFC300]">★</span></span>
+              <span className="text-[20px] font-[700] text-[#F5F5F0]">4.9<span className="text-[#FFC300] relative -top-[2px] text-[0.85em]">★</span></span>
               <span className="text-[20px] font-[700] text-[#F5F5F0]">Average Rating</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">

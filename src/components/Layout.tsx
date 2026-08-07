@@ -36,11 +36,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             : 'bg-[#1A1A1A] lg:bg-[#1A1A1A]/0'
         }`}>
           <div className="w-full max-w-[1280px] mx-auto h-[64px] lg:h-[80px] px-4 lg:px-8 flex items-center justify-between">
-            <Link to="/" className="flex items-center -ml-5 lg:-ml-[48px]" aria-label="Home">
+            <Link to="/" className="flex items-center mt-1 -ml-3 lg:-ml-[32px]" aria-label="Home">
             <Logo className="w-24 lg:w-32" />
           </Link>
           
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-8 relative -left-6">
             <NavLink to="/">Home</NavLink>
             
             <div className="relative group h-[80px] flex items-center">
@@ -73,7 +73,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             <NavLink to="/about">About</NavLink>
-            <NavLink to="/faq">FAQ</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </div>
 
@@ -95,12 +94,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-40 bg-[#1A1A1A] pt-[80px] px-6 flex flex-col gap-6 overflow-y-auto pb-[100px]">
+          <div className="fixed inset-0 z-40 bg-[#1A1A1A] pt-[80px] px-6 flex flex-col gap-8 overflow-y-auto pb-[100px]">
             <MobileNavLink to="/">Home</MobileNavLink>
             <MobileNavLink to="/services">Services</MobileNavLink>
             <MobileNavLink to="/service-areas">Service Areas</MobileNavLink>
             <MobileNavLink to="/about">About</MobileNavLink>
-            <MobileNavLink to="/faq">FAQ</MobileNavLink>
             <MobileNavLink to="/contact">Contact</MobileNavLink>
           </div>
         )}

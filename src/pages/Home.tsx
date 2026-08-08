@@ -403,6 +403,12 @@ export function Home() {
                 </div>
               </div>
             </div>
+            
+            <div className="mt-[40px] text-center">
+              <Link to="/leave-review" className="inline-flex items-center gap-2 bg-[#1F46B4] text-[#F5F5F0] font-[800] text-[16px] px-[32px] py-[16px] rounded-[4px] uppercase tracking-wide hover:bg-[#153488] transition-colors border-2 border-[#1F46B4]">
+                <span className="text-[#FFC300] text-[1.2em]">★</span> Leave Us a Review
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -437,36 +443,6 @@ export function Home() {
 
           <div className="text-center mt-[32px]">
             <Link to="/faq" className="text-[16px] font-[600] text-[#1F46B4] hover:underline">See the full FAQ &rarr;</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 6.8 Reviews */}
-      <section className="bg-[#1A1A1A] py-[90px] lg:py-[120px] px-4">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">WHAT PEOPLE SAY</span>
-            <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mt-2">510+ real reviews.</h2>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-[60px]">
-            <div className="bg-[#242424] p-8 border border-white/10 rounded-[4px]">
-              <p className="text-[16px] text-[#F5F5F0] leading-[1.6] italic">"Basement was flooding at 1am. They picked up on the second ring, quoted a fixed price, and had a truck at my door in 25 minutes."</p>
-              <div className="mt-6 text-[14px] text-[#9C9C96]">
-                <span className="font-[700] text-[#F5F5F0]">Marcus T.</span> &middot; Riverside &middot; Flood extraction &middot; April 2026
-              </div>
-            </div>
-            <div className="bg-[#242424] p-8 border border-white/10 rounded-[4px]">
-              <p className="text-[16px] text-[#F5F5F0] leading-[1.6] italic">"Sewer backed up into the kitchen on Thanksgiving. They didn't flinch, handled the mess professionally, fixed the root cause same visit."</p>
-              <div className="mt-6 text-[14px] text-[#9C9C96]">
-                <span className="font-[700] text-[#F5F5F0]">Dana W.</span> &middot; Oakwood &middot; Sewer emergency &middot; November 2025
-              </div>
-            </div>
-            <div className="bg-[#242424] p-8 border border-white/10 rounded-[4px]">
-              <p className="text-[16px] text-[#F5F5F0] leading-[1.6] italic">"Furnace and hot water died during a cold snap. Had heat back by midnight. Genuinely saved our pipes from freezing."</p>
-              <div className="mt-6 text-[14px] text-[#9C9C96]">
-                <span className="font-[700] text-[#F5F5F0]">Ray H.</span> &middot; Highland Park &middot; No heat emergency &middot; January 2026
-              </div>
-            </div>
           </div>
         </div>
       </section>

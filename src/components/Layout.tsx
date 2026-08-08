@@ -77,7 +77,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:6504871907" className="bg-[#F2131A] text-[#F5F5F0] font-[800] text-[15px] px-[20px] py-[13px] rounded-[2px] tracking-wide hover:bg-[#D91117] active:scale-[0.98] transition-all flex items-center gap-2 border-2 border-[#F2131A]">
+            <a href="tel:6504871907" className="bg-[#F2131A] text-[#F5F5F0] font-[800] text-[15px] px-[20px] py-[13px] rounded-[2px] tracking-wide hover:bg-transparent hover:text-[#F2131A] active:scale-[0.98] transition-all flex items-center gap-2 border-2 border-[#F2131A]">
               <Phone size={18} />
               (650) 487-1907
             </a>
@@ -111,7 +111,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Sticky Action Buttons */}
         <div className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden bg-[#1A1A1A] border-t-2 border-[#1F46B4] p-3 gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-          <a href="tel:6504871907" className="flex-1 bg-[#F2131A] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center gap-2 hover:bg-[#D91117] active:scale-[0.98] transition-all">
+          <a href="tel:6504871907" className="flex-1 bg-[#F2131A] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center gap-2 hover:bg-transparent hover:text-[#F2131A] border-2 border-[#F2131A] active:scale-[0.98] transition-all">
             <Phone size={16} />
             CALL NOW
           </a>
@@ -176,7 +176,7 @@ export function CTABand() {
         <p className="text-[18px] text-[#F5F5F0]/85 mt-4 max-w-[580px]">
           Dispatchers are standing by right now.
         </p>
-        <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="text-[36px] lg:text-[56px] font-[800] text-[#F2131A] mt-8 hover:text-[#D91117] transition-colors">
+        <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="text-[36px] lg:text-[56px] font-[800] text-[#F2131A] mt-8 hover:text-[#F5F5F0] hover:scale-[1.02] active:scale-[0.98] transition-all inline-block">
           CALL NOW
         </a>
         <Link to="/contact" className="text-[16px] font-[600] text-[#F5F5F0]/80 underline mt-4 hover:text-[#F5F5F0]">
@@ -228,7 +228,7 @@ function Footer() {
 
           <div className="flex flex-col gap-3">
             <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">GET IN TOUCH</span>
-            <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="text-[24px] font-[800] text-[#F2131A] hover:text-[#D91117] transition-colors">CALL NOW</a>
+            <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="text-[24px] font-[800] text-[#F2131A] hover:text-[#F5F5F0] hover:scale-[1.02] active:scale-[0.98] origin-left transition-all inline-block">CALL NOW</a>
             <div className="text-[15px] text-[#9C9C96] mt-2 flex flex-col gap-1">
               <span>dispatch@ironcladplumbing.com</span>
               <span>1420 NW Industrial St, Portland, OR 97209</span>

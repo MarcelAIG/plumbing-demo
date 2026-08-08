@@ -54,7 +54,7 @@ export function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-[28px]">
-              <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="bg-[#F2131A] text-white font-[800] px-8 py-4 rounded-[2px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-[#D91117] active:scale-[0.98] transition-all">
+              <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="bg-[#F2131A] text-white font-[800] px-8 py-4 rounded-[2px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-transparent hover:text-[#F2131A] border-2 border-[#F2131A] active:scale-[0.98] transition-all">
                 <Phone size={20} />
                 CALL NOW
               </a>

@@ -110,7 +110,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Footer />
 
         {/* Mobile Sticky Action Buttons */}
-        <div className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden bg-[#1A1A1A] border-t-2 border-[#1F46B4] p-3 gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden bg-[#1A1A1A] p-3 gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
           <a href="tel:6504871907" className="flex-1 bg-[#F2131A] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center gap-2 hover:bg-transparent hover:text-[#F2131A] border-2 border-[#F2131A] active:scale-[0.98] transition-all">
             <Phone size={16} />
             CALL NOW

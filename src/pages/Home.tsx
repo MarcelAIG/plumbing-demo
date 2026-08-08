@@ -36,7 +36,7 @@ export function Home() {
       </Helmet>
 
       {/* 6.1 Hero */}
-      <section className="relative w-full h-[90vh] min-h-[620px] max-h-[740px] flex items-end">
+      <section className="relative w-full min-h-screen lg:min-h-[620px] lg:h-[90vh] lg:max-h-[740px] flex items-start lg:items-end pt-[100px] lg:pt-0 pb-[40px] lg:pb-0">
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#1A1A1A]">
           {/* Placeholder for documentary photo */}
           <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale mix-blend-luminosity" alt="Emergency plumbing truck rushing to a call" />
@@ -44,7 +44,7 @@ export function Home() {
         </div>
         
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 lg:px-8 pb-[60px] lg:pb-[90px] flex flex-col lg:flex-row lg:items-end justify-between gap-12">
-          <div className="max-w-[640px]">
+          <div className="max-w-[640px] flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0">
             <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4] font-inter">FAST LOCAL PLUMBING SERVICE · PORTLAND</span>
             <h1 className="text-[42px] lg:text-[76px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-none tracking-[-0.01em] mt-2">
               Water's rising. We're already on the way.
@@ -53,17 +53,17 @@ export function Home() {
               Fast, reliable plumbing help for homes and businesses across Portland. Call now to check availability or request service online.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mt-[28px]">
-              <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="bg-[#F2131A] text-white font-[800] px-8 py-4 rounded-[2px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-transparent hover:text-[#F2131A] border-2 border-[#F2131A] active:scale-[0.98] transition-all">
+            <div className="flex flex-col sm:flex-row gap-4 mt-[28px] w-full sm:w-auto">
+              <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="bg-[#F2131A] text-white font-[800] px-8 py-4 rounded-[2px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-transparent hover:text-[#F2131A] border-2 border-[#F2131A] active:scale-[0.98] transition-all w-full sm:w-auto">
                 <Phone size={20} />
                 CALL NOW
               </a>
-              <Link to="/contact" className="border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] px-8 py-4 rounded-[2px] text-center uppercase tracking-wide hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors">
+              <Link to="/contact" className="border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] px-8 py-4 rounded-[2px] text-center uppercase tracking-wide hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors w-full sm:w-auto">
                 REQUEST SERVICE
               </Link>
             </div>
             
-            <div className="mt-[32px] text-[13px] font-[800] uppercase tracking-[0.1em] text-[#1F46B4] flex flex-wrap items-center gap-2">
+            <div className="mt-[32px] text-[13px] font-[800] uppercase tracking-[0.1em] text-[#1F46B4] flex flex-wrap items-center justify-center lg:justify-start gap-2">
               <span>FAST LOCAL RESPONSE</span>
               <span className="text-[#F5F5F0]">&middot;</span>
               <span>LICENSED & INSURED</span>
@@ -72,7 +72,7 @@ export function Home() {
             </div>
           </div>
 
-          <div className="w-full max-w-[440px] bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/10 rounded-[4px] p-6 lg:p-8 flex-shrink-0 lg:mr-16 xl:mr-32">
+          <div className="w-full max-w-[440px] mx-auto lg:mx-0 bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/10 rounded-[4px] p-6 lg:p-8 flex-shrink-0 lg:mr-16 xl:mr-32">
             <h3 className="text-[26px] text-center uppercase font-[700] text-[#1F46B4] font-oswald leading-none mb-6">
               REQUEST PLUMBING SERVICE
             </h3>

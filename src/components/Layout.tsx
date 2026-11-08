@@ -194,60 +194,261 @@ export function CTABand() {
 }
 
 function Footer() {
+  const footerServices = [
+    { name: 'Emergency Plumbing', to: '/services/burst-pipe-repair' },
+    { name: 'Drain Cleaning', to: '/services/emergency-drain-clearing' },
+    { name: 'Water Heaters', to: '/services/no-heat-no-hot-water' },
+    { name: 'Sewer Line Repair', to: '/services/sewer-backup-emergency' },
+    { name: 'Leak Detection', to: '/services/burst-pipe-repair' },
+    { name: 'Pipe Repair & Repiping', to: '/services/burst-pipe-repair' },
+    { name: 'Hydro Jetting', to: '/services/emergency-drain-clearing' },
+    { name: 'Boiler & Heating', to: '/services/no-heat-no-hot-water' },
+    { name: 'Flood Extraction', to: '/services/flood-water-extraction' },
+    { name: 'Fixture Installation', to: '/services' },
+    { name: 'Sump Pumps', to: '/services/flood-water-extraction' },
+    { name: 'Camera Inspection', to: '/services/sewer-backup-emergency' },
+  ];
+
+  const footerAreas = [
+    { name: 'Downtown', to: '/service-areas/downtown' },
+    { name: 'Riverside', to: '/service-areas/riverside' },
+    { name: 'Oakwood', to: '/service-areas/oakwood' },
+    { name: 'Highland Park', to: '/service-areas/highland-park' },
+    { name: 'Eastside', to: '/service-areas/eastside' },
+    { name: 'Westgate', to: '/service-areas/westgate' },
+    { name: 'Beaverton', to: '/service-areas' },
+    { name: 'Lake Oswego', to: '/service-areas' },
+    { name: 'Tigard', to: '/service-areas' },
+    { name: 'Gresham', to: '/service-areas' },
+    { name: 'Milwaukie', to: '/service-areas' },
+    { name: 'Oregon City', to: '/service-areas' },
+    { name: 'Hillsboro', to: '/service-areas' },
+    { name: 'Vancouver', to: '/service-areas' },
+  ];
+
+  const operatingHours = [
+    'Sun: Closed',
+    'Mon: 8:00am - 6:00pm',
+    'Tue: 8:00am - 6:00pm',
+    'Wed: 8:00am - 6:00pm',
+    'Thu: 8:00am - 6:00pm',
+    'Fri: 8:00am - 5:00pm',
+    'Sat: 8:00am - 6:00pm',
+  ];
+
   return (
-    <footer className="w-full bg-[#1A1A1A] text-[#F5F5F0] py-[48px] lg:py-[90px] border-t-2 border-[#1F46B4] px-4 lg:px-8">
-      <div className="max-w-[1280px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center -ml-2 lg:-ml-4">
-              <Logo className="w-32" />
+    <footer className="w-full bg-[#0D0D0D] text-[#F5F5F0] -mt-[1px]">
+      <div className="max-w-[1280px] mx-auto px-4 lg:px-8 pt-[36px] lg:pt-[48px] pb-[64px] lg:pb-[84px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] xl:grid-cols-[360px_1fr] gap-10 lg:gap-12 xl:gap-16 items-start">
+          {/* Left White Business Card */}
+          <div className="bg-white rounded-[6px] p-6 sm:p-7 text-[#1A1A1A] shadow-2xl max-w-[380px] w-full">
+            {/* Top Logo + Contact Details */}
+            <div className="grid grid-cols-[125px_1fr] gap-4 items-center py-2">
+              <Link to="/" className="flex items-center justify-center overflow-hidden" aria-label="SOLO Plumbing & Heating Home">
+                <Logo className="w-[125px] h-auto scale-[1.22]" />
+              </Link>
+              <div className="min-w-0">
+                <div className="text-[16px] font-[800] text-[#1A1A1A] leading-tight mb-1.5">
+                  SOLO Plumbing
+                </div>
+                <a
+                  href="tel:6504871907"
+                  className="block text-[13px] font-[600] text-[#333333] hover:text-[#1F46B4] transition-colors leading-relaxed"
+                >
+                  (650) 487-1907
+                </a>
+                <a
+                  href="mailto:contact.soloplumbing@gmail.com"
+                  className="block text-[13px] font-[600] text-[#333333] hover:text-[#1F46B4] transition-colors leading-snug mt-0.5 break-all"
+                >
+                  Contact.soloplumbing
+                  <br />
+                  @gmail.com
+                </a>
+              </div>
             </div>
-            <p className="text-[14px] text-[#9C9C96] max-w-[240px]">
-              Emergency plumbing dispatch across Portland. Trucks stocked, dispatchers ready.
-            </p>
-            <div className="border border-[#1F46B4] px-3 py-1 mt-2 inline-block self-start">
-              <span className="text-[12px] text-[#F5F5F0]">LICENSED · INSURED · MASTER PLUMBER #MP-78291</span>
+
+            {/* Middle Contact + Get Quote Strip */}
+            <div className="bg-[#1F46B4] rounded-[4px] px-5 py-3.5 my-5 flex items-center justify-between gap-3">
+              <span className="text-[15px] font-[800] uppercase tracking-wide text-white">
+                CONTACT
+              </span>
+              <Link
+                to="/contact"
+                className="bg-white text-[#0D0D0D] hover:bg-[#F5F5F0] text-[12px] font-[800] uppercase tracking-wide px-5 py-2.5 rounded-[4px] transition-colors whitespace-nowrap shadow-sm"
+              >
+                GET QUOTE
+              </Link>
+            </div>
+
+            {/* Bottom 4 Circular Social Icons (Same as About Us Section) */}
+            <div className="flex items-center justify-around pt-2">
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-11 h-11 rounded-full flex items-center justify-center bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)] hover:scale-110 transition-transform shadow-md"
+              >
+                <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5" />
+                  <circle cx="12" cy="12" r="4.5" />
+                  <circle cx="17.5" cy="6.5" r="1" className="fill-white stroke-none" />
+                </svg>
+              </a>
+
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-11 h-11 rounded-full flex items-center justify-center bg-[#1877F2] hover:scale-110 transition-transform shadow-md"
+              >
+                <svg viewBox="0 0 24 24" className="w-6 h-6 fill-white" aria-hidden="true">
+                  <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z" />
+                </svg>
+              </a>
+
+              <a
+                href="https://www.tiktok.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="w-11 h-11 rounded-full flex items-center justify-center bg-[#000000] hover:scale-110 transition-transform shadow-md"
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.26 8.26 0 0 0 4.84 1.55V6.91a4.85 4.85 0 0 1-1.08-.22z"
+                    fill="#25F4EE"
+                    transform="translate(-0.6 -0.6)"
+                  />
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.26 8.26 0 0 0 4.84 1.55V6.91a4.85 4.85 0 0 1-1.08-.22z"
+                    fill="#FE2C55"
+                    transform="translate(0.6 0.6)"
+                  />
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.26 8.26 0 0 0 4.84 1.55V6.91a4.85 4.85 0 0 1-1.08-.22z"
+                    fill="#FFFFFF"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-11 h-11 rounded-full flex items-center justify-center bg-[#FF0000] hover:scale-110 transition-transform shadow-md"
+              >
+                <svg viewBox="0 0 24 24" className="w-6 h-6 fill-white" aria-hidden="true">
+                  <path
+                    fillRule="evenodd"
+                    d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.93 4.78 12 4.78 12 4.78s-5.93 0-7.64.46A2.75 2.75 0 0 0 2.42 7.19 28.7 28.7 0 0 0 1.96 12a28.7 28.7 0 0 0 .46 4.81 2.75 2.75 0 0 0 1.94 1.95c1.71.46 7.64.46 7.64.46s5.93 0 7.64-.46a2.75 2.75 0 0 0 1.94-1.95A28.7 28.7 0 0 0 22.04 12a28.7 28.7 0 0 0-.46-4.81zM9.95 15.05V8.95L15.2 12l-5.25 3.05z"
+                  />
+                </svg>
+              </a>
             </div>
           </div>
 
-          <div className="flex flex-col gap-3">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">SERVICES</span>
-            <Link to="/services/burst-pipe-repair" className="text-[15px] hover:text-[#1F46B4]">Burst pipe repair</Link>
-            <Link to="/services/sewer-backup-emergency" className="text-[15px] hover:text-[#1F46B4]">Sewer backup emergency</Link>
-            <Link to="/services/no-heat-no-hot-water" className="text-[15px] hover:text-[#1F46B4]">No heat / no hot water</Link>
-            <Link to="/services/flood-water-extraction" className="text-[15px] hover:text-[#1F46B4]">Flood water extraction</Link>
-            <Link to="/services/emergency-drain-clearing" className="text-[15px] hover:text-[#1F46B4]">Emergency drain clearing</Link>
-            <Link to="/services" className="text-[15px] text-[#1F46B4] font-[600] mt-2">View all services &rarr;</Link>
-          </div>
+          {/* Right 4 Navigation & Info Columns */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 lg:gap-10 pt-1">
+            {/* BUSINESS */}
+            <div>
+              <h3 className="text-[13px] font-[800] uppercase tracking-wider text-white mb-4">
+                BUSINESS
+              </h3>
+              <ul className="flex flex-col gap-2.5 text-[14px] font-[600] text-[#D4D4D0]">
+                <li>
+                  <Link to="/" className="hover:text-white transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <a href="/#our-work" className="hover:text-white transition-colors">
+                    Projects
+                  </a>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-white transition-colors">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-white transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/leave-review" className="hover:text-white transition-colors">
+                    Review Us
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-          <div className="flex flex-col gap-3">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">AREAS COVERED</span>
-            <Link to="/service-areas/downtown" className="text-[15px] hover:text-[#1F46B4]">Downtown</Link>
-            <Link to="/service-areas/riverside" className="text-[15px] hover:text-[#1F46B4]">Riverside</Link>
-            <Link to="/service-areas/oakwood" className="text-[15px] hover:text-[#1F46B4]">Oakwood</Link>
-            <Link to="/service-areas/highland-park" className="text-[15px] hover:text-[#1F46B4]">Highland Park</Link>
-            <Link to="/service-areas/eastside" className="text-[15px] hover:text-[#1F46B4]">Eastside</Link>
-            <Link to="/service-areas/westgate" className="text-[15px] hover:text-[#1F46B4]">Westgate</Link>
-            <Link to="/service-areas" className="text-[15px] text-[#1F46B4] font-[600] mt-2">View all areas &rarr;</Link>
-          </div>
+            {/* OUR SERVICES */}
+            <div>
+              <h3 className="text-[13px] font-[800] uppercase tracking-wider text-white mb-4">
+                OUR SERVICES
+              </h3>
+              <ul className="flex flex-col gap-2.5 text-[14px] font-[600] text-[#D4D4D0]">
+                {footerServices.map((service) => (
+                  <li key={service.name}>
+                    <Link to={service.to} className="hover:text-white transition-colors">
+                      {service.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="flex flex-col gap-3">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">GET IN TOUCH</span>
-            <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="text-[24px] font-[800] text-[#F2131A] hover:text-[#F5F5F0] hover:scale-[1.02] active:scale-[0.98] origin-left transition-all inline-block">CALL NOW</a>
-            <div className="text-[15px] text-[#9C9C96] mt-2 flex flex-col gap-1">
-              <span>dispatch@ironcladplumbing.com</span>
-              <span>1420 NW Industrial St, Portland, OR 97209</span>
+            {/* SERVICE AREAS */}
+            <div>
+              <h3 className="text-[13px] font-[800] uppercase tracking-wider text-white mb-4">
+                SERVICE AREAS
+              </h3>
+              <ul className="flex flex-col gap-2.5 text-[14px] font-[600] text-[#D4D4D0]">
+                {footerAreas.map((area) => (
+                  <li key={area.name}>
+                    <Link to={area.to} className="hover:text-white transition-colors">
+                      {area.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* OPERATING HOURS */}
+            <div>
+              <h3 className="text-[13px] font-[800] uppercase tracking-wider text-white mb-4">
+                OPERATING HOURS
+              </h3>
+              <ul className="flex flex-col gap-2.5 text-[14px] font-[600] text-[#D4D4D0]">
+                {operatingHours.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="mt-[48px] pt-8 border-t border-white/15 flex flex-col md:flex-row justify-between items-center gap-4 text-[14px] text-[#9C9C96]">
-          <div>&copy; {new Date().getFullYear()} SOLO Plumbing & Heating, Inc.</div>
-          <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-white">Privacy</Link>
-            <Link to="/terms" className="hover:text-white">Terms</Link>
-          </div>
+      {/* Bottom Legal Bar */}
+      <div className="w-full border-t border-white/25">
+        <div className="max-w-[1280px] mx-auto px-4 lg:px-8 py-5 flex items-center justify-end gap-12 sm:gap-20">
+          <Link
+            to="/privacy"
+            className="text-[13px] font-[800] text-white hover:text-[#5C85F6] transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          <Link
+            to="/terms"
+            className="text-[13px] font-[800] text-white hover:text-[#5C85F6] transition-colors"
+          >
+            Terms &amp; Conditions
+          </Link>
         </div>
       </div>
     </footer>

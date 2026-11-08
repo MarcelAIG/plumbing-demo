@@ -1,8 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { CTABand } from '../components/Layout';
 import { HOME_FAQS } from '../data/faqs';
-import { NEIGHBORHOODS } from '../data/neighborhoods';
 import { useState, useEffect, useRef, type PointerEvent as ReactPointerEvent } from 'react';
 import { ChevronDown, Phone, Check, MapPin, Clock, ShieldCheck, Award, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PHONE_NUMBER } from '../config';
@@ -202,6 +200,23 @@ const CUSTOMER_REVIEWS: CustomerReview[] = [
 
 const REVIEWS_PER_PAGE = 3;
 const TOTAL_REVIEW_PAGES = Math.ceil(CUSTOMER_REVIEWS.length / REVIEWS_PER_PAGE);
+
+const SERVICE_AREA_LINKS = [
+  { name: 'Downtown', to: '/service-areas/downtown' },
+  { name: 'Riverside', to: '/service-areas/riverside' },
+  { name: 'Oakwood', to: '/service-areas/oakwood' },
+  { name: 'Highland Park', to: '/service-areas/highland-park' },
+  { name: 'Eastside', to: '/service-areas/eastside' },
+  { name: 'Westgate', to: '/service-areas/westgate' },
+  { name: 'Beaverton', to: '/service-areas' },
+  { name: 'Lake Oswego', to: '/service-areas' },
+  { name: 'Tigard', to: '/service-areas' },
+  { name: 'Gresham', to: '/service-areas' },
+  { name: 'Milwaukie', to: '/service-areas' },
+  { name: 'Oregon City', to: '/service-areas' },
+  { name: 'Hillsboro', to: '/service-areas' },
+  { name: 'Vancouver', to: '/service-areas' },
+];
 
 export function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -1083,74 +1098,127 @@ export function Home() {
         </div>
       </section>
 
-      {/* 6.5 Emergency-Rate Pricing */}
-      <section className="bg-[#1F46B4] pt-[64px] lg:pt-[84px] pb-[90px] lg:pb-[120px] px-4 text-center">
-        <div className="max-w-[1280px] mx-auto flex flex-col items-center">
-          <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">NO SURPRISE BILLING</span>
-          <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mt-2 max-w-[800px]">
-            You'll know the price before the truck leaves the yard.
+      {/* 6.495 Proudly Serving These Areas */}
+      <section className="bg-[#0D0D0D] border-t border-white/15 pt-[48px] lg:pt-[64px]">
+        <div className="max-w-[1280px] mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-[1.06fr_0.94fr] gap-10 lg:gap-14 items-start">
+          {/* Interactive Map + Business Place Card */}
+          <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[470px] bg-[#1A1A1A] overflow-hidden shadow-2xl">
+            <iframe
+              title="SOLO Plumbing & Heating Service Area Map — Greater Portland"
+              src="https://maps.google.com/maps?q=Portland,+OR&t=&z=8&ie=UTF8&iwloc=&output=embed"
+              className="w-full h-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+
+            {/* Google Maps Business Info Card Overlay */}
+            <div className="absolute top-[10px] left-[10px] z-10 bg-white rounded-[2px] shadow-[0_1px_4px_rgba(0,0,0,0.3)] px-3.5 py-2.5 min-w-[215px] text-left">
+              <div className="text-[14px] font-[700] text-[#202124] leading-tight">
+                SOLO Plumbing &amp; Heating
+              </div>
+              <div className="mt-1 flex items-center gap-1 text-[12px]">
+                <span className="text-[#70757a] font-[700]">4.9</span>
+                <div className="flex items-center text-[#fbbc04]" aria-label="4.9 out of 5 stars">
+                  {[0, 1, 2, 3, 4].map((s) => (
+                    <svg key={s} viewBox="0 0 24 24" className="w-[13px] h-[13px] fill-current" aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <Link to="/leave-review" className="text-[#1a73e8] hover:underline font-[700] ml-0.5">
+                  147 reviews
+                </Link>
+              </div>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=SOLO+Plumbing+%26+Heating+Portland+OR"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1.5 inline-block text-[12px] text-[#1a73e8] hover:underline font-[700]"
+              >
+                View larger map
+              </a>
+            </div>
+          </div>
+
+          {/* Areas Column */}
+          <div className="lg:pt-2">
+            <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-[1.08] tracking-[-0.01em] mb-8 lg:mb-10">
+              PROUDLY SERVING
+              <br />
+              THESE AREAS
+            </h2>
+
+            <div className="grid grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-5 sm:gap-y-6 max-w-[500px]">
+              {SERVICE_AREA_LINKS.map((area) => (
+                <Link
+                  key={area.name}
+                  to={area.to}
+                  className="text-[17px] sm:text-[19px] lg:text-[20px] font-[700] text-[#F5F5F0] hover:text-[#5C85F6] transition-colors leading-snug"
+                >
+                  {area.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6.5 Pre-Footer Photo CTA & Wave Transition into Footer */}
+      <section className="relative bg-[#0D0D0D] overflow-hidden -mt-[1px]">
+        {/* Background Photo */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/work/work-01.jpg')" }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
+
+        {/* Top Organic Wave from Proudly Serving These Areas */}
+        <div className="relative z-10 w-full overflow-hidden leading-none pt-6 sm:pt-8 lg:pt-10 bg-[#0D0D0D]">
+          <div className="h-[1px] w-full bg-[#0D0D0D]" />
+        </div>
+        <div className="relative z-10 w-full overflow-hidden leading-none -mt-[1px]">
+          <svg
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+            className="block w-full h-[64px] sm:h-[88px] lg:h-[116px]"
+            aria-hidden="true"
+          >
+            <path
+              d="M0,0 L0,14 C120,24 235,104 385,104 C545,104 685,14 850,14 C1025,14 1185,108 1355,108 C1395,108 1420,102 1440,94 L1440,0 Z"
+              fill="#0D0D0D"
+            />
+          </svg>
+        </div>
+
+        {/* Center CTA Content */}
+        <div className="relative z-10 max-w-[960px] mx-auto px-4 lg:px-8 py-[44px] sm:py-[60px] text-center flex flex-col items-center">
+          <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-[1.08] tracking-[-0.01em] drop-shadow-md">
+            READY TO START YOUR PROJECT?
           </h2>
-          <p className="text-[17px] lg:text-[18px] text-[#F5F5F0]/85 max-w-[640px] mt-4 leading-[1.6]">
-            Emergency-rate pricing is fixed and quoted on the phone — not estimated on arrival.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-[40px]">
-            <div className="bg-[#1A1A1A] text-[#F5F5F0] font-[800] px-6 py-3 rounded-[2px] uppercase tracking-wide text-[14px]">Standard emergency call-out: $250</div>
-            <div className="bg-[#1A1A1A] text-[#F5F5F0] font-[800] px-6 py-3 rounded-[2px] uppercase tracking-wide text-[14px]">After-hours (10pm–6am): $250</div>
-            <div className="bg-[#1A1A1A] text-[#F5F5F0] font-[800] px-6 py-3 rounded-[2px] uppercase tracking-wide text-[14px]">Call-out fee applied to final invoice</div>
-          </div>
+          <Link
+            to="/contact"
+            className="mt-6 inline-flex items-center justify-center bg-[#1F46B4] hover:bg-[#193996] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-wider px-8 py-4 rounded-[4px] transition-colors shadow-lg"
+          >
+            GET FREE QUOTE
+          </Link>
+        </div>
+
+        {/* Bottom Organic Wave into Footer */}
+        <div className="relative z-10 w-full overflow-hidden leading-none">
+          <svg
+            viewBox="0 0 1440 200"
+            preserveAspectRatio="none"
+            className="block w-full h-[110px] sm:h-[145px] lg:h-[185px]"
+            aria-hidden="true"
+          >
+            <path
+              d="M0,112 C110,48 215,24 330,28 C450,32 525,82 640,82 C770,82 890,14 1040,14 C1190,14 1320,92 1440,118 L1440,200 L0,200 Z"
+              fill="#0D0D0D"
+            />
+          </svg>
         </div>
       </section>
-
-      {/* 6.6 Track Record */}
-      <section className="bg-[#1A1A1A] py-[70px] lg:py-[100px] px-4">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">OUR TRACK RECORD</span>
-            <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mt-2">Numbers, not adjectives.</h2>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-[60px]">
-            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">FAST</div>
-              <div className="text-[16px] text-[#9C9C96] font-[600] mt-2">local response</div>
-            </div>
-            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">3,400+</div>
-              <div className="text-[16px] text-[#9C9C96] font-[600] mt-2">emergencies handled</div>
-            </div>
-            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">READY</div>
-              <div className="text-[16px] text-[#9C9C96] font-[600] mt-2">when you need us</div>
-            </div>
-            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">4.9<span className="text-[#FFC300] relative -top-[4px] text-[0.85em]">★</span></div>
-              <div className="text-[16px] text-[#F5F5F0] font-[600] mt-2">average rating</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6.9 Service Areas Preview */}
-      <section className="bg-[#242424] py-[90px] lg:py-[120px] px-4">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center flex flex-col items-center">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">AREAS WE COVER</span>
-            <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mt-2">Dispatched across Portland.</h2>
-            <p className="text-[17px] text-[#9C9C96] max-w-[560px] mt-4 leading-[1.6]">
-              We run trucks through these neighborhoods every night. If yours isn't listed, call anyway — we're probably close.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 mt-[60px] max-w-[900px] mx-auto">
-            {NEIGHBORHOODS.map(n => (
-              <Link key={n.id} to={`/service-areas/${n.id}`} className="bg-[#1A1A1A] border border-[#1F46B4]/30 hover:border-[#1F46B4] text-[#F5F5F0] font-[700] px-6 py-4 rounded-[4px] transition-colors">
-                {n.title}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CTABand />
     </>
   );
 }

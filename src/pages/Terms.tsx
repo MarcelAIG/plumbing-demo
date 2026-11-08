@@ -10,7 +10,7 @@ export function Terms() {
       </Helmet>
 
       {/* 15.1 Compact Hero */}
-      <section className="bg-[#1A1A1A] py-[80px] lg:py-[100px] px-4 text-center">
+      <section className="bg-[#1A1A1A] pt-[124px] pb-[80px] lg:pt-[140px] lg:pb-[100px] px-4 text-center">
         <h1 className="text-[42px] lg:text-[52px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.1]">
           Terms of Service
         </h1>

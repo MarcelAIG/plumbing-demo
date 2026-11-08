@@ -1,14 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --font-oswald: 'Oswald', sans-serif;
-  --font-inter: 'Inter', sans-serif;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-oswald: 'Montserrat', sans-serif;
+  --font-inter: 'Montserrat', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
 }
 
 body {
   background-color: #1A1A1A;
   color: #F5F5F0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;

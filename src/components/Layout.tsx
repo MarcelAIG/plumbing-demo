@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Clock, ShieldCheck, Truck, Star, Phone } from 'lucide-react';
+import { Menu, X, Clock, ShieldCheck, Truck, Star, Phone, ChevronDown } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { PHONE_NUMBER } from '../config';
@@ -30,21 +30,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col min-h-screen pb-[74px] lg:pb-0 bg-[#1A1A1A] text-[#F5F5F0]">
         
         {/* 5.2 Main Navigation */}
-        <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-          isScrolled 
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled || mobileMenuOpen
             ? 'bg-[#1A1A1A]/95 backdrop-blur-md border-b border-white/5 shadow-lg' 
-            : 'bg-[#1A1A1A] lg:bg-[#1A1A1A]/0'
+            : 'bg-transparent border-b border-transparent'
         }`}>
           <div className="w-full max-w-[1280px] mx-auto h-[64px] lg:h-[80px] px-4 lg:px-8 flex items-center justify-between">
             <Link to="/" className="flex items-center mt-1 -ml-3 lg:-ml-[32px]" aria-label="Home">
             <Logo className="w-24 lg:w-32" />
           </Link>
           
-          <div className="hidden lg:flex items-center gap-8 relative -left-6">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8 relative lg:left-0 xl:-left-6 lg:translate-y-[6px]">
             <NavLink to="/">Home</NavLink>
             
             <div className="relative group h-[80px] flex items-center">
-              <NavLink to="/services">Services</NavLink>
+              <NavLink to="/services">
+                <span>Services</span>
+                <ChevronDown size={14} strokeWidth={2} className="mt-[1px] opacity-75 transition-transform duration-200 group-hover:rotate-180" />
+              </NavLink>
               <div className="absolute top-full left-0 hidden group-hover:block w-[240px]">
                 <div className="bg-[#1A1A1A] border border-white/10 rounded-[2px] shadow-xl py-2 flex flex-col">
                   <Link to="/services/burst-pipe-repair" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Burst pipe repair</Link>
@@ -58,7 +61,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             <div className="relative group h-[80px] flex items-center">
-              <NavLink to="/service-areas">Service Areas</NavLink>
+              <NavLink to="/service-areas">
+                <span>Service Areas</span>
+                <ChevronDown size={14} strokeWidth={2} className="mt-[1px] opacity-75 transition-transform duration-200 group-hover:rotate-180" />
+              </NavLink>
               <div className="absolute top-full left-0 hidden group-hover:block w-[200px]">
                 <div className="bg-[#1A1A1A] border border-white/10 rounded-[2px] shadow-xl py-2 flex flex-col">
                   <Link to="/service-areas/downtown" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Downtown</Link>
@@ -76,13 +82,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <NavLink to="/contact">Contact</NavLink>
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:6504871907" className="bg-[#F2131A] text-[#F5F5F0] font-[800] text-[15px] px-[20px] py-[13px] rounded-[2px] tracking-wide hover:bg-transparent hover:text-[#F2131A] active:scale-[0.98] transition-all flex items-center gap-2 border-2 border-[#F2131A]">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4 lg:translate-y-[6px]">
+            <a href="tel:6504871907" className="bg-[#F2131A] text-[#F5F5F0] font-[800] text-[14px] xl:text-[15px] px-4 xl:px-[20px] py-[13px] rounded-[2px] tracking-wide hover:bg-transparent hover:text-[#F2131A] active:scale-[0.98] transition-all flex items-center gap-2 border-2 border-[#F2131A] whitespace-nowrap">
               <Phone size={18} />
               (650) 487-1907
             </a>
-            <Link to="/contact" className="bg-[#1F46B4] text-white font-[800] text-[14px] px-[28px] py-[14px] border-2 border-[#1F46B4] rounded-[2px] uppercase tracking-wide hover:bg-transparent hover:text-[#1F46B4] transition-colors">
-              REQUEST SERVICE
+            <Link to="/contact" className="bg-[#1F46B4] text-white font-[800] text-[14px] px-5 xl:px-[28px] py-[14px] border-2 border-[#1F46B4] rounded-[2px] uppercase tracking-wide hover:bg-transparent hover:text-[#1F46B4] transition-colors whitespace-nowrap">
+              Get Free Quote
             </Link>
           </div>
 
@@ -116,7 +122,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             CALL NOW
           </a>
           <Link to="/contact" className="flex-1 border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center uppercase hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors">
-            REQUEST SERVICE
+            Get Free Quote
           </Link>
         </div>
       </div>
@@ -128,7 +134,7 @@ function NavLink({ to, children }: { to: string, children: React.ReactNode }) {
   const { pathname } = useLocation();
   const isActive = pathname === to || (to !== '/' && pathname.startsWith(to));
   return (
-    <Link to={to} className={`text-[16px] font-[600] ${isActive ? 'text-[#1F46B4] border-b-2 border-[#1F46B4]' : 'text-[#F5F5F0] hover:text-[#1F46B4]'} pb-1 transition-colors`}>
+    <Link to={to} className={`inline-flex items-center gap-1 text-[16px] font-[600] ${isActive ? 'text-[#1F46B4] border-b-2 border-[#1F46B4]' : 'text-[#F5F5F0] hover:text-[#1F46B4]'} pb-1 transition-colors`}>
       {children}
     </Link>
   );
@@ -201,7 +207,7 @@ function Footer() {
               Emergency plumbing dispatch across Portland. Trucks stocked, dispatchers ready.
             </p>
             <div className="border border-[#1F46B4] px-3 py-1 mt-2 inline-block self-start">
-              <span className="font-mono text-[12px] text-[#F5F5F0]">LICENSED · INSURED · MASTER PLUMBER #MP-78291</span>
+              <span className="text-[12px] text-[#F5F5F0]">LICENSED · INSURED · MASTER PLUMBER #MP-78291</span>
             </div>
           </div>
 

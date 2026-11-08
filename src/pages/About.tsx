@@ -25,11 +25,11 @@ export function About() {
       </Helmet>
 
       {/* 11.1 Hero */}
-      <section className="w-full bg-[#1A1A1A] min-h-[500px] flex items-center px-4 py-16">
+      <section className="w-full bg-[#1A1A1A] min-h-[500px] flex items-center px-4 pt-[104px] pb-16 lg:pt-[120px]">
         <div className="max-w-[1280px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
           <div>
             <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">ABOUT IRONCLAD PLUMBING</span>
-            <h1 className="text-[42px] lg:text-[60px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.05] mt-2">
+            <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.08] mt-2">
               We built this for the 2am calls.
             </h1>
             <p className="text-[18px] text-[#F5F5F0]/85 mt-4 leading-[1.6]">

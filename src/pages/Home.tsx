@@ -11,21 +11,6 @@ import { Logo } from '../components/Logo';
 
 export function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [isServiceDropdownOpen, setIsServiceDropdownOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState('');
-
-  const handleServiceSelect = (service: string) => {
-    setSelectedService(service);
-    setIsServiceDropdownOpen(false);
-  };
-
-  const serviceOptions = [
-    { value: 'emergency', label: 'Emergency Plumbing' },
-    { value: 'drain', label: 'Drain Cleaning' },
-    { value: 'water-heater', label: 'Water Heater Repair' },
-    { value: 'leak', label: 'Leak Detection' },
-    { value: 'other', label: 'Other' },
-  ];
 
   return (
     <>
@@ -36,7 +21,7 @@ export function Home() {
       </Helmet>
 
       {/* 6.1 Hero */}
-      <section className="relative w-full min-h-screen lg:min-h-[740px] flex items-start lg:items-end pt-[72px] lg:pt-[32px] pb-[40px] lg:pb-0">
+      <section className="relative w-full min-h-screen lg:min-h-[780px] flex items-start lg:items-end pt-[104px] lg:pt-[112px] pb-[40px] lg:pb-0">
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#1A1A1A]">
           {/* Placeholder for documentary photo */}
           <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale mix-blend-luminosity" alt="Emergency plumbing truck rushing to a call" />
@@ -44,8 +29,8 @@ export function Home() {
         </div>
         
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 lg:px-8 pb-[60px] lg:pb-[90px] flex flex-col lg:flex-row lg:items-end justify-between gap-12">
-          <div className="max-w-[640px] flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:pb-[64px]">
-            <h1 className="text-[42px] lg:text-[76px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-none tracking-[-0.01em]">
+          <div className="max-w-[640px] flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:pb-[48px]">
+            <h1 className="text-[32px] sm:text-[42px] lg:text-[54px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.05] tracking-[-0.01em]">
               Water's rising{' '}
               <br />
               We're already on the way
@@ -60,61 +45,27 @@ export function Home() {
                 CALL NOW
               </a>
               <Link to="/contact" className="border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] px-8 py-4 rounded-[2px] text-center uppercase tracking-wide hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors w-full sm:w-auto">
-                REQUEST SERVICE
+                Get Free Quote
               </Link>
             </div>
           </div>
 
-          <div className="w-full max-w-[440px] mx-auto lg:mx-0 bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/10 rounded-[4px] p-6 lg:p-8 flex-shrink-0 lg:mr-16 xl:mr-32">
-            <h3 className="text-[26px] text-center uppercase font-[700] text-[#1F46B4] font-oswald leading-none mb-6">
-              REQUEST PLUMBING SERVICE
+          <div className="w-full max-w-[460px] mx-auto lg:mx-0 bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/10 rounded-[4px] p-6 lg:p-8 flex-shrink-0 lg:mr-16 xl:mr-32">
+            <h3 className="text-[24px] lg:text-[28px] text-center uppercase font-[800] text-[#1F46B4] font-oswald leading-none tracking-[0.02em] mb-7">
+              GET A FREE QUOTE
             </h3>
             <form className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Full Name</label>
-                <input type="text" placeholder="John Doe" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px]" required />
+                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Full Name *</label>
+                <input type="text" placeholder="John Smith" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px]" required />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Phone Number</label>
-                <input type="tel" placeholder="Enter your phone number" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px]" required />
-              </div>
-              <div className="flex flex-col gap-1.5 relative">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Selected Service</label>
-                <div className="relative">
-                  <div 
-                    className={`bg-[#242424] border ${isServiceDropdownOpen ? 'border-[#1F46B4]' : 'border-white/5'} rounded-[2px] p-3 text-[15px] cursor-pointer flex items-center justify-between transition-colors`}
-                    onClick={() => setIsServiceDropdownOpen(!isServiceDropdownOpen)}
-                  >
-                    <span className={selectedService ? 'text-[#F5F5F0]' : 'text-[#F5F5F0]/30'}>
-                      {selectedService ? serviceOptions.find(opt => opt.value === selectedService)?.label : 'Select a service'}
-                    </span>
-                    <div className="flex items-center pointer-events-none">
-                      <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" className={`transition-transform duration-200 ${isServiceDropdownOpen ? 'rotate-180' : ''}`}>
-                        <path d="M1 1.5L6 6.5L11 1.5" stroke="#F5F5F0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                  </div>
-                  
-                  {isServiceDropdownOpen && (
-                    <div className="absolute top-[calc(100%+4px)] left-0 w-full bg-[#242424] border border-white/10 rounded-[2px] shadow-xl z-20 py-1 max-h-[200px] overflow-y-auto">
-                      {serviceOptions.map((option) => (
-                        <div
-                          key={option.value}
-                          className="px-4 py-3 text-[15px] text-[#F5F5F0] hover:bg-[#1A1A1A] hover:text-[#1F46B4] cursor-pointer transition-colors"
-                          onClick={() => handleServiceSelect(option.value)}
-                        >
-                          {option.label}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {/* Hidden input for form submission if needed */}
-                  <input type="hidden" name="service" value={selectedService} required />
-                </div>
+                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Phone *</label>
+                <input type="tel" placeholder="(808) 555-1234" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px]" required />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Describe your plumbing issue</label>
-                <textarea rows={2} placeholder="Please provide details about the problem..." className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px] resize-none" required></textarea>
+                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Short message about your needs *</label>
+                <textarea rows={3} placeholder="Your message goes straight to my phone, I'll get back to you as soon as I'm available" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px] resize-none" required></textarea>
               </div>
               <div className="flex items-start gap-3 mt-1">
                 <div className="relative flex items-center mt-[2px] shrink-0">
@@ -145,7 +96,7 @@ export function Home() {
                 </label>
               </div>
               <button type="submit" className="mt-2 bg-[#1F46B4] text-white font-[800] py-4 rounded-[2px] text-[16px] uppercase tracking-wide hover:bg-[#183890] transition-colors w-full">
-                REQUEST SERVICE
+                SEND
               </button>
             </form>
           </div>
@@ -231,20 +182,20 @@ export function Home() {
             <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mt-2">Numbers, not adjectives.</h2>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-[60px]">
-            <div className="bg-[#242424] p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[40px] lg:text-[56px] font-[800] text-[#F5F5F0] font-oswald leading-none">FAST</div>
+            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
+              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">FAST</div>
               <div className="text-[16px] text-[#9C9C96] font-[600] mt-2">local response</div>
             </div>
-            <div className="bg-[#242424] p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[40px] lg:text-[56px] font-[800] text-[#F5F5F0] font-oswald leading-none">3,400+</div>
+            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
+              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">3,400+</div>
               <div className="text-[16px] text-[#9C9C96] font-[600] mt-2">emergencies handled</div>
             </div>
-            <div className="bg-[#242424] p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[40px] lg:text-[56px] font-[800] text-[#F5F5F0] font-oswald leading-none">READY</div>
+            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
+              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">READY</div>
               <div className="text-[16px] text-[#9C9C96] font-[600] mt-2">when you need us</div>
             </div>
-            <div className="bg-[#242424] p-8 text-center rounded-[4px] border border-white/5">
-              <div className="text-[40px] lg:text-[56px] font-[800] text-[#F5F5F0] font-oswald leading-none">4.9<span className="text-[#FFC300] relative -top-[6px] text-[0.85em]">★</span></div>
+            <div className="bg-[#242424] p-6 sm:p-8 text-center rounded-[4px] border border-white/5">
+              <div className="text-[28px] sm:text-[36px] lg:text-[46px] font-[800] text-[#F5F5F0] font-oswald leading-none">4.9<span className="text-[#FFC300] relative -top-[4px] text-[0.85em]">★</span></div>
               <div className="text-[16px] text-[#F5F5F0] font-[600] mt-2">average rating</div>
             </div>
           </div>

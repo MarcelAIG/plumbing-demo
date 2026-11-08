@@ -18,7 +18,7 @@ export function ReviewPage() {
       <Helmet>
         <title>Leave Us a Review | SOLO Plumbing & Heating</title>
       </Helmet>
-      <div className="bg-transparent min-h-screen flex justify-center pt-[60px] pb-[100px] px-4">
+      <div className="bg-transparent min-h-screen flex justify-center pt-[104px] lg:pt-[120px] pb-[100px] px-4">
         <div className="w-full max-w-[458px] bg-transparent overflow-hidden mx-auto">
           <iframe 
             src="https://api.izadsystems.dev/widget/survey/JL5XHXn2bTelM4Ma9PdI" 

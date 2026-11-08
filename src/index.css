@@ -29,6 +29,15 @@ html {
   scroll-behavior: auto;
 }
 
+/* Hide scrollbars cleanly for horizontal carousels */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Chat widget mobile adjustments */
 @media (max-width: 1024px) {
   #chat-widget-container, div[id*="chat-widget"], iframe[id*="chat-widget"] {

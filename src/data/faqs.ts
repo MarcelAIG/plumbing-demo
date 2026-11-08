@@ -34,10 +34,24 @@ export const FAQS = [
 ];
 
 export const HOME_FAQS = [
-  { q: 'How fast can you actually get here?', a: 'Average is 30 minutes across most of Portland. Outlying areas can run up to 60 minutes — we tell you honestly on the call, before you commit.' },
-  { q: 'Is your emergency rate really fixed?', a: 'Yes. You get the number on the phone before dispatch, not an estimate that changes once the truck is in the driveway.' },
-  { q: 'Do you charge extra for nights and weekends?', a: 'A modest after-hours rate applies 10pm–6am, stated upfront — never a surprise on the invoice.' },
-  { q: 'What counts as a real plumbing emergency?', a: 'Anything actively causing damage or leaving you without an essential utility: burst pipes, sewage backup, flooding, no heat in freezing weather, total water loss.' },
-  { q: 'Are your plumbers actually licensed?', a: 'Every technician on every truck. Master Plumber License #MP-78291, fully insured, background-checked.' },
-  { q: 'What if the part isn\'t on the truck?', a: 'Trucks are stocked for 90%+ of emergency scenarios. For rare parts, we stabilize the situation safely first and return with the part, usually same day.' }
+  {
+    q: 'Can you provide references from past clients?',
+    a: 'Yes! We have hundreds of verified 5-star Google reviews from Portland homeowners and businesses, and we are happy to share local project references for repiping, water heater, boiler, or sewer jobs.',
+  },
+  {
+    q: 'What sets you apart from other contractors in the area?',
+    a: 'We combine rapid local dispatch across Portland with upfront, fixed pricing before any work begins. Every truck comes fully stocked and is staffed by a licensed, insured technician under Master Plumber License #MP-78291.',
+  },
+  {
+    q: 'What types of services do you offer?',
+    a: 'We handle full-service residential and commercial plumbing and heating—including burst pipe repair, drain cleaning, water heaters, sewer lines, flood extraction, leak detection, boiler repair, hydro jetting, sump pumps, pipe replacement, fixture repair, and camera inspections.',
+  },
+  {
+    q: 'How fast can you actually get here?',
+    a: 'Average response is 30 minutes across most of Portland. Outlying areas can run up to 60 minutes—we tell you honestly on the call before you commit.',
+  },
+  {
+    q: 'Is your emergency rate really fixed?',
+    a: 'Yes. You get the upfront price before work begins, not a vague estimate that changes once the truck is in your driveway.',
+  },
 ];

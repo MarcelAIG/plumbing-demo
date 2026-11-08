@@ -5,7 +5,7 @@ import { SERVICES } from '../data/services';
 import { HOME_FAQS } from '../data/faqs';
 import { NEIGHBORHOODS } from '../data/neighborhoods';
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Phone } from 'lucide-react';
+import { ChevronDown, ChevronUp, Phone, Check } from 'lucide-react';
 import { PHONE_NUMBER } from '../config';
 import { Logo } from '../components/Logo';
 
@@ -36,7 +36,7 @@ export function Home() {
       </Helmet>
 
       {/* 6.1 Hero */}
-      <section className="relative w-full min-h-screen lg:min-h-[620px] lg:h-[90vh] lg:max-h-[740px] flex items-start lg:items-end pt-[100px] lg:pt-0 pb-[40px] lg:pb-0">
+      <section className="relative w-full min-h-screen lg:min-h-[740px] flex items-start lg:items-end pt-[72px] lg:pt-[32px] pb-[40px] lg:pb-0">
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#1A1A1A]">
           {/* Placeholder for documentary photo */}
           <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale mix-blend-luminosity" alt="Emergency plumbing truck rushing to a call" />
@@ -44,10 +44,11 @@ export function Home() {
         </div>
         
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 lg:px-8 pb-[60px] lg:pb-[90px] flex flex-col lg:flex-row lg:items-end justify-between gap-12">
-          <div className="max-w-[640px] flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4] font-inter">FAST LOCAL PLUMBING SERVICE · PORTLAND</span>
-            <h1 className="text-[42px] lg:text-[76px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-none tracking-[-0.01em] mt-2">
-              Water's rising. We're already on the way.
+          <div className="max-w-[640px] flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:pb-[64px]">
+            <h1 className="text-[42px] lg:text-[76px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-none tracking-[-0.01em]">
+              Water's rising{' '}
+              <br />
+              We're already on the way
             </h1>
             <p className="text-[17px] lg:text-[19px] text-[#F5F5F0]/85 max-w-[500px] mt-[20px] leading-[1.55]">
               Fast, reliable plumbing help for homes and businesses across Portland. Call now to check availability or request service online.
@@ -61,14 +62,6 @@ export function Home() {
               <Link to="/contact" className="border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] px-8 py-4 rounded-[2px] text-center uppercase tracking-wide hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors w-full sm:w-auto">
                 REQUEST SERVICE
               </Link>
-            </div>
-            
-            <div className="mt-[32px] text-[13px] font-[800] uppercase tracking-[0.1em] text-[#1F46B4] flex flex-wrap items-center justify-center lg:justify-start gap-2">
-              <span>FAST LOCAL RESPONSE</span>
-              <span className="text-[#F5F5F0]">&middot;</span>
-              <span>LICENSED & INSURED</span>
-              <span className="text-[#F5F5F0]">&middot;</span>
-              <span>UPFRONT PRICING</span>
             </div>
           </div>
 
@@ -122,6 +115,34 @@ export function Home() {
               <div className="flex flex-col gap-1.5">
                 <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Describe your plumbing issue</label>
                 <textarea rows={2} placeholder="Please provide details about the problem..." className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px] resize-none" required></textarea>
+              </div>
+              <div className="flex items-start gap-3 mt-1">
+                <div className="relative flex items-center mt-[2px] shrink-0">
+                  <input
+                    id="terms-consent"
+                    type="checkbox"
+                    required
+                    className="peer appearance-none w-4 h-4 rounded-[2px] bg-[#F5F5F0] border border-white/20 checked:bg-[#1F46B4] checked:border-[#1F46B4] cursor-pointer transition-colors"
+                  />
+                  <Check
+                    size={12}
+                    strokeWidth={3}
+                    className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                  />
+                </div>
+                <label htmlFor="terms-consent" className="text-[12px] text-[#F5F5F0]/85 leading-[1.45] cursor-pointer select-none">
+                  I agree to{' '}
+                  <Link
+                    to="/terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#5C85F6] hover:text-[#82A3FA] underline underline-offset-2 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    terms &amp; conditions
+                  </Link>{' '}
+                  provided by the company. By providing my phone number, I agree to receive text messages from the business.
+                </label>
               </div>
               <button type="submit" className="mt-2 bg-[#1F46B4] text-white font-[800] py-4 rounded-[2px] text-[16px] uppercase tracking-wide hover:bg-[#183890] transition-colors w-full">
                 REQUEST SERVICE

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { HOME_FAQS } from '../data/faqs';
-import { useState, useEffect, useRef, type PointerEvent as ReactPointerEvent } from 'react';
+import { useState, useEffect, useRef, type PointerEvent as ReactPointerEvent, type CSSProperties } from 'react';
 import { ChevronDown, Phone, Check, MapPin, Clock, ShieldCheck, Award, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PHONE_NUMBER } from '../config';
 import { Logo } from '../components/Logo';
@@ -218,12 +218,233 @@ const SERVICE_AREA_LINKS = [
   { name: 'Vancouver', to: '/service-areas' },
 ];
 
+const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/doggroomingby_julia/';
+const INSTAGRAM_USERNAME = 'doggroomingby_julia';
+const INSTAGRAM_AVATAR = '/images/instagram/avatar.jpg';
+
+type InstagramPost = {
+  id: string;
+  images: string[];
+  mediaType: 'carousel' | 'reel' | 'photo';
+  likes: number;
+  comments: number;
+  caption: string;
+  date: string;
+  permalink: string;
+};
+
+const INSTAGRAM_POSTS: InstagramPost[] = [
+  {
+    id: 'ig-1',
+    images: [
+      '/images/instagram/post-01.jpg',
+      '/images/instagram/post-02.jpg',
+      '/images/instagram/post-03.jpg',
+    ],
+    mediaType: 'carousel',
+    likes: 73,
+    comments: 5,
+    caption:
+      'Fresh fluffy blowout & full teddy bear trim for this sweet little Pomeranian in Polis, Paphos! ✂️🐾 Bath, brush, and full styling session. DM to book or call 99073343 #doggroomingbyjulia #paphosdogs #polischrysochous #pomeraniangrooming #petstylist',
+    date: 'DECEMBER 25, 2024',
+    permalink: 'https://www.instagram.com/p/DdW5tJdAK-Z/',
+  },
+  {
+    id: 'ig-2',
+    images: [
+      '/images/instagram/post-04.jpg',
+      '/images/instagram/post-05.jpg',
+      '/images/instagram/post-06.jpg',
+    ],
+    mediaType: 'carousel',
+    likes: 64,
+    comments: 4,
+    caption:
+      'Happy, fresh, and ready for park walks after a warm spa bath, deshedding, and tidy scissor finish! 🐶✨ Thank you for trusting Dog Grooming by Julia. #doggrooming #cyprusdogs #paphos #fluffydog #groomingspa',
+    date: 'DECEMBER 18, 2024',
+    permalink: 'https://www.instagram.com/p/DYPK8r8kftn/',
+  },
+  {
+    id: 'ig-3',
+    images: [
+      '/images/instagram/post-07.jpg',
+      '/images/instagram/post-08.jpg',
+      '/images/instagram/post-09.jpg',
+    ],
+    mediaType: 'reel',
+    likes: 58,
+    comments: 6,
+    caption:
+      'Golden hour glow after a full coat conditioning treatment, ear cleaning, and paw pad trim! 🐾✂️ Every pup gets gentle, one-on-one care in our Polis studio. #doggroomingbyjulia #petgroomer #pomeranian #polis #cyprus',
+    date: 'DECEMBER 9, 2024',
+    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+  },
+  {
+    id: 'ig-4',
+    images: ['/images/instagram/post-02.jpg', '/images/instagram/post-01.jpg'],
+    mediaType: 'carousel',
+    likes: 81,
+    comments: 7,
+    caption:
+      'Look at that big smile! 🐾 Full bath, gentle blow dry, sanitary tidy, and nail clipping completed today. Book your pup’s next appointment via DM! #doggroomingbyjulia #dogsofcyprus #petstylist #happyclient',
+    date: 'NOVEMBER 29, 2024',
+    permalink: 'https://www.instagram.com/p/DdW5tJdAK-Z/',
+  },
+  {
+    id: 'ig-5',
+    images: ['/images/instagram/post-05.jpg', '/images/instagram/post-06.jpg'],
+    mediaType: 'reel',
+    likes: 50,
+    comments: 3,
+    caption:
+      'Nothing beats the feeling of a fresh, tangle-free coat! ✂️🫧 Warm hydro-bath, blueberry facial, and custom breed styling. 📍Polis, Paphos – Cyprus | 📞 99073343 #doggroomer #paphoscyprus #dogspa',
+    date: 'NOVEMBER 21, 2024',
+    permalink: 'https://www.instagram.com/p/DYPK8r8kftn/',
+  },
+  {
+    id: 'ig-6',
+    images: ['/images/instagram/post-08.jpg', '/images/instagram/post-09.jpg'],
+    mediaType: 'carousel',
+    likes: 69,
+    comments: 5,
+    caption:
+      'Soft, cloud-like fluff! ☁️🐶 Gentle undercoat removal and precision scissoring to keep this handsome boy looking his absolute best. #doggroomingbyjulia #pomeranianlove #groomingday #cypruslife',
+    date: 'NOVEMBER 14, 2024',
+    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+  },
+  {
+    id: 'ig-7',
+    images: ['/images/instagram/post-10.jpg'],
+    mediaType: 'reel',
+    likes: 54,
+    comments: 4,
+    caption:
+      'Bath time bliss! 🛁🐾 Deep cleansing shampoo, coat mask, and warm towel wrap for our golden guest today. #doggroomingbyjulia #dogbath #goldenretriever #petcare #paphos',
+    date: 'NOVEMBER 5, 2024',
+    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+  },
+  {
+    id: 'ig-8',
+    images: ['/images/instagram/post-03.jpg', '/images/instagram/post-01.jpg'],
+    mediaType: 'carousel',
+    likes: 76,
+    comments: 8,
+    caption:
+      'Best friends enjoying the sunshine right after a full grooming makeover! ✂️🐾 Send us a DM or call 99073343 to reserve your spot this week. #doggroomingbyjulia #petstylist #polischrysochous #paphos',
+    date: 'OCTOBER 28, 2024',
+    permalink: 'https://www.instagram.com/p/DdW5tJdAK-Z/',
+  },
+  {
+    id: 'ig-9',
+    images: ['/images/instagram/post-06.jpg'],
+    mediaType: 'photo',
+    likes: 62,
+    comments: 3,
+    caption:
+      'Little white cloud ready for the weekend! 🐾✨ Full hygiene trim, nail filing, and fluff dry. #doggroomingbyjulia #pomeranian #cyprusdogs',
+    date: 'OCTOBER 19, 2024',
+    permalink: 'https://www.instagram.com/p/DYPK8r8kftn/',
+  },
+  {
+    id: 'ig-10',
+    images: ['/images/instagram/post-09.jpg'],
+    mediaType: 'reel',
+    likes: 48,
+    comments: 2,
+    caption:
+      'Freshly groomed and posing like a pro! 📸🐶 Book your dog’s bath, haircut, or nail trim in Polis, Paphos. #doggroomingbyjulia #petgrooming #dogstyle',
+    date: 'OCTOBER 11, 2024',
+    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+  },
+  {
+    id: 'ig-11',
+    images: ['/images/instagram/post-11.jpg'],
+    mediaType: 'photo',
+    likes: 57,
+    comments: 4,
+    caption:
+      'Puppy’s first groom! Gentle introduction to the dryer, comb, and nail trimmers with lots of treats and patience. 🐾💛 #puppygroom #doggroomingbyjulia #paphos',
+    date: 'OCTOBER 3, 2024',
+    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+  },
+  {
+    id: 'ig-12',
+    images: ['/images/instagram/post-12.jpg'],
+    mediaType: 'carousel',
+    likes: 65,
+    comments: 5,
+    caption:
+      'Clean paws, shiny coat, and happy tail wags! 🐾✂️ Thank you to all our wonderful clients in Polis & Paphos. #doggroomingbyjulia #doglovers #petstylist',
+    date: 'SEPTEMBER 24, 2024',
+    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+  },
+];
+
 export function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [activeIgPostIndex, setActiveIgPostIndex] = useState<number | null>(null);
+  const [visibleIgCount, setVisibleIgCount] = useState(8);
+  const [igSlideIndexes, setIgSlideIndexes] = useState<Record<string, number>>({});
+  const igModalFeedRef = useRef<HTMLDivElement>(null);
   const [reviewPage, setReviewPage] = useState(0);
   const [expandedReviews, setExpandedReviews] = useState<Record<string, boolean>>({});
   const [isDraggingReviews, setIsDraggingReviews] = useState(false);
+  const [workIndex, setWorkIndex] = useState(0);
+  const [isWorkPaused, setIsWorkPaused] = useState(false);
+  const [isMobileGallery, setIsMobileGallery] = useState(false);
+  const workTouchStartXRef = useRef<number | null>(null);
+
+  const goToWork = (dir: 1 | -1) => {
+    setWorkIndex((prev) => (prev + dir + WORK_GALLERY.length) % WORK_GALLERY.length);
+  };
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)');
+    const update = () => setIsMobileGallery(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    if (isWorkPaused || lightboxIndex !== null) return;
+    const timer = window.setInterval(() => {
+      setWorkIndex((prev) => (prev + 1) % WORK_GALLERY.length);
+    }, 4000);
+    return () => window.clearInterval(timer);
+  }, [isWorkPaused, lightboxIndex]);
+
+  const getWorkSlideStyle = (idx: number): CSSProperties => {
+    const n = WORK_GALLERY.length;
+    const offset = ((idx - workIndex + n + Math.floor(n / 2)) % n) - Math.floor(n / 2);
+    const abs = Math.abs(offset);
+    const sign = Math.sign(offset);
+
+    // [width %, height %, center-x offset % of container, opacity, zIndex]
+    const desktop: Record<number, [number, number, number, number, number]> = {
+      0: [40, 100, 0, 1, 30],
+      1: [23, 80, 31, 1, 20],
+      2: [18, 70, 51.5, 1, 10],
+    };
+    const mobile: Record<number, [number, number, number, number, number]> = {
+      0: [74, 100, 0, 1, 30],
+      1: [40, 78, 55, 1, 20],
+    };
+    const table = isMobileGallery ? mobile : desktop;
+    const maxVisible = isMobileGallery ? 1 : 2;
+    const [w, h, x, opacity, z] =
+      abs <= maxVisible ? table[abs] : [18, 70, isMobileGallery ? 90 : 72, 0, 0];
+
+    return {
+      width: `${w}%`,
+      height: `${h}%`,
+      left: `${50 + sign * x - w / 2}%`,
+      opacity,
+      zIndex: z,
+      pointerEvents: opacity === 0 ? 'none' : 'auto',
+    };
+  };
 
   const reviewsTrackRef = useRef<HTMLDivElement>(null);
   const dragStateRef = useRef({ active: false, dragging: false, startX: 0, startScrollLeft: 0 });
@@ -240,6 +461,31 @@ export function Home() {
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [lightboxIndex]);
+
+  useEffect(() => {
+    if (activeIgPostIndex === null) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const scrollTimer = window.setTimeout(() => {
+      const container = igModalFeedRef.current;
+      if (!container) return;
+      const target = container.querySelector<HTMLElement>(`[data-ig-post-index="${activeIgPostIndex}"]`);
+      if (target) {
+        target.scrollIntoView({ block: 'start' });
+      }
+    }, 20);
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveIgPostIndex(null);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.clearTimeout(scrollTimer);
+      window.removeEventListener('keydown', handleKey);
+    };
+  }, [activeIgPostIndex]);
 
   useEffect(() => {
     const handleWindowPointerMove = (e: PointerEvent) => {
@@ -443,7 +689,7 @@ export function Home() {
               </p>
               <div className="mt-7 flex items-center gap-5">
                 <a
-                  href="https://www.instagram.com/"
+                  href={INSTAGRAM_PROFILE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -748,48 +994,98 @@ export function Home() {
       </section>
 
       {/* 6.45 See Our Work */}
-      <section className="bg-[#0D0D0D] pt-[12px] lg:pt-[20px] pb-5 sm:pb-6 lg:pb-7">
-        <div className="max-w-[1280px] mx-auto px-4 lg:px-8">
-          <div className="flex flex-wrap sm:flex-nowrap items-end justify-between gap-4 sm:gap-6 mb-7 lg:mb-9">
+      <section className="bg-[#0D0D0D] pt-[24px] lg:pt-[40px] pb-10 sm:pb-12 lg:pb-14 overflow-hidden">
+        {/* Left-Aligned Header (matches Our Services / Our Process) */}
+        <div className="max-w-[1344px] mx-auto px-4 lg:px-8">
+          <div className="flex items-end gap-5 sm:gap-6">
             <div className="inline-flex flex-col items-start sm:items-center shrink-0">
               <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#F5F5F0] mb-1.5">
-                SEE WHY OUR CUSTOMERS LOVE US
+                VIEW OUR WORK
               </span>
               <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-none tracking-[-0.01em]">
-                SEE OUR WORK
+                OUR PROJECT GALLERY
               </h2>
             </div>
-
-            <div className="hidden sm:block h-[2px] flex-grow bg-[#1F46B4]/60 mb-[18px] lg:mb-[22px]" />
-
-            <button
-              type="button"
-              onClick={() => setLightboxIndex(0)}
-              className="bg-white hover:bg-[#F5F5F0] text-[#0D0D0D] font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-4 sm:px-6 py-3 sm:py-3.5 rounded-[6px] inline-flex items-center gap-2 shrink-0 shadow-md transition-colors cursor-pointer sm:mb-[4px]"
-            >
-              SEE ALL PHOTOS
-              <ArrowRight size={15} strokeWidth={2.8} className="text-[#1F46B4]" />
-            </button>
+            <div className="h-[2px] flex-grow bg-[#1F46B4]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {WORK_GALLERY.map((photo, idx) => (
+        {/* Coverflow Carousel */}
+        <div
+          className="relative w-full mt-10 sm:mt-12 lg:mt-14 h-[230px] sm:h-[300px] lg:h-[400px] xl:h-[440px] select-none"
+          onMouseEnter={() => setIsWorkPaused(true)}
+          onMouseLeave={() => setIsWorkPaused(false)}
+          onTouchStart={(e) => {
+            workTouchStartXRef.current = e.touches[0].clientX;
+            setIsWorkPaused(true);
+          }}
+          onTouchEnd={(e) => {
+            const startX = workTouchStartXRef.current;
+            workTouchStartXRef.current = null;
+            setIsWorkPaused(false);
+            if (startX === null) return;
+            const dx = e.changedTouches[0].clientX - startX;
+            if (Math.abs(dx) > 40) goToWork(dx < 0 ? 1 : -1);
+          }}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Project gallery"
+        >
+          {WORK_GALLERY.map((photo, idx) => {
+            const isActive = idx === workIndex;
+            return (
               <button
                 key={photo.image}
                 type="button"
-                onClick={() => setLightboxIndex(idx)}
-                aria-label={`View project photo: ${photo.alt}`}
-                className="aspect-[4/3] rounded-[8px] sm:rounded-[10px] overflow-hidden border-[2px] border-[#F5F5F0]/85 hover:border-white bg-[#1A1A1A] transition-colors cursor-pointer block w-full p-0"
+                onClick={() => (isActive ? setLightboxIndex(idx) : setWorkIndex(idx))}
+                aria-label={isActive ? `Open project photo: ${photo.alt}` : `Show project photo: ${photo.alt}`}
+                className={`absolute top-1/2 -translate-y-1/2 p-0 overflow-hidden rounded-[12px] sm:rounded-[16px] bg-[#1A1A1A] cursor-pointer transition-all duration-[650ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] ${
+                  isActive ? 'shadow-[0_18px_45px_rgba(0,0,0,0.65)]' : 'shadow-[0_10px_25px_rgba(0,0,0,0.45)]'
+                }`}
+                style={getWorkSlideStyle(idx)}
               >
                 <img
                   src={photo.image}
                   alt={photo.alt}
                   loading="lazy"
+                  draggable={false}
                   className="w-full h-full object-cover"
                 />
               </button>
-            ))}
-          </div>
+            );
+          })}
+
+          {/* Arrows */}
+          <button
+            type="button"
+            onClick={() => goToWork(-1)}
+            aria-label="Previous project"
+            className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-40 w-10 h-14 flex items-center justify-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] hover:scale-110 transition-transform cursor-pointer"
+          >
+            <ChevronLeft size={40} strokeWidth={1.75} />
+          </button>
+          <button
+            type="button"
+            onClick={() => goToWork(1)}
+            aria-label="Next project"
+            className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-40 w-10 h-14 flex items-center justify-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] hover:scale-110 transition-transform cursor-pointer"
+          >
+            <ChevronRight size={40} strokeWidth={1.75} />
+          </button>
+        </div>
+
+        {/* View More Projects */}
+        <div className="mt-10 sm:mt-12 lg:mt-14 flex justify-center px-4">
+          <button
+            type="button"
+            onClick={() => setLightboxIndex(workIndex)}
+            className="bg-[#1F46B4] hover:bg-[#183890] text-white font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-6 sm:px-7 py-3 sm:py-3.5 rounded-[4px] inline-flex items-center gap-2 shadow-[0_6px_18px_rgba(31,70,180,0.35)] transition-colors cursor-pointer"
+          >
+            VIEW MORE PROJECTS
+            <span className="w-[16px] h-[16px] rounded-full bg-white flex items-center justify-center">
+              <ArrowRight size={11} strokeWidth={3.2} className="text-[#1F46B4]" />
+            </span>
+          </button>
         </div>
       </section>
 
@@ -878,10 +1174,10 @@ export function Home() {
           </svg>
         </div>
 
-        <div className="relative z-10 max-w-[1280px] mx-auto px-4 lg:px-8 pt-6 sm:pt-8 pb-5 sm:pb-6 lg:pb-8">
+        <div className="relative z-10 max-w-[1344px] mx-auto px-4 lg:px-8 pt-6 sm:pt-8 pb-5 sm:pb-6 lg:pb-8">
           {/* Eyebrow Pill + Heading + Divider + CTA */}
           <div className="mb-8 lg:mb-10">
-            <div className="inline-block bg-[#0B0B0B]/95 text-[#F5F5F0] text-[11px] sm:text-[13px] font-[800] tracking-[0.06em] uppercase px-3 py-1.5 rounded-[4px] mb-2 sm:ml-4 shadow-md">
+            <div className="inline-block bg-[#0B0B0B]/95 text-[#F5F5F0] text-[11px] sm:text-[13px] font-[800] tracking-[0.06em] uppercase px-3 py-1.5 rounded-[4px] mb-2 shadow-md">
               DISCOVER WHAT OUR CUSTOMERS HAVE TO SAY ABOUT US
             </div>
             <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 sm:gap-6">
@@ -1100,7 +1396,7 @@ export function Home() {
 
       {/* 6.495 Proudly Serving These Areas */}
       <section className="bg-[#0D0D0D] border-t border-white/15 pt-[48px] lg:pt-[64px]">
-        <div className="max-w-[1280px] mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-[1.06fr_0.94fr] gap-10 lg:gap-14 items-start">
+        <div className="max-w-[1344px] mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-[1.06fr_0.94fr] gap-10 lg:gap-14 items-start">
           {/* Interactive Map + Business Place Card */}
           <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[470px] bg-[#1A1A1A] overflow-hidden shadow-2xl">
             <iframe
@@ -1162,6 +1458,300 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* 6.498 Follow Us on Instagram */}
+      <section className="bg-[#0D0D0D] pt-[56px] lg:pt-[76px] pb-[28px] lg:pb-[40px]">
+        <div className="max-w-[1040px] mx-auto px-4 lg:px-8">
+          {/* Centered Section Header */}
+          <div className="text-center mb-8 sm:mb-10">
+            <span className="block text-[14px] sm:text-[15px] font-[700] uppercase tracking-[0.06em] text-[#5C85F6] mb-1.5">
+              INSTAGRAM
+            </span>
+            <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] uppercase font-[800] text-[#F5F5F0] leading-[1.08] tracking-[-0.01em]">
+              FOLLOW US ON INSTAGRAM
+            </h2>
+          </div>
+
+          {/* 4x2 Square Post Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px] bg-[#1A1A1A]">
+            {INSTAGRAM_POSTS.slice(0, visibleIgCount).map((post, idx) => (
+              <button
+                key={post.id}
+                type="button"
+                onClick={() => setActiveIgPostIndex(idx)}
+                aria-label={`Open Instagram post ${idx + 1} by @${INSTAGRAM_USERNAME}`}
+                className="group relative aspect-square w-full overflow-hidden bg-[#141414] p-0 text-left cursor-pointer focus:outline-none"
+              >
+                <img
+                  src={post.images[0]}
+                  alt={`@${INSTAGRAM_USERNAME} post ${idx + 1}`}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Top-Right Media Type Badge (Carousel or Reel) */}
+                {post.mediaType === 'carousel' && (
+                  <div className="absolute top-2.5 right-2.5 z-10 text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.65)] pointer-events-none">
+                    <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] fill-current" aria-hidden="true">
+                      <path d="M19 5.5h-1.5V4A2.5 2.5 0 0 0 15 1.5H4A2.5 2.5 0 0 0 1.5 4v11A2.5 2.5 0 0 0 4 17.5h1.5V19A2.5 2.5 0 0 0 8 21.5h11a2.5 2.5 0 0 0 2.5-2.5V8A2.5 2.5 0 0 0 19 5.5zM4 15.5a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1.5H8A2.5 2.5 0 0 0 5.5 8v7.5H4zm15.5 3.5a.5.5 0 0 1-.5.5H8a.5.5 0 0 1-.5-.5V8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v11z" />
+                    </svg>
+                  </div>
+                )}
+                {post.mediaType === 'reel' && (
+                  <div className="absolute top-2.5 right-2.5 z-10 text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.65)] pointer-events-none">
+                    <svg viewBox="0 0 24 24" className="w-[21px] h-[21px] fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="2.5" y="5" width="14" height="14" rx="2.5" />
+                      <path d="M16.5 10l5-3v10l-5-3v-4z" fill="currentColor" />
+                    </svg>
+                  </div>
+                )}
+
+                {/* Hover Overlay with Likes, Comments & Caption Preview */}
+                <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center p-4 text-center text-white">
+                  <div className="flex items-center justify-center gap-5 text-[14px] font-[700] mb-3">
+                    <span className="inline-flex items-center gap-1.5">
+                      <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-none stroke-current" strokeWidth="2.2" aria-hidden="true">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                      </svg>
+                      {post.likes}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-none stroke-current" strokeWidth="2.2" aria-hidden="true">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                      </svg>
+                      {post.comments}
+                    </span>
+                  </div>
+                  <p className="text-[12px] sm:text-[12.5px] font-[600] leading-[1.4] text-white/95 line-clamp-4 max-w-[210px]">
+                    {post.caption}
+                  </p>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Load More / View on Instagram Button */}
+          <div className="mt-7 flex justify-center">
+            {visibleIgCount < INSTAGRAM_POSTS.length ? (
+              <button
+                type="button"
+                onClick={() => setVisibleIgCount(INSTAGRAM_POSTS.length)}
+                className="bg-[#1F46B4] hover:bg-[#183890] text-white text-[13px] font-[700] px-14 py-2.5 rounded-[4px] transition-colors shadow-md cursor-pointer"
+              >
+                Load more
+              </button>
+            ) : (
+              <a
+                href={INSTAGRAM_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#1F46B4] hover:bg-[#183890] text-white text-[13px] font-[700] px-10 py-2.5 rounded-[4px] transition-colors shadow-md inline-flex items-center gap-2"
+              >
+                View more on Instagram
+              </a>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* In-Website Scrollable Instagram Feed Modal */}
+      {activeIgPostIndex !== null && (
+        <div
+          ref={igModalFeedRef}
+          onClick={() => setActiveIgPostIndex(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Instagram feed viewer"
+          className="fixed inset-0 z-[110] bg-black/80 backdrop-blur-[2px] overflow-y-auto py-4 sm:py-8 px-3 sm:px-4"
+        >
+          {/* Fixed Close Button positioned to the right of the centered column */}
+          <button
+            type="button"
+            onClick={() => setActiveIgPostIndex(null)}
+            aria-label="Close Instagram feed"
+            className="fixed top-4 right-4 sm:top-6 sm:right-[calc(50%-325px)] z-[120] w-10 h-10 rounded-full bg-black/50 sm:bg-transparent hover:bg-white/15 text-white/90 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+          >
+            <X size={26} strokeWidth={1.8} />
+          </button>
+
+          {/* Centered White Scrollable Feed Column */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-[540px] w-full mx-auto bg-white text-[#1A1A1A] rounded-[4px] shadow-[0_20px_60px_rgba(0,0,0,0.75)] overflow-hidden divide-y divide-black/10"
+          >
+            {INSTAGRAM_POSTS.map((post, postIdx) => {
+              const currentSlide = igSlideIndexes[post.id] ?? 0;
+              const totalSlides = post.images.length;
+
+              return (
+                <article
+                  key={post.id}
+                  data-ig-post-index={postIdx}
+                  className="bg-white scroll-mt-4"
+                >
+                  {/* Post Top Header Bar */}
+                  <div className="px-4 py-3 flex items-center justify-between gap-3">
+                    <a
+                      href={INSTAGRAM_PROFILE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 group min-w-0"
+                    >
+                      <span className="p-[2px] rounded-full bg-[linear-gradient(45deg,#f09433_0%,#e6683c_25%,#dc2743_50%,#cc2366_75%,#bc1888_100%)] shrink-0">
+                        <img
+                          src={INSTAGRAM_AVATAR}
+                          alt={INSTAGRAM_USERNAME}
+                          className="w-8 h-8 rounded-full object-cover bg-white p-[1px]"
+                        />
+                      </span>
+                      <span className="text-[13.5px] font-[700] text-[#1A1A1A] group-hover:underline truncate">
+                        {INSTAGRAM_USERNAME}
+                      </span>
+                    </a>
+
+                    <div className="flex items-center gap-3 shrink-0">
+                      <a
+                        href={INSTAGRAM_PROFILE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[13px] font-[700] text-[#0095F6] hover:text-[#00376B] transition-colors"
+                      >
+                        Follow
+                      </a>
+                      <a
+                        href={post.permalink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open post on Instagram"
+                        className="text-[#1A1A1A] hover:text-[#0095F6] transition-colors"
+                      >
+                        <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] fill-none stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5" />
+                          <circle cx="12" cy="12" r="4.5" />
+                          <circle cx="17.5" cy="6.5" r="1" className="fill-current stroke-none" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Post Media (with Multi-Photo Carousel Controls if applicable) */}
+                  <div className="relative w-full bg-[#F5F5F5] overflow-hidden select-none">
+                    <a
+                      href={post.permalink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full"
+                      title="View post on Instagram"
+                    >
+                      <img
+                        src={post.images[currentSlide]}
+                        alt={`${INSTAGRAM_USERNAME} post ${postIdx + 1}`}
+                        className="w-full max-h-[620px] object-cover block"
+                      />
+                    </a>
+
+                    {totalSlides > 1 && (
+                      <>
+                        {currentSlide > 0 && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setIgSlideIndexes((prev) => ({
+                                ...prev,
+                                [post.id]: currentSlide - 1,
+                              }))
+                            }
+                            aria-label="Previous slide"
+                            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/55 hover:bg-black/75 text-white flex items-center justify-center transition-colors cursor-pointer"
+                          >
+                            <ChevronLeft size={18} />
+                          </button>
+                        )}
+                        {currentSlide < totalSlides - 1 && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setIgSlideIndexes((prev) => ({
+                                ...prev,
+                                [post.id]: currentSlide + 1,
+                              }))
+                            }
+                            aria-label="Next slide"
+                            className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/55 hover:bg-black/75 text-white flex items-center justify-center transition-colors cursor-pointer"
+                          >
+                            <ChevronRight size={18} />
+                          </button>
+                        )}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-full">
+                          {post.images.map((_, dotIdx) => (
+                            <span
+                              key={dotIdx}
+                              className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                                dotIdx === currentSlide ? 'bg-white' : 'bg-white/45'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  {/* Post Footer: Likes, Share, Caption & Date */}
+                  <div className="px-4 pt-3.5 pb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[13.5px] font-[700] text-[#1A1A1A]">
+                        {post.likes} likes
+                      </span>
+                      <a
+                        href={post.permalink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[13px] font-[600] text-[#1A1A1A] hover:text-[#0095F6] transition-colors"
+                      >
+                        <svg viewBox="0 0 24 24" className="w-[16px] h-[16px] fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d="M15 14l5-5-5-5" />
+                          <path d="M4 20v-7a4 4 0 0 1 4-4h12" />
+                        </svg>
+                        Share
+                      </a>
+                    </div>
+
+                    <p className="text-[13.5px] leading-[1.45] text-[#262626] font-[500]">
+                      <a
+                        href={INSTAGRAM_PROFILE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-[700] text-[#1A1A1A] hover:underline mr-1.5"
+                      >
+                        {INSTAGRAM_USERNAME}
+                      </a>
+                      {post.caption.split(' ').map((word, wIdx) =>
+                        word.startsWith('#') || word.startsWith('@') ? (
+                          <a
+                            key={wIdx}
+                            href={INSTAGRAM_PROFILE_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#00376B] hover:underline"
+                          >
+                            {word}{' '}
+                          </a>
+                        ) : (
+                          <span key={wIdx}>{word} </span>
+                        )
+                      )}
+                    </p>
+
+                    <div className="mt-2.5 text-[10.5px] font-[600] uppercase tracking-[0.04em] text-[#8E8E8E]">
+                      {post.date}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* 6.5 Pre-Footer Photo CTA & Wave Transition into Footer */}
       <section className="relative bg-[#0D0D0D] overflow-hidden -mt-[1px]">

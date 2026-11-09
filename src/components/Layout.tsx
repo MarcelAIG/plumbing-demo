@@ -284,7 +284,7 @@ function Footer() {
             {/* Bottom 4 Circular Social Icons (Same as About Us Section) */}
             <div className="flex items-center justify-around pt-2">
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/doggroomingby_julia/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

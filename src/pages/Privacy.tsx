@@ -1,12 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { CTABand } from '../components/Layout';
+import { BUSINESS_NAME, GREEK_IDENTITY, PHONE_NUMBER, PHONE_HREF } from '../config';
 
 export function Privacy() {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | SOLO Plumbing & Heating</title>
-        <meta name="description" content="Privacy policy and data collection practices." />
+        <title>{`Privacy Policy | ${BUSINESS_NAME}`}</title>
+        <meta name="description" content={`Privacy notice for ${BUSINESS_NAME}.`} />
       </Helmet>
 
       {/* 14.1 Compact Hero */}
@@ -15,47 +16,32 @@ export function Privacy() {
           Privacy Policy
         </h1>
         <p className="text-[18px] text-[#9C9C96] mt-4 leading-[1.6]">
-          Last updated August 2026
+          {BUSINESS_NAME} ({GREEK_IDENTITY})
         </p>
       </section>
 
       {/* 14.2 Body Content */}
       <section className="bg-[#242424] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[760px] mx-auto text-[17px] text-[#F5F5F0]/90 leading-[1.6] flex flex-col gap-10">
-          
+
           <div className="flex flex-col gap-4">
-            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Information We Collect</h3>
-            <p>We collect personal information that you voluntarily provide to us when you express an interest in obtaining information about us or our products and services, when you participate in activities on the website, or otherwise when you contact us. This includes your name, phone number, physical address, and service history.</p>
+            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Information You Share</h3>
+            <p>When you contact {BUSINESS_NAME} by phone or messaging platforms regarding a handyman repair, installation, or maintenance request, you may share your name, phone number, district location, and job details.</p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">How We Use It</h3>
-            <p>We use personal information collected via our website for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. Primary uses include emergency dispatch operations, service delivery, and follow-up quality checks.</p>
+            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">How Information Is Used</h3>
+            <p>Contact details are used solely to respond to your inquiry, discuss service availability in Larnaca and Limassol districts, and coordinate requested handyman work.</p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Data Storage & Security</h3>
-            <p>We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure.</p>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Third-Party Sharing</h3>
-            <p>We do not sell, rent, or trade your personal information to third parties. We may share your data with third-party vendors, service providers, contractors, or agents who perform services for us or on our behalf and require access to such information to do that work (such as payment processing or dispatch routing).</p>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Cookies</h3>
-            <p>We may use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Notice.</p>
-          </div>
-
-          <div className="flex flex-col gap-4">
-            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Your Rights</h3>
-            <p>Depending on your location, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request deletion of your personal data, please contact us using the details provided below.</p>
+            <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Third-Party Links</h3>
+            <p>This website includes links to external services such as Google Maps, WhatsApp, and Facebook. Interactions on those platforms are governed by their respective privacy policies.</p>
           </div>
 
           <div className="flex flex-col gap-4">
             <h3 className="text-[26px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Contact Us</h3>
-            <p>If you have questions or comments about this notice, you may email us at <a href="mailto:dispatch@ironcladplumbing.com" className="text-[#1F46B4] underline">dispatch@ironcladplumbing.com</a>.</p>
+            <p>If you have questions about this notice, please call <a href={PHONE_HREF} className="text-[#2DD4BF] underline">{PHONE_NUMBER}</a>.</p>
           </div>
 
         </div>

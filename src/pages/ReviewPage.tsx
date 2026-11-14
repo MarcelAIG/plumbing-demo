@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Logo } from '../components/Logo';
-import { GOOGLE_MAPS_REVIEW_URL } from '../config';
+import { BUSINESS_NAME, GREEK_IDENTITY, GOOGLE_MAPS_REVIEW_URL, PHONE_NUMBER, PHONE_HREF } from '../config';
 
 const STAR_OPTIONS = [
   { value: 5, label: '5 Stars' },
@@ -16,14 +16,11 @@ const STAR_OPTIONS = [
 export function ReviewPage() {
   const [searchParams] = useSearchParams();
   const initialParam = Number(searchParams.get('rating'));
-  const initialLowRating =
-    initialParam >= 1 && initialParam <= 3 ? initialParam : null;
+  const validInitial = initialParam >= 1 && initialParam <= 5 ? initialParam : 5;
 
-  const [selectedRating, setSelectedRating] = useState<number | null>(
-    initialLowRating ?? 5
-  );
+  const [selectedRating, setSelectedRating] = useState<number>(validInitial);
   const [step, setStep] = useState<'rate' | 'feedback' | 'submitted'>(
-    initialLowRating ? 'feedback' : 'rate'
+    initialParam >= 1 && initialParam <= 3 ? 'feedback' : 'rate'
   );
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,16 +29,15 @@ export function ReviewPage() {
   const handleSelectRating = (stars: number) => {
     setSelectedRating(stars);
     if (stars >= 4) {
-      window.location.href = GOOGLE_MAPS_REVIEW_URL;
+      window.open(GOOGLE_MAPS_REVIEW_URL, '_blank', 'noopener,noreferrer');
       return;
     }
     setStep('feedback');
   };
 
   const handleNext = () => {
-    if (!selectedRating) return;
     if (selectedRating >= 4) {
-      window.location.href = GOOGLE_MAPS_REVIEW_URL;
+      window.open(GOOGLE_MAPS_REVIEW_URL, '_blank', 'noopener,noreferrer');
       return;
     }
     setStep('feedback');
@@ -57,10 +53,10 @@ export function ReviewPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] pt-[124px] lg:pt-[140px] pb-[90px] px-4 flex flex-col items-center">
       <Helmet>
-        <title>Leave Us a Review | George Handyman Services</title>
+        <title>{`Leave Us a Review | ${BUSINESS_NAME}`}</title>
         <meta
           name="description"
-          content="Share your experience with George Handyman Services in Paphos, Cyprus."
+          content={`Share your experience with ${BUSINESS_NAME} (${GREEK_IDENTITY}) in Larnaca and Limassol, Cyprus.`}
         />
       </Helmet>
 
@@ -69,8 +65,8 @@ export function ReviewPage() {
         <Logo className="w-[156px] sm:w-[176px] h-auto" />
       </div>
 
-      {/* Main Dark Review Card with Orange Border */}
-      <div className="w-full max-w-[470px] rounded-[12px] bg-[#0B0D10] border border-[#F97316]/85 shadow-[0_18px_50px_rgba(0,0,0,0.65)] p-5 sm:p-6">
+      {/* Main Dark Review Card with Teal Border */}
+      <div className="w-full max-w-[470px] rounded-[12px] bg-[#0B0D10] border border-[#0D9488]/85 shadow-[0_18px_50px_rgba(0,0,0,0.65)] p-5 sm:p-6">
         {step === 'rate' && (
           <>
             <h1 className="text-center text-[22px] sm:text-[26px] font-[800] text-white tracking-[-0.01em] mb-5">
@@ -97,12 +93,12 @@ export function ReviewPage() {
                       <span
                         className={`w-[15px] h-[15px] rounded-full border flex items-center justify-center shrink-0 transition-colors ${
                           isChecked
-                            ? 'border-[#2563EB] bg-white'
+                            ? 'border-[#0D9488] bg-white'
                             : 'border-[#9CA3AF] bg-white group-hover:border-[#4B5563]'
                         }`}
                       >
                         {isChecked && (
-                          <span className="w-[8px] h-[8px] rounded-full bg-[#2563EB]" />
+                          <span className="w-[8px] h-[8px] rounded-full bg-[#0D9488]" />
                         )}
                       </span>
 
@@ -126,13 +122,25 @@ export function ReviewPage() {
                   );
                 })}
               </div>
+
+              {/* Public Google Review Option Always Available Regardless of Rating */}
+              <div className="mt-5 pt-4 border-t border-black/10 text-center">
+                <a
+                  href={GOOGLE_MAPS_REVIEW_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[12.5px] font-[700] text-[#0F766E] hover:underline"
+                >
+                  Or leave a public review directly on Google Maps &rarr;
+                </a>
+              </div>
             </div>
 
             <div className="mt-4">
               <button
                 type="button"
                 onClick={handleNext}
-                className="w-full bg-[#1C2026] hover:bg-[#272C35] text-white text-[13px] font-[700] py-2.5 rounded-[6px] border border-white/10 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full bg-[#0D9488] hover:bg-[#0F766E] text-white text-[13px] font-[700] py-2.5 rounded-[6px] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <span>Next</span>
                 <span aria-hidden="true" className="text-[10px]">
@@ -146,7 +154,7 @@ export function ReviewPage() {
         {step === 'feedback' && (
           <>
             <h1 className="text-center text-[20px] sm:text-[23px] font-[800] text-white leading-[1.2] mb-5 px-2">
-              Sorry to hear that you&apos;re not satisfied.
+              Share your feedback or post a public Google review
             </h1>
 
             <form
@@ -154,8 +162,21 @@ export function ReviewPage() {
               className="bg-white rounded-[8px] p-5 sm:p-6 text-[#111317] shadow-inner flex flex-col gap-4"
             >
               <p className="text-[12.5px] font-[600] text-[#4B5563] leading-[1.45]">
-                Please provide us with your feedback and we&apos;ll do our best to improve.
+                You can leave a public review on Google Maps at any rating, or write a note below and contact us directly at{' '}
+                <a href={PHONE_HREF} className="text-[#0F766E] underline">
+                  {PHONE_NUMBER}
+                </a>
+                .
               </p>
+
+              <a
+                href={GOOGLE_MAPS_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#F0FDFA] border border-[#0D9488]/40 text-[#0F766E] hover:bg-[#CCFBF1] text-[12.5px] font-[800] py-2.5 px-3 rounded-[4px] text-center transition-colors"
+              >
+                Leave a Public Review on Google Maps &rarr;
+              </a>
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="review-name" className="text-[12px] font-[700] text-[#374151]">
@@ -167,7 +188,7 @@ export function ReviewPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
-                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#2563EB]"
+                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488]"
                 />
               </div>
 
@@ -181,7 +202,7 @@ export function ReviewPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#2563EB]"
+                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488]"
                 />
               </div>
 
@@ -189,9 +210,6 @@ export function ReviewPage() {
                 <label htmlFor="review-feedback" className="text-[12px] font-[700] text-[#374151]">
                   Your Feedback
                 </label>
-                <span className="text-[11px] font-[500] text-[#6B7280] -mt-1">
-                  Please let us know what can we do to improve?
-                </span>
                 <textarea
                   id="review-feedback"
                   rows={4}
@@ -199,7 +217,7 @@ export function ReviewPage() {
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
                   placeholder="Enter your feedback here..."
-                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#2563EB] resize-y"
+                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488] resize-y"
                 />
               </div>
 
@@ -215,7 +233,7 @@ export function ReviewPage() {
                   type="submit"
                   className="bg-[#0B0D10] hover:bg-[#1F2937] text-white text-[13px] font-[700] px-6 py-2.5 rounded-[5px] transition-colors cursor-pointer"
                 >
-                  Submit
+                  Continue
                 </button>
               </div>
             </form>
@@ -224,26 +242,40 @@ export function ReviewPage() {
 
         {step === 'submitted' && (
           <div className="bg-white rounded-[8px] p-6 sm:p-7 text-[#111317] text-center flex flex-col items-center gap-3">
-            <CheckCircle2 size={42} className="text-[#16A34A]" />
+            <CheckCircle2 size={42} className="text-[#0D9488]" />
             <h1 className="text-[20px] font-[800] text-[#111317]">
-              Thank you for your feedback
+              Thank you for sharing your feedback
             </h1>
             <p className="text-[13px] text-[#4B5563] leading-[1.55]">
-              We appreciate you taking the time to tell us how we can do better. George Handyman Services will review your note carefully.
+              This static preview does not send messages automatically. You can still post your review publicly on Google Maps or reach {BUSINESS_NAME} directly at{' '}
+              <a href={PHONE_HREF} className="text-[#0F766E] underline font-[700]">
+                {PHONE_NUMBER}
+              </a>
+              .
             </p>
-            <Link
-              to="/"
-              className="mt-2 inline-block bg-[#D94E0F] hover:bg-[#B8400B] text-white text-[12.5px] font-[800] uppercase tracking-wide px-6 py-2.5 rounded-[4px] transition-colors"
-            >
-              Return Home
-            </Link>
+            <div className="flex flex-col gap-2 w-full mt-2">
+              <a
+                href={GOOGLE_MAPS_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-[#0D9488] hover:bg-[#0F766E] text-white text-[12.5px] font-[800] uppercase tracking-wide px-6 py-2.5 rounded-[4px] transition-colors"
+              >
+                Post Review on Google Maps
+              </a>
+              <Link
+                to="/"
+                className="inline-block text-[#4B5563] hover:text-[#111827] text-[12.5px] font-[700] py-1.5"
+              >
+                Return Home
+              </Link>
+            </div>
           </div>
         )}
 
         {/* Bottom Progress Bar */}
         <div className="mt-4 w-full h-[14px] rounded-full bg-[#3F4248] overflow-hidden relative flex items-center justify-center">
           <div
-            className="absolute inset-y-0 left-0 bg-[#F97316] transition-all duration-300"
+            className="absolute inset-y-0 left-0 bg-[#0D9488] transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
           <span className="relative z-10 text-[10px] font-[800] text-white/95 leading-none">

@@ -1,57 +1,68 @@
 export const FAQS = [
   {
-    category: 'Emergencies & Response',
+    category: 'Services & Scope',
     items: [
-      { q: 'What actually qualifies as a plumbing emergency?', a: 'Anything actively causing property damage or leaving you without an essential utility: burst pipes, sewage backup, flooding, total water loss, or no heat in freezing weather.' },
-      { q: 'How fast do you really respond?', a: 'Average is 30 minutes across Portland, varying 20–35 minutes by neighborhood — see our Service Areas page for specifics.' },
-      { q: 'Are you open on holidays?', a: 'Yes. 24/7/365, including every holiday, with no reduced staffing.' }
-    ]
+      {
+        q: 'What handyman services do you offer?',
+        a: 'We cover four main areas: Plumbing Works (faucet repairs/replacements, sink repairs, minor plumbing), Carpentry (furniture assembly, cabinet/drawer repairs, parquet installation, small carpentry), Electrical & Lighting (light fixtures, switches/sockets, decorative lighting), and Garden & Yard Work (garden cleaning, weeding/small pruning, fence creation/repair, general yard maintenance).',
+      },
+      {
+        q: 'Do you handle small home repair jobs as well as installations?',
+        a: 'Yes. From replacing a corroded basin faucet or hanging a ceiling pendant to assembling outdoor storage boxes and installing pergola string lights, small jobs are our specialty.',
+      },
+      {
+        q: 'Can I see examples of your actual work?',
+        a: 'Yes. You can explore real project photos in our Project Gallery, Before & After slider, and Facebook section on the homepage.',
+      },
+    ],
   },
   {
-    category: 'Pricing',
+    category: 'Service Areas',
     items: [
-      { q: 'Is your emergency rate really fixed?', a: 'Yes — quoted on the phone before dispatch, never re-negotiated on arrival.' },
-      { q: 'Do you charge extra at night?', a: 'A modest, disclosed after-hours rate applies 10pm–6am. It\'s stated on the call, never a surprise.' },
-      { q: 'Do you accept insurance claims directly?', a: 'We don\'t bill insurers directly, but we provide full documentation and photos your insurer will typically need.' }
-    ]
+      {
+        q: 'Which regions of Cyprus do you serve?',
+        a: 'We serve the Larnaca and Limassol districts in Cyprus.',
+      },
+      {
+        q: 'How do I check availability for my location?',
+        a: 'Call or message +357 97 608803 with your location in the Larnaca or Limassol district and a short note about the job.',
+      },
+    ],
   },
   {
-    category: 'Technicians & Trust',
+    category: 'Quotes & Contact',
     items: [
-      { q: 'Are your plumbers licensed?', a: 'Every technician on every truck, under Master Plumber License #MP-78291.' },
-      { q: 'Do you subcontract any work?', a: 'No. Every technician is directly employed and trained to the same standard.' },
-      { q: 'What guarantee do you offer?', a: '12 months on labor for all emergency repairs, plus manufacturer warranty on any parts installed.' }
-    ]
+      {
+        q: 'How can I request a quote or book a visit?',
+        a: 'Call +357 97 608803 directly, send a message on WhatsApp, or visit our Facebook page to share details of what you need done.',
+      },
+      {
+        q: 'Should I send photos of the repair or installation needed?',
+        a: 'Sharing a quick description or photo by phone/WhatsApp helps us understand the job clearly and give you an accurate estimate.',
+      },
+    ],
   },
-  {
-    category: 'Logistics',
-    items: [
-      { q: 'Do I need to be home for the repair?', a: 'Yes, for access and to approve the fixed quote before work starts.' },
-      { q: 'What if the fix needs a part not on the truck?', a: 'We stabilize the situation safely first, then return with the part — usually same day.' },
-      { q: 'Can you help if I\'m not sure it\'s a real emergency?', a: 'Call anyway. Dispatchers will help you assess it honestly — we\'d rather talk you through it than have water spread while you wait.' }
-    ]
-  }
 ];
 
 export const HOME_FAQS = [
   {
-    q: 'Can you provide examples of past handyman work in Paphos?',
-    a: 'Yes! You can browse our Project Gallery and our @paphos_handyman Instagram feed right on this page, featuring real local projects including timber fences, courtyard gates, pergola roofs, ceiling repairs, and exterior painting.',
-  },
-  {
-    q: 'What sets George Handyman Services apart?',
-    a: 'We focus on clean, durable workmanship, punctual arrivals, and honest quotes before any job starts—handling both small indoor fixes and custom outdoor carpentry across Paphos.',
-  },
-  {
     q: 'What types of handyman services do you offer?',
-    a: 'We handle custom wooden & aluminum gates, privacy fencing, pergolas, ceiling & drywall restoration, LED lighting installation, interior/exterior painting, deck staining, TV mounting, upholstery care, and general plumbing/AC maintenance.',
+    a: 'We offer Plumbing Works (faucet repairs and replacement, kitchen and bathroom sink repairs, minor plumbing), Carpentry (furniture assembly, cabinet and drawer repairs, parquet installation, small carpentry jobs), Electrical & Lighting (light fixtures, switches and sockets, decorative lighting), and Garden & Yard Work (garden cleaning, weeding and small pruning, fence creation and repair, yard maintenance).',
   },
   {
-    q: 'Which areas around Paphos do you cover?',
-    a: 'We serve Kato Paphos, Chloraka, Peyia, Coral Bay, Tala, Kissonerga, Geroskipou, Empa, Tremithousa, Mesogi, Konia, Anarita, Mandria, and nearby villages.',
+    q: 'Which areas in Cyprus do you cover?',
+    a: 'We serve the Larnaca and Limassol districts in Cyprus. Call +357 97 608803 to discuss your location and job requirements.',
   },
   {
-    q: 'How can I get a free quote or book a visit?',
-    a: 'Call +357 99 233225 directly or send a quick message using the Free Quote form above and George will get back to you promptly.',
+    q: 'Can I see examples of your recent handyman work?',
+    a: 'Yes! Browse our Before & After slider, Project Gallery, and Facebook gallery on this page to view real projects including basin faucet replacement, ceiling light installation, outdoor storage box assembly, and pergola decorative lighting.',
+  },
+  {
+    q: 'Do you take on small household repairs and assembly jobs?',
+    a: 'Yes—small repairs, fixture replacements, furniture assembly, and routine indoor or outdoor maintenance are exactly what we focus on.',
+  },
+  {
+    q: 'How can I get in touch to request a quote?',
+    a: 'Call +357 97 608803 directly or message us on WhatsApp to tell us what needs repairing, assembling, or installing.',
   },
 ];

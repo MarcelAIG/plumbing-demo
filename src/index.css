@@ -20,7 +20,7 @@ body {
 
 /* Sharp focus outlines for accessibility */
 *:focus-visible {
-  outline: 3px solid #EA580C !important;
+  outline: 3px solid #0D9488 !important;
   outline-offset: 2px !important;
 }
 

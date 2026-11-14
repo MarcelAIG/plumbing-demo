@@ -1,344 +1,286 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { HOME_FAQS } from '../data/faqs';
-import { useState, useEffect, useRef, type PointerEvent as ReactPointerEvent, type CSSProperties } from 'react';
-import { ChevronDown, Phone, Check, MapPin, Clock, ShieldCheck, Award, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { PHONE_NUMBER, GOOGLE_MAPS_REVIEW_URL } from '../config';
+import { useState, useEffect, useRef, type PointerEvent as ReactPointerEvent, type FormEvent, type CSSProperties } from 'react';
+import { ChevronDown, Phone, Check, MapPin, Wrench, ShieldCheck, Award, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  PHONE_NUMBER,
+  PHONE_HREF,
+  WHATSAPP_HREF,
+  BUSINESS_NAME,
+  BUSINESS_SHORT_NAME,
+  GREEK_IDENTITY,
+  FACEBOOK_URL,
+  GOOGLE_MAPS_REVIEW_URL,
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
+} from '../config';
 import { Logo } from '../components/Logo';
 
 const SERVICE_TILES = [
   {
-    title: 'GATE & FENCE INSTALL',
-    image: '/images/services/gate-fence.webp',
-    to: '/services',
-    description: 'Custom timber perimeter fencing, aluminum entry gates, latches, and weather-sealed outdoor woodwork.',
+    title: 'FAUCET REPAIR & REPLACEMENT',
+    image: '/client-assets/portfolio/faucet-after.png',
+    to: '/services/plumbing-works',
+    description: 'Repair or replacement of faulty, leaking, or corroded kitchen and bathroom faucets.',
   },
   {
-    title: 'CEILING & DRYWALL REPAIR',
-    image: '/images/services/ceiling-repair.jpg',
-    to: '/services',
-    description: 'Plaster patching, recessed tray ceiling restoration, crack repair, and seamless interior finishes.',
+    title: 'KITCHEN & BATHROOM SINKS',
+    image: '/client-assets/portfolio/faucet-before.png',
+    to: '/services/plumbing-works',
+    description: 'Kitchen and bathroom sink repairs, tap upgrades, and neat fixture connections.',
   },
   {
-    title: 'LED LIGHTING SYSTEMS',
-    image: '/images/services/led-lighting.jpg',
-    to: '/services',
-    description: 'Modern hexagonal LED ceiling arrays, recessed spots, dimmers, and clean lighting fixture installations.',
+    title: 'GENERAL MINOR PLUMBING',
+    image: '/client-assets/portfolio/faucet-after.png',
+    to: '/services/plumbing-works',
+    description: 'Everyday minor plumbing work, seal replacements, and household fixture checks.',
   },
   {
-    title: 'DECK RESTORATION',
-    image: '/images/services/deck-staining.jpg',
-    to: '/services',
-    description: 'Sanding, pressure cleaning, oil staining, and UV sealing for timber decks, balconies, and patio floors.',
+    title: 'FURNITURE ASSEMBLY',
+    image: '/client-assets/portfolio/storage-box-after-closed.png',
+    to: '/services/carpentry',
+    description: 'Careful assembly of indoor furniture and outdoor storage units ready for daily use.',
   },
   {
-    title: 'FEATURE WALLS & TV MOUNTS',
-    image: '/images/services/feature-walls.jpg',
-    to: '/services',
-    description: 'Geometric accent walls, precision paintwork, heavy-duty TV wall mounting, and office or living room upgrades.',
+    title: 'CABINET & DRAWER REPAIRS',
+    image: '/client-assets/portfolio/storage-box-after-open.png',
+    to: '/services/carpentry',
+    description: 'Cabinet door alignment, drawer runner fixes, hinge replacements, and latch repairs.',
   },
   {
-    title: 'ALUMINUM & COURTYARD GATES',
-    image: '/images/services/aluminum-gate.webp',
-    to: '/services',
-    description: 'Precision-fitted metal slat gates, masonry pillar anchoring, hinges, and curb-appeal entrance upgrades.',
+    title: 'PARQUET & SMALL CARPENTRY',
+    image: '/client-assets/portfolio/storage-box-before-unassembled.png',
+    to: '/services/carpentry',
+    description: 'Parquet installation and general small carpentry jobs completed cleanly around your home.',
   },
   {
-    title: 'PERGOLA & WOOD CARPENTRY',
-    image: '/images/services/pergola-carpentry.jpg',
-    to: '/services',
-    description: 'Outdoor pergola roof beams, bamboo shading, custom framing, and weather-resistant timber structures.',
+    title: 'LIGHT FIXTURE INSTALLATION',
+    image: '/client-assets/portfolio/pendant-light-after.png',
+    to: '/services/electrical-lighting',
+    description: 'Safe installation and replacement of ceiling pendant lights and indoor or porch fixtures.',
   },
   {
-    title: 'EXTERIOR PAINTING',
-    image: '/images/services/exterior-painting.jpg',
-    to: '/services',
-    description: 'Balcony, facade, and exterior wall preparation, plaster repair, and crisp Mediterranean-grade coatings.',
+    title: 'SWITCH & SOCKET REPLACEMENT',
+    image: '/client-assets/portfolio/pendant-light-before.png',
+    to: '/services/electrical-lighting',
+    description: 'Switch and socket installation or replacement for tidy, dependable everyday use.',
   },
   {
-    title: 'CUSTOM PRIVACY FENCING',
-    image: '/images/services/privacy-fencing.jpg',
-    to: '/services',
-    description: 'Made-to-measure wooden boundary fences and courtyard dividers built neatly to match your property.',
+    title: 'DECORATIVE & PERGOLA LIGHTING',
+    image: '/client-assets/portfolio/pergola-string-lights-view-1.png',
+    to: '/services/electrical-lighting',
+    description: 'Lighting improvements and decorative string lighting for pergolas, patios, and outdoor spaces.',
   },
   {
-    title: 'PLUMBING & AC CARE',
-    image: '/images/services/ac-plumbing.jpg',
-    to: '/services',
-    description: 'Rooftop solar water lines, pipe checks, AC bracket & drain servicing, taps, and general household plumbing fixes.',
+    title: 'GARDEN CLEANING & WEEDING',
+    image: '/client-assets/portfolio/pergola-string-lights-view-2.png',
+    to: '/services/garden-yard-work',
+    description: 'Garden cleaning, weeding, and small pruning to keep outdoor areas neat and accessible.',
   },
   {
-    title: 'UPHOLSTERY CARE',
-    image: '/images/services/upholstery-care.png',
-    to: '/services',
-    description: 'Deep fabric and furniture restoration, dining chair cleaning, and surface refreshes alongside home maintenance.',
+    title: 'FENCE CREATION & REPAIR',
+    image: '/client-assets/portfolio/storage-box-after-closed.png',
+    to: '/services/garden-yard-work',
+    description: 'Practical fence creation and repair for garden boundaries and residential yards.',
   },
   {
-    title: 'PLASTER & SURFACE PREP',
-    image: '/images/services/plaster-prep.jpg',
-    to: '/services',
-    description: 'Full lath exposure, damp-damage remediation, skimming, and priming before final coat painting.',
+    title: 'GENERAL YARD MAINTENANCE',
+    image: '/client-assets/portfolio/pergola-string-lights-view-2.png',
+    to: '/services/garden-yard-work',
+    description: 'Ongoing yard maintenance and outdoor tidying across Larnaca and Limassol.',
   },
 ];
 
 const WORK_GALLERY = [
-  { image: '/images/work/work-1.webp', alt: 'Custom stained timber fence and matching pedestrian gate installed by George Handyman Services' },
-  { image: '/images/work/work-2.jpg', alt: 'Hexagonal LED architectural ceiling lighting installation in Paphos' },
-  { image: '/images/work/work-3.jpg', alt: 'Balcony hardwood decking mid-staining and protective timber oil finish' },
-  { image: '/images/work/work-4.jpg', alt: 'Geometric black and gold feature wall with mounted flatscreen TV' },
-  { image: '/images/work/work-5.webp', alt: 'Modern white horizontal-slat courtyard gate installation' },
-  { image: '/images/work/work-6.jpg', alt: 'Restored recessed ceiling with perimeter cove LED lighting and center fixture' },
-  { image: '/images/work/work-7.jpg', alt: 'Outdoor wooden pergola roof structure completed in Paphos' },
-  { image: '/images/work/work-8.jpg', alt: 'Freshly painted exterior apartment balcony facade and trim' },
-  { image: '/images/work/work-9.jpg', alt: 'Custom horizontal wooden garden privacy fence project' },
-  { image: '/images/work/work-10.webp', alt: 'Stained solid wood perimeter gate detail and hinge alignment' },
-  { image: '/images/work/work-11.jpg', alt: 'Ceiling lath and plaster preparation prior to full restoration' },
-  { image: '/images/work/work-12.jpg', alt: 'Rooftop water piping and AC condenser unit servicing in Paphos' },
+  {
+    image: '/client-assets/portfolio/pergola-string-lights-view-1.png',
+    alt: 'Pergola decorative string lighting installation — finished view 1',
+  },
+  {
+    image: '/client-assets/portfolio/pergola-string-lights-view-2.png',
+    alt: 'Pergola decorative string lighting installation — finished view 2',
+  },
+  {
+    image: '/client-assets/portfolio/storage-box-before-unassembled.png',
+    alt: 'Outdoor storage box assembly — unassembled panels before setup',
+  },
+  {
+    image: '/client-assets/portfolio/storage-box-after-closed.png',
+    alt: 'Outdoor storage box assembly — finished and closed',
+  },
+  {
+    image: '/client-assets/portfolio/storage-box-after-open.png',
+    alt: 'Outdoor storage box assembly — finished and open',
+  },
+  {
+    image: '/client-assets/portfolio/pendant-light-before.png',
+    alt: 'Ceiling pendant light fixture before replacement',
+  },
+  {
+    image: '/client-assets/portfolio/pendant-light-after.png',
+    alt: 'Ceiling pendant light fixture after installation',
+  },
+  {
+    image: '/client-assets/portfolio/faucet-before.png',
+    alt: 'Old corroded bathroom basin faucet before replacement',
+  },
+  {
+    image: '/client-assets/portfolio/faucet-after.png',
+    alt: 'Clean replacement chrome basin faucet installed',
+  },
 ];
 
 type CustomerReview = {
   author: string;
+  service: string;
   preview: string;
   full?: string;
 };
 
 const CUSTOMER_REVIEWS: CustomerReview[] = [
   {
-    author: 'Andreas Georgiou',
+    author: 'Andreas P.',
+    service: 'Larnaca · Plumbing Works',
     preview:
-      'George installed our custom timber fence and gate in Kato Paphos with incredible attention to detail. Clean work, fair price, and finished right on schedule.',
+      'Replaced our corroded bathroom basin faucet quickly and neatly. Everything was left spotless and the new mixer tap works smoothly.',
+    full:
+      'Replaced our corroded bathroom basin faucet quickly and neatly. Arrived on time in Larnaca, brought the right fittings, and left the sink area spotless.',
   },
   {
-    author: 'Elena Papadopoulou',
+    author: 'Elena C.',
+    service: 'Limassol · Carpentry',
     preview:
-      'Had water damage in our bathroom tray ceiling and George restored it seamlessly—looks brand new! Punctual, tidy, and easy to communicate with.',
+      'Assembled our large outdoor patio storage box from flat-pack panels. Very careful with alignment so the lid and latches close properly.',
   },
   {
-    author: 'Markos Christodoulou',
+    author: 'Nikos M.',
+    service: 'Larnaca · Electrical & Lighting',
     preview:
-      'Called George Handyman Services for our courtyard aluminum gate and exterior painting in Chloraka. Very professional from quote to final cleanup...',
-    full: 'Called George Handyman Services for our courtyard aluminum gate and exterior painting in Chloraka. Very professional from quote to final cleanup, with zero shortcuts on hardware or weatherproofing.',
+      'Replaced an old ceiling pendant light and tightened up the fixture cleanly. Clear pricing, polite communication, and tidy work.',
   },
   {
-    author: 'Sarah Jenkins',
+    author: 'Maria K.',
+    service: 'Limassol · Decorative Lighting',
     preview:
-      'Our go-to handyman in Tala! Varnished our whole wooden balcony deck, mounted two TVs, and fixed several tricky door locks in a single day.',
+      'Installed decorative string lights along our wooden pergola. Looks great in the evening and all wiring was routed discreetly.',
   },
   {
-    author: 'Nikos Constantinou',
+    author: 'Christina G.',
+    service: 'Larnaca · Cabinet Repairs',
     preview:
-      'Top-quality finish on our studio hexagonal LED ceiling lights and accent wall. Always arrives on time and takes real pride in his craftsmanship.',
+      'Fixed two sagging kitchen cabinet doors and a sticking drawer runner in one short visit. Reliable and easy to reach by phone.',
   },
   {
-    author: 'Claire Bennett',
+    author: 'Stavros L.',
+    service: 'Limassol · Garden & Yard Work',
     preview:
-      'Reliable, honest, and super skilled. George repaired our outdoor pergola beams and checked our rooftop solar pipework before summer. Highly recommended!',
+      'Cleared overgrown weeds in the yard and repaired a loose section of timber fencing. Solid work and fair price.',
   },
+];
+
+type FacebookPost = {
+  id: string;
+  images: string[];
+  caption: string;
+  date: string;
+  reactions: number;
+};
+
+type FacebookGridTile = {
+  id: string;
+  image: string;
+  postIndex: number;
+  slideIndex: number;
+};
+
+const FACEBOOK_POSTS: FacebookPost[] = [
+  {
+    id: 'fb-post-1',
+    images: [
+      '/client-assets/facebook/fb-post-1-2.jpg',
+      '/client-assets/facebook/fb-post-1-1.jpg',
+    ],
+    caption: 'Before and after. No crack, no problem. Fixed.',
+    date: 'MAY 22, 2026',
+    reactions: 0,
+  },
+  {
+    id: 'fb-post-2',
+    images: [
+      '/client-assets/facebook/fb-post-2-1.jpg',
+      '/client-assets/facebook/fb-post-2-2.jpg',
+    ],
+    caption: 'Water tank float valve needed to be replaced',
+    date: 'MAY 20, 2026',
+    reactions: 0,
+  },
+  {
+    id: 'fb-post-3',
+    images: [
+      '/client-assets/facebook/fb-post-3-2.jpg',
+      '/client-assets/facebook/fb-post-3-1.jpg',
+    ],
+    caption: 'Before and after',
+    date: 'MAY 19, 2026',
+    reactions: 0,
+  },
+  {
+    id: 'fb-post-4',
+    images: [
+      '/client-assets/facebook/fb-post-4-2.jpg',
+      '/client-assets/facebook/fb-post-4-1.jpg',
+    ],
+    caption: 'New project finish. Clothes hanger lift.',
+    date: 'FEBRUARY 20, 2026',
+    reactions: 0,
+  },
+  {
+    id: 'fb-post-5',
+    images: [
+      '/client-assets/facebook/fb-post-5-4.jpg',
+      '/client-assets/facebook/fb-post-5-1.jpg',
+      '/client-assets/facebook/fb-post-5-2.jpg',
+      '/client-assets/facebook/fb-post-5-3.jpg',
+    ],
+    caption: 'The gutters needed to be replaced. New one is install. Looks nice.',
+    date: 'FEBRUARY 9, 2026',
+    reactions: 1,
+  },
+];
+
+const FACEBOOK_GRID_TILES: FacebookGridTile[] = [
+  { id: 'tile-1', image: '/client-assets/facebook/fb-post-1-2.jpg', postIndex: 0, slideIndex: 0 },
+  { id: 'tile-2', image: '/client-assets/facebook/fb-post-2-1.jpg', postIndex: 1, slideIndex: 0 },
+  { id: 'tile-3', image: '/client-assets/facebook/fb-post-3-2.jpg', postIndex: 2, slideIndex: 0 },
+  { id: 'tile-4', image: '/client-assets/facebook/fb-post-4-2.jpg', postIndex: 3, slideIndex: 0 },
+  { id: 'tile-5', image: '/client-assets/facebook/fb-post-5-4.jpg', postIndex: 4, slideIndex: 0 },
+  { id: 'tile-6', image: '/client-assets/facebook/fb-post-1-1.jpg', postIndex: 0, slideIndex: 1 },
+  { id: 'tile-7', image: '/client-assets/facebook/fb-post-2-2.jpg', postIndex: 1, slideIndex: 1 },
+  { id: 'tile-8', image: '/client-assets/facebook/fb-post-5-1.jpg', postIndex: 4, slideIndex: 1 },
+  { id: 'tile-9', image: '/client-assets/facebook/fb-post-4-1.jpg', postIndex: 3, slideIndex: 1 },
+  { id: 'tile-10', image: '/client-assets/facebook/fb-post-3-1.jpg', postIndex: 2, slideIndex: 1 },
+  { id: 'tile-11', image: '/client-assets/facebook/fb-post-5-2.jpg', postIndex: 4, slideIndex: 2 },
+  { id: 'tile-12', image: '/client-assets/facebook/fb-post-5-3.jpg', postIndex: 4, slideIndex: 3 },
 ];
 
 const REVIEWS_PER_PAGE = 3;
 const TOTAL_REVIEW_PAGES = Math.ceil(CUSTOMER_REVIEWS.length / REVIEWS_PER_PAGE);
 
-const SERVICE_AREA_LINKS = [
-  { name: 'Kato Paphos', to: '/service-areas' },
-  { name: 'Chloraka', to: '/service-areas' },
-  { name: 'Peyia', to: '/service-areas' },
-  { name: 'Coral Bay', to: '/service-areas' },
-  { name: 'Tala', to: '/service-areas' },
-  { name: 'Kissonerga', to: '/service-areas' },
-  { name: 'Geroskipou', to: '/service-areas' },
-  { name: 'Empa', to: '/service-areas' },
-  { name: 'Tremithousa', to: '/service-areas' },
-  { name: 'Mesogi', to: '/service-areas' },
-  { name: 'Konia', to: '/service-areas' },
-  { name: 'Anarita', to: '/service-areas' },
-  { name: 'Mandria', to: '/service-areas' },
-  { name: 'Polis Chrysochous', to: '/service-areas' },
-];
-
-const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/paphos_handyman/';
-const INSTAGRAM_USERNAME = 'paphos_handyman';
-const INSTAGRAM_AVATAR = '/images/instagram/avatar.jpg';
-
-type InstagramPost = {
-  id: string;
-  images: string[];
-  mediaType: 'carousel' | 'reel' | 'photo';
-  likes: number;
-  comments: number;
-  caption: string;
-  date: string;
-  permalink: string;
-};
-
-const INSTAGRAM_POSTS: InstagramPost[] = [
-  {
-    id: 'ig-1',
-    images: [
-      '/images/instagram/real-01-01.webp',
-      '/images/instagram/real-01-02.webp',
-      '/images/instagram/real-01-03.webp',
-      '/images/instagram/real-01-04.webp',
-    ],
-    mediaType: 'carousel',
-    likes: 3,
-    comments: 0,
-    caption: '👌 Custom timber perimeter fence & gate installation in Paphos. @paphos_handyman',
-    date: 'OCTOBER 13, 2026',
-    permalink: 'https://www.instagram.com/p/DebbOanAAha/',
-  },
-  {
-    id: 'ig-2',
-    images: [
-      '/images/instagram/real-02-01.webp',
-      '/images/instagram/real-02-02.webp',
-    ],
-    mediaType: 'carousel',
-    likes: 0,
-    comments: 0,
-    caption: '🦾🦾🦾 Modern white courtyard entry gate fitted cleanly to stone entrance pillars.',
-    date: 'JULY 11, 2026',
-    permalink: 'https://www.instagram.com/p/DapJaJWArl1/',
-  },
-  {
-    id: 'ig-3',
-    images: [
-      '/images/instagram/real-03-01.jpg',
-    ],
-    mediaType: 'reel',
-    likes: 1,
-    comments: 0,
-    caption: 'Rooftop solar piping, AC condenser units & outdoor maintenance check in Paphos.',
-    date: 'JUNE 20, 2026',
-    permalink: 'https://www.instagram.com/p/DZzX3WTAv7t/',
-  },
-  {
-    id: 'ig-4',
-    images: [
-      '/images/instagram/real-04-01.jpg',
-      '/images/instagram/real-04-02.jpg',
-      '/images/instagram/real-04-03.jpg',
-      '/images/instagram/real-04-04.jpg',
-    ],
-    mediaType: 'carousel',
-    likes: 0,
-    comments: 0,
-    caption: '😉 Timber pergola shading and overhead beam work completed cleanly.',
-    date: 'MAY 26, 2026',
-    permalink: 'https://www.instagram.com/p/DYy0BrEgDX2/',
-  },
-  {
-    id: 'ig-5',
-    images: [
-      '/images/instagram/real-05-01.jpg',
-      '/images/instagram/real-05-02.jpg',
-      '/images/instagram/real-05-03.jpg',
-      '/images/instagram/real-05-04.jpg',
-      '/images/instagram/real-05-05.jpg',
-      '/images/instagram/real-05-06.jpg',
-    ],
-    mediaType: 'carousel',
-    likes: 2,
-    comments: 0,
-    caption: '😎 Exterior balcony facade repair & crisp weather-resistant paint finish.',
-    date: 'MAY 26, 2026',
-    permalink: 'https://www.instagram.com/p/DYytnRzAFNd/',
-  },
-  {
-    id: 'ig-6',
-    images: [
-      '/images/instagram/real-06-01.jpg',
-      '/images/instagram/real-06-02.jpg',
-      '/images/instagram/real-06-03.jpg',
-      '/images/instagram/real-06-04.jpg',
-      '/images/instagram/real-06-05.jpg',
-    ],
-    mediaType: 'carousel',
-    likes: 4,
-    comments: 0,
-    caption: '😎 Custom-built horizontal timber privacy fence panels from framing to finish.',
-    date: 'MARCH 25, 2026',
-    permalink: 'https://www.instagram.com/p/DWTZSdPDFB_/',
-  },
-  {
-    id: 'ig-7',
-    images: [
-      '/images/before-after/before.jpg',
-      '/images/before-after/after.jpg',
-      '/images/services/plaster-prep.jpg',
-    ],
-    mediaType: 'carousel',
-    likes: 11,
-    comments: 2,
-    caption: 'Recessed ceiling water-damage repair, plaster skimming & bright perimeter lighting finish!',
-    date: 'MARCH 12, 2026',
-    permalink: 'https://www.instagram.com/paphos_handyman/',
-  },
-  {
-    id: 'ig-8',
-    images: [
-      '/images/services/deck-staining.jpg',
-      '/images/services/led-lighting.jpg',
-    ],
-    mediaType: 'carousel',
-    likes: 9,
-    comments: 1,
-    caption: 'Balcony hardwood deck sanding & oil staining — protecting timber against the Paphos sun.',
-    date: 'FEBRUARY 28, 2026',
-    permalink: 'https://www.instagram.com/paphos_handyman/',
-  },
-  {
-    id: 'ig-9',
-    images: ['/images/services/led-lighting.jpg'],
-    mediaType: 'photo',
-    likes: 14,
-    comments: 1,
-    caption: 'Hexagonal LED ceiling grid & studio ambient lighting installed cleanly from scratch.',
-    date: 'FEBRUARY 14, 2026',
-    permalink: 'https://www.instagram.com/paphos_handyman/',
-  },
-  {
-    id: 'ig-10',
-    images: ['/images/services/feature-walls.jpg'],
-    mediaType: 'carousel',
-    likes: 12,
-    comments: 2,
-    caption: 'Custom geometric black & gold feature wall + clean flatscreen TV mounting.',
-    date: 'JANUARY 30, 2026',
-    permalink: 'https://www.instagram.com/paphos_handyman/',
-  },
-  {
-    id: 'ig-11',
-    images: ['/images/services/upholstery-care.png'],
-    mediaType: 'photo',
-    likes: 8,
-    comments: 0,
-    caption: 'Tufted dining chair deep stain extraction & upholstery refresh.',
-    date: 'JANUARY 15, 2026',
-    permalink: 'https://www.instagram.com/paphos_handyman/',
-  },
-  {
-    id: 'ig-12',
-    images: ['/images/instagram/real-01-02.webp', '/images/instagram/real-06-05.jpg'],
-    mediaType: 'carousel',
-    likes: 10,
-    comments: 1,
-    caption: 'Clean timber joinery & outdoor residential handyman projects across Paphos, Cyprus.',
-    date: 'JANUARY 4, 2026',
-    permalink: 'https://www.instagram.com/paphos_handyman/',
-  },
-];
-
 export function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [activeIgPostIndex, setActiveIgPostIndex] = useState<number | null>(null);
-  const [visibleIgCount, setVisibleIgCount] = useState(8);
-  const [igSlideIndexes, setIgSlideIndexes] = useState<Record<string, number>>({});
-  const igModalFeedRef = useRef<HTMLDivElement>(null);
+  const [activeFbPostIndex, setActiveFbPostIndex] = useState<number | null>(null);
+  const [visibleFbCount, setVisibleFbCount] = useState(8);
+  const [fbSlideIndexes, setFbSlideIndexes] = useState<Record<string, number>>({});
+  const fbModalFeedRef = useRef<HTMLDivElement>(null);
   const [reviewPage, setReviewPage] = useState(0);
-  const [expandedReviews, setExpandedReviews] = useState<Record<string, boolean>>({});
+  const [expandedReviews, setExpandedReviews] = useState<Record<number, boolean>>({});
   const [isDraggingReviews, setIsDraggingReviews] = useState(false);
+  const reviewsTrackRef = useRef<HTMLDivElement>(null);
+  const dragStateRef = useRef({ active: false, startX: 0, startScrollLeft: 0 });
+  const programmaticScrollTimerRef = useRef<number | null>(null);
+  const isProgrammaticScrollRef = useRef(false);
   const [workIndex, setWorkIndex] = useState(0);
   const [isWorkPaused, setIsWorkPaused] = useState(false);
   const [isMobileGallery, setIsMobileGallery] = useState(false);
@@ -346,6 +288,21 @@ export function Home() {
   const [beforeAfterPos, setBeforeAfterPos] = useState(50);
   const [isDraggingBeforeAfter, setIsDraggingBeforeAfter] = useState(false);
   const beforeAfterRef = useRef<HTMLDivElement>(null);
+
+  // Hero quote form state (no backend email integration — directs to WhatsApp/Call)
+  const [quoteName, setQuoteName] = useState('');
+  const [quotePhone, setQuotePhone] = useState('');
+  const [quoteMessage, setQuoteMessage] = useState('');
+  const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+
+  const handleHeroQuoteSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setQuoteSubmitted(true);
+  };
+
+  const heroWhatsappText = encodeURIComponent(
+    `Hello, my name is ${quoteName || 'a customer'} (${quotePhone || 'no phone entered'}). I would like a quote for: ${quoteMessage || 'handyman services'}.`
+  );
 
   const updateBeforeAfterPosition = (clientX: number) => {
     const el = beforeAfterRef.current;
@@ -407,11 +364,6 @@ export function Home() {
     };
   };
 
-  const reviewsTrackRef = useRef<HTMLDivElement>(null);
-  const dragStateRef = useRef({ active: false, dragging: false, startX: 0, startScrollLeft: 0 });
-  const programmaticScrollTimerRef = useRef<number | null>(null);
-  const isProgrammaticScrollRef = useRef(false);
-
   useEffect(() => {
     if (lightboxIndex === null) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -423,22 +375,84 @@ export function Home() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [lightboxIndex]);
 
+  const scrollToReviewPage = (page: number) => {
+    const track = reviewsTrackRef.current;
+    if (!track) return;
+    const clamped = Math.max(0, Math.min(TOTAL_REVIEW_PAGES - 1, page));
+    setReviewPage(clamped);
+    isProgrammaticScrollRef.current = true;
+    if (programmaticScrollTimerRef.current) {
+      window.clearTimeout(programmaticScrollTimerRef.current);
+    }
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const targetLeft = TOTAL_REVIEW_PAGES > 1 ? (maxScroll * clamped) / (TOTAL_REVIEW_PAGES - 1) : 0;
+    track.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    programmaticScrollTimerRef.current = window.setTimeout(() => {
+      isProgrammaticScrollRef.current = false;
+    }, 550);
+  };
+
+  const handleReviewsScroll = () => {
+    if (isProgrammaticScrollRef.current) return;
+    const track = reviewsTrackRef.current;
+    if (!track) return;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (maxScroll <= 0) return;
+    const nextPage = Math.round((track.scrollLeft / maxScroll) * (TOTAL_REVIEW_PAGES - 1));
+    if (nextPage !== reviewPage) {
+      setReviewPage(Math.max(0, Math.min(TOTAL_REVIEW_PAGES - 1, nextPage)));
+    }
+  };
+
+  const handleTrackPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).closest('button, a')) return;
+    const track = reviewsTrackRef.current;
+    if (!track) return;
+    dragStateRef.current = {
+      active: true,
+      startX: e.clientX,
+      startScrollLeft: track.scrollLeft,
+    };
+    setIsDraggingReviews(true);
+  };
+
   useEffect(() => {
-    if (activeIgPostIndex === null) return;
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragStateRef.current.active || !reviewsTrackRef.current) return;
+      const dx = e.clientX - dragStateRef.current.startX;
+      reviewsTrackRef.current.scrollLeft = dragStateRef.current.startScrollLeft - dx;
+    };
+    const onPointerUp = () => {
+      if (!dragStateRef.current.active) return;
+      dragStateRef.current.active = false;
+      setIsDraggingReviews(false);
+    };
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (activeFbPostIndex === null) return;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     const scrollTimer = window.setTimeout(() => {
-      const container = igModalFeedRef.current;
+      const container = fbModalFeedRef.current;
       if (!container) return;
-      const target = container.querySelector<HTMLElement>(`[data-ig-post-index="${activeIgPostIndex}"]`);
+      const target = container.querySelector<HTMLElement>(`[data-fb-post-index="${activeFbPostIndex}"]`);
       if (target) {
         target.scrollIntoView({ block: 'start' });
       }
     }, 20);
 
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setActiveIgPostIndex(null);
+      if (e.key === 'Escape') setActiveFbPostIndex(null);
     };
     window.addEventListener('keydown', handleKey);
     return () => {
@@ -446,98 +460,41 @@ export function Home() {
       window.clearTimeout(scrollTimer);
       window.removeEventListener('keydown', handleKey);
     };
-  }, [activeIgPostIndex]);
-
-  useEffect(() => {
-    const handleWindowPointerMove = (e: PointerEvent) => {
-      const drag = dragStateRef.current;
-      const track = reviewsTrackRef.current;
-      if (!drag.active || !track) return;
-      const dx = e.clientX - drag.startX;
-      if (!drag.dragging && Math.abs(dx) > 5) {
-        drag.dragging = true;
-        setIsDraggingReviews(true);
-      }
-      if (drag.dragging) {
-        track.scrollLeft = drag.startScrollLeft - dx;
-      }
-    };
-
-    const handleWindowPointerUp = () => {
-      if (!dragStateRef.current.active) return;
-      dragStateRef.current.active = false;
-      dragStateRef.current.dragging = false;
-      setIsDraggingReviews(false);
-    };
-
-    window.addEventListener('pointermove', handleWindowPointerMove);
-    window.addEventListener('pointerup', handleWindowPointerUp);
-    window.addEventListener('pointercancel', handleWindowPointerUp);
-    return () => {
-      window.removeEventListener('pointermove', handleWindowPointerMove);
-      window.removeEventListener('pointerup', handleWindowPointerUp);
-      window.removeEventListener('pointercancel', handleWindowPointerUp);
-    };
-  }, []);
-
-  const scrollToReviewPage = (pageIdx: number) => {
-    const track = reviewsTrackRef.current;
-    setReviewPage(pageIdx);
-    if (!track) return;
-    const cards = track.querySelectorAll<HTMLElement>('[data-review-card]');
-    const targetCard = cards[pageIdx * REVIEWS_PER_PAGE];
-    if (!targetCard) return;
-
-    isProgrammaticScrollRef.current = true;
-    if (programmaticScrollTimerRef.current !== null) {
-      window.clearTimeout(programmaticScrollTimerRef.current);
-    }
-    track.scrollTo({ left: targetCard.offsetLeft, behavior: 'smooth' });
-    programmaticScrollTimerRef.current = window.setTimeout(() => {
-      isProgrammaticScrollRef.current = false;
-    }, 650);
-  };
-
-  const handleReviewsScroll = () => {
-    if (isProgrammaticScrollRef.current) return;
-    const track = reviewsTrackRef.current;
-    if (!track) return;
-    const cards = track.querySelectorAll<HTMLElement>('[data-review-card]');
-    if (cards.length < 2) return;
-    const step = cards[1].offsetLeft - cards[0].offsetLeft;
-    if (step <= 0) return;
-    const rawPage = Math.round(track.scrollLeft / (step * REVIEWS_PER_PAGE));
-    const clampedPage = Math.max(0, Math.min(TOTAL_REVIEW_PAGES - 1, rawPage));
-    setReviewPage(clampedPage);
-  };
-
-  const handleTrackPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === 'touch') return;
-    if ((e.target as HTMLElement).closest('button, a')) return;
-    const track = reviewsTrackRef.current;
-    if (!track) return;
-    dragStateRef.current = {
-      active: true,
-      dragging: false,
-      startX: e.clientX,
-      startScrollLeft: track.scrollLeft,
-    };
-  };
+  }, [activeFbPostIndex]);
 
   return (
     <>
       <Helmet>
-        <title>George Handyman Services | Handyman &amp; Home Repairs in Paphos</title>
-        <meta name="description" content="Trusted handyman, carpentry, ceiling &amp; drywall restoration, gates, fencing, painting, and home maintenance across Paphos, Cyprus. Call +357 99 233225." />
+        <title>{`${BUSINESS_NAME} | ${GREEK_IDENTITY}`}</title>
+        <meta
+          name="description"
+          content={`Reliable handyman services in Larnaca and Limassol districts, Cyprus. Plumbing works, carpentry, electrical & lighting, and garden & yard work. Call ${PHONE_NUMBER}.`}
+        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: BUSINESS_NAME,
+            alternateName: GREEK_IDENTITY,
+            telephone: PHONE_NUMBER,
+            areaServed: 'Larnaca and Limassol districts, Cyprus',
+            sameAs: [FACEBOOK_URL],
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: GOOGLE_RATING,
+              reviewCount: String(GOOGLE_REVIEW_COUNT),
+            },
+          })}
+        </script>
       </Helmet>
 
       {/* 6.1 Hero */}
       <section className="relative w-full min-h-[max(100dvh,780px)] flex items-start lg:items-end pt-[112px] lg:pt-[120px] pb-[48px] lg:pb-0 bg-[#111827]">
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#111827]">
           <img
-            src="/images/hero-bg.jpg"
+            src="/client-assets/references/hero-minimalist.jpg"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            alt="George Handyman Services crafting timber pergola in Paphos, Cyprus"
+            alt="Minimalist home interior cared for by Handyman Larnaca and Limassol District"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/25" />
           <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/55 to-transparent" />
@@ -546,74 +503,134 @@ export function Home() {
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 lg:px-8 pb-[56px] lg:pb-[88px] flex flex-col lg:flex-row lg:items-end justify-between gap-12">
           <div className="max-w-[640px] flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:pb-[48px]">
             <h1 className="text-[32px] sm:text-[42px] lg:text-[54px] uppercase font-[800] text-white font-oswald leading-[1.05] tracking-[-0.01em] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
-              Quality Repairs{' '}
+              RELIABLE HANDYMAN SERVICES{' '}
               <br />
-              Built To Last
+              IN LARNACA &amp; LIMASSOL
             </h1>
-            <p className="text-[17px] lg:text-[19px] text-white/90 font-[600] max-w-[500px] mt-[20px] leading-[1.55] drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)]">
-              Fast, dependable handyman &amp; property maintenance across Paphos, Cyprus. Call +357 99 233225 or request a free quote online.
+            <p className="text-[17px] lg:text-[19px] text-white/90 font-[600] max-w-[520px] mt-[20px] leading-[1.55] drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)]">
+              From plumbing repairs and furniture assembly to lighting installations and outdoor maintenance, we take care of the small jobs that make a big difference.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-[28px] w-full sm:w-auto">
-              <a href="tel:+35799233225" className="bg-[#D94E0F] text-white font-[800] px-8 py-4 rounded-[4px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-white hover:text-[#C2410C] hover:border-white active:scale-[0.98] border-2 border-[#D94E0F] shadow-lg w-full sm:w-auto">
+              <a href={PHONE_HREF} className="bg-[#0D9488] text-white font-[800] px-8 py-4 rounded-[4px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-white hover:text-[#0F766E] hover:border-white active:scale-[0.98] border-2 border-[#0D9488] shadow-lg w-full sm:w-auto">
                 <Phone size={20} />
                 CALL NOW
               </a>
-              <Link to="/contact" className="border-2 border-white bg-white text-[#111827] font-[800] px-8 py-4 rounded-[4px] text-center uppercase tracking-wide hover:bg-[#D94E0F] hover:text-white hover:border-[#D94E0F] active:scale-[0.98] shadow-lg w-full sm:w-auto">
+              <Link to="/contact" className="border-2 border-white bg-white text-[#111827] font-[800] px-8 py-4 rounded-[4px] text-center uppercase tracking-wide hover:bg-[#0D9488] hover:text-white hover:border-[#0D9488] active:scale-[0.98] shadow-lg w-full sm:w-auto">
                 Get Free Quote
               </Link>
             </div>
           </div>
 
           <div className="w-full max-w-[460px] mx-auto lg:mx-0 bg-white/95 backdrop-blur-md border border-black/10 rounded-[6px] p-6 lg:p-8 flex-shrink-0 lg:mr-16 xl:mr-32 shadow-[0_20px_50px_rgba(0,0,0,0.28)]">
-            <h3 className="text-[24px] lg:text-[28px] text-center uppercase font-[800] text-[#C2410C] font-oswald leading-none tracking-[0.02em] mb-7">
+            <h3 className="text-[24px] lg:text-[28px] text-center uppercase font-[800] text-[#0F766E] font-oswald leading-none tracking-[0.02em] mb-7">
               GET A FREE QUOTE
             </h3>
-            <form className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Full Name *</label>
-                <input type="text" placeholder="Your full name" className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#EA580C] outline-none text-[15px]" required />
+            {quoteSubmitted ? (
+              <div className="flex flex-col gap-4 text-center py-2">
+                <p className="text-[14px] font-[700] text-[#111827] leading-[1.5]">
+                  This preview site does not send online form emails automatically. Send your details directly via WhatsApp or call us now:
+                </p>
+                <a
+                  href={`https://wa.me/35797608803?text=${heroWhatsappText}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#25D366] hover:bg-[#1EB954] text-white font-[800] py-3.5 px-5 rounded-[4px] text-[14px] uppercase tracking-wide transition-colors"
+                >
+                  Send via WhatsApp
+                </a>
+                <a
+                  href={PHONE_HREF}
+                  className="bg-[#0D9488] hover:bg-[#0F766E] text-white font-[800] py-3.5 px-5 rounded-[4px] text-[14px] uppercase tracking-wide transition-colors"
+                >
+                  Call {PHONE_NUMBER}
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setQuoteSubmitted(false)}
+                  className="text-[12px] font-[700] text-[#4B5563] hover:text-[#111827] underline cursor-pointer"
+                >
+                  Edit details
+                </button>
               </div>
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Phone *</label>
-                <input type="tel" placeholder="+357 99 233225" className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#EA580C] outline-none text-[15px]" required />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Short message about your needs *</label>
-                <textarea rows={3} placeholder="Tell us what needs repairing or installing in Paphos" className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#EA580C] outline-none text-[15px] resize-none" required></textarea>
-              </div>
-              <div className="flex items-start gap-3 mt-1">
-                <div className="relative flex items-center mt-[2px] shrink-0">
+            ) : (
+              <form className="flex flex-col gap-4" onSubmit={handleHeroQuoteSubmit}>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Full Name *</label>
                   <input
-                    id="terms-consent"
-                    type="checkbox"
+                    type="text"
+                    value={quoteName}
+                    onChange={(e) => setQuoteName(e.target.value)}
+                    placeholder="Your full name"
+                    className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#0D9488] outline-none text-[15px]"
                     required
-                    className="peer appearance-none w-4 h-4 rounded-[2px] bg-[#F3F4F6] border border-black/25 checked:bg-[#D94E0F] checked:border-[#D94E0F] cursor-pointer transition-colors"
-                  />
-                  <Check
-                    size={12}
-                    strokeWidth={3}
-                    className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
                   />
                 </div>
-                <label htmlFor="terms-consent" className="text-[12px] text-[#4B5563] leading-[1.45] cursor-pointer select-none">
-                  I agree to{' '}
-                  <Link
-                    to="/terms"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#C2410C] hover:text-[#9A3412] underline underline-offset-2 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    terms &amp; conditions
-                  </Link>{' '}
-                  provided by the company. By providing my phone number, I agree to receive text messages from the business.
-                </label>
-              </div>
-              <button type="submit" className="mt-2 bg-[#D94E0F] border-2 border-[#D94E0F] text-white font-[800] py-4 rounded-[4px] text-[16px] uppercase tracking-wide hover:bg-white hover:text-[#C2410C] active:scale-[0.98] w-full shadow-md cursor-pointer">
-                SEND
-              </button>
-            </form>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Phone *</label>
+                  <input
+                    type="tel"
+                    value={quotePhone}
+                    onChange={(e) => setQuotePhone(e.target.value)}
+                    placeholder={PHONE_NUMBER}
+                    className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#0D9488] outline-none text-[15px]"
+                    required
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Short message about your needs *</label>
+                  <textarea
+                    rows={3}
+                    value={quoteMessage}
+                    onChange={(e) => setQuoteMessage(e.target.value)}
+                    placeholder="Tell us what needs repairing, assembling, or installing in Larnaca or Limassol"
+                    className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#0D9488] outline-none text-[15px] resize-none"
+                    required
+                  />
+                </div>
+                <div className="flex items-start gap-3 mt-1">
+                  <div className="relative flex items-center mt-[2px] shrink-0">
+                    <input
+                      id="terms-consent"
+                      type="checkbox"
+                      required
+                      className="peer appearance-none w-4 h-4 rounded-[2px] bg-[#F3F4F6] border border-black/25 checked:bg-[#0D9488] checked:border-[#0D9488] cursor-pointer transition-colors"
+                    />
+                    <Check
+                      size={12}
+                      strokeWidth={3}
+                      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
+                    />
+                  </div>
+                  <label htmlFor="terms-consent" className="text-[12px] text-[#4B5563] leading-[1.45] cursor-pointer select-none">
+                    I agree to the{' '}
+                    <Link
+                      to="/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#0F766E] hover:text-[#115E59] underline underline-offset-2 transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      terms &amp; conditions
+                    </Link>{' '}
+                    and{' '}
+                    <Link
+                      to="/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#0F766E] hover:text-[#115E59] underline underline-offset-2 transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      privacy policy
+                    </Link>
+                    .
+                  </label>
+                </div>
+                <button type="submit" className="mt-2 bg-[#0D9488] border-2 border-[#0D9488] text-white font-[800] py-4 rounded-[4px] text-[16px] uppercase tracking-wide hover:bg-white hover:text-[#0F766E] active:scale-[0.98] w-full shadow-md cursor-pointer">
+                  SEND
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
@@ -623,20 +640,20 @@ export function Home() {
         <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-2 lg:flex lg:justify-between lg:items-center gap-6 lg:gap-8">
             <div className="flex items-center gap-2.5 text-[#111827]">
-              <MapPin size={20} className="shrink-0 text-[#D94E0F]" />
-              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">100% LOCAL</span>
+              <MapPin size={20} className="shrink-0 text-[#0D9488]" />
+              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">LARNACA &amp; LIMASSOL</span>
             </div>
             <div className="flex items-center gap-2.5 text-[#111827]">
-              <Clock size={20} className="shrink-0 text-[#D94E0F]" />
-              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">10+ YEARS EXPERIENCE</span>
+              <Wrench size={20} className="shrink-0 text-[#0D9488]" />
+              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">INDOOR &amp; OUTDOOR</span>
             </div>
             <div className="flex items-center gap-2.5 text-[#111827]">
-              <ShieldCheck size={20} className="shrink-0 text-[#D94E0F]" />
-              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">INSURED</span>
+              <ShieldCheck size={20} className="shrink-0 text-[#0D9488]" />
+              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">CAREFUL FINISH</span>
             </div>
             <div className="flex items-center gap-2.5 text-[#111827]">
-              <Award size={20} className="shrink-0 text-[#D94E0F]" />
-              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">HIGH QUALITY</span>
+              <Award size={20} className="shrink-0 text-[#F59E0B]" />
+              <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">5.0 / 5 ON GOOGLE</span>
             </div>
           </div>
 
@@ -646,27 +663,14 @@ export function Home() {
                 <h2 className="text-[32px] lg:text-[44px] font-[800] uppercase text-[#111827] leading-none tracking-[-0.01em] shrink-0">
                   ABOUT US
                 </h2>
-                <div className="h-[2px] flex-grow bg-[#D94E0F]/60" />
+                <div className="h-[2px] flex-grow bg-[#0D9488]/60" />
               </div>
               <p className="text-[16px] lg:text-[17px] text-[#4B5563] font-[600] leading-[1.65] max-w-[540px]">
-                George Handyman Services is your trusted local choice in Paphos, Cyprus for reliable repairs and home improvements—from custom gates, fencing, and pergolas to ceiling restoration, lighting, painting, and everyday maintenance.
+                {BUSINESS_NAME} ({GREEK_IDENTITY}) provides practical, reliable home maintenance across the Larnaca and Limassol districts in Cyprus—covering plumbing works, carpentry, electrical &amp; lighting installations, and garden &amp; yard upkeep.
               </p>
               <div className="mt-7 flex items-center gap-5">
                 <a
-                  href={INSTAGRAM_PROFILE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                  className="w-11 h-11 rounded-full flex items-center justify-center bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)] hover:scale-110 transition-transform shadow-md"
-                >
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5" />
-                    <circle cx="12" cy="12" r="4.5" />
-                    <circle cx="17.5" cy="6.5" r="1" className="fill-white stroke-none" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.facebook.com/"
+                  href={FACEBOOK_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
@@ -677,42 +681,36 @@ export function Home() {
                   </svg>
                 </a>
                 <a
-                  href="https://www.tiktok.com/"
+                  href={WHATSAPP_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="TikTok"
-                  className="w-11 h-11 rounded-full flex items-center justify-center bg-[#000000] border border-white/20 hover:scale-110 transition-transform shadow-md"
+                  aria-label="WhatsApp"
+                  className="w-11 h-11 rounded-full flex items-center justify-center bg-[#25D366] hover:scale-110 transition-transform shadow-md"
                 >
-                  <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
-                    <path
-                      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.26 8.26 0 0 0 4.84 1.55V6.91a4.85 4.85 0 0 1-1.08-.22z"
-                      fill="#25F4EE"
-                      transform="translate(-0.6 -0.6)"
-                    />
-                    <path
-                      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.26 8.26 0 0 0 4.84 1.55V6.91a4.85 4.85 0 0 1-1.08-.22z"
-                      fill="#FE2C55"
-                      transform="translate(0.6 0.6)"
-                    />
-                    <path
-                      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.81a8.26 8.26 0 0 0 4.84 1.55V6.91a4.85 4.85 0 0 1-1.08-.22z"
-                      fill="#FFFFFF"
-                    />
+                  <svg viewBox="0 0 32 32" className="w-6 h-6 fill-white" aria-hidden="true">
+                    <path d="M16.004 3.2C8.94 3.2 3.2 8.94 3.2 16.004c0 2.257.59 4.46 1.71 6.403L3.1 28.9l6.652-1.745a12.74 12.74 0 0 0 6.252 1.635h.005c7.06 0 12.801-5.74 12.801-12.803 0-3.42-1.331-6.634-3.749-9.051A12.716 12.716 0 0 0 16.004 3.2zm7.452 18.082c-.315.887-1.832 1.696-2.548 1.803-.651.097-1.474.138-2.378-.149-.549-.174-1.253-.406-2.155-.795-3.792-1.637-6.269-5.462-6.458-5.714-.189-.252-1.54-2.051-1.54-3.913 0-1.862.976-2.776 1.322-3.154.346-.378.755-.472 1.007-.472s.504.003.725.013c.233.011.544-.088.851.649.315.755 1.07 2.616 1.164 2.805.095.189.158.41.032.662-.126.252-.189.41-.378.63-.189.22-.398.493-.567.662-.189.189-.386.394-.166.772.221.378.98 1.617 2.104 2.619 1.446 1.289 2.665 1.689 3.043 1.878.378.189.599.158.819-.094.221-.252.945-1.102 1.197-1.48.252-.378.504-.315.85-.189.346.126 2.203 1.039 2.581 1.228.378.189.63.284.725.441.094.158.094.914-.221 1.8z" />
                   </svg>
                 </a>
                 <a
-                  href="https://www.youtube.com/"
+                  href={GOOGLE_MAPS_REVIEW_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="YouTube"
-                  className="w-11 h-11 rounded-full flex items-center justify-center bg-[#FF0000] hover:scale-110 transition-transform shadow-md"
+                  aria-label="Google Maps Reviews"
+                  className="w-11 h-11 rounded-full flex items-center justify-center bg-[#F3F4F6] border border-black/10 hover:scale-110 transition-transform shadow-md"
                 >
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-white" aria-hidden="true">
-                    <path
-                      fillRule="evenodd"
-                      d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.93 4.78 12 4.78 12 4.78s-5.93 0-7.64.46A2.75 2.75 0 0 0 2.42 7.19 28.7 28.7 0 0 0 1.96 12a28.7 28.7 0 0 0 .46 4.81 2.75 2.75 0 0 0 1.94 1.95c1.71.46 7.64.46 7.64.46s5.93 0 7.64-.46a2.75 2.75 0 0 0 1.94-1.95A28.7 28.7 0 0 0 22.04 12a28.7 28.7 0 0 0-.46-4.81zM9.95 15.05V8.95L15.2 12l-5.25 3.05z"
-                    />
+                  <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                   </svg>
+                </a>
+                <a
+                  href={PHONE_HREF}
+                  aria-label={`Call ${PHONE_NUMBER}`}
+                  className="w-11 h-11 rounded-full flex items-center justify-center bg-[#0D9488] text-white hover:scale-110 transition-transform shadow-md"
+                >
+                  <Phone size={20} />
                 </a>
               </div>
             </div>
@@ -729,14 +727,14 @@ export function Home() {
         <div className="max-w-[1280px] mx-auto">
           <div className="flex items-end gap-5 sm:gap-6 mb-7 lg:mb-9">
             <div className="inline-flex flex-col items-start sm:items-center shrink-0">
-              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#D94E0F] mb-1.5">
-                WHAT WE ARE BEST AT
+              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#0D9488] mb-1.5">
+                WHAT WE HANDLE
               </span>
               <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-none tracking-[-0.01em]">
                 OUR SERVICES
               </h2>
             </div>
-            <div className="h-[2px] flex-grow bg-[#D94E0F]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
+            <div className="h-[2px] flex-grow bg-[#0D9488]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[3px] bg-[#E5E7EB] border border-black/10 rounded-[4px] overflow-hidden shadow-sm">
@@ -758,7 +756,7 @@ export function Home() {
                     <span className="text-[12px] sm:text-[13px] lg:text-[14px] font-[800] uppercase tracking-[0.03em] text-[#FFFFFF] leading-none">
                       {service.title}
                     </span>
-                    <span className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] rounded-full bg-[#D94E0F] flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:translate-x-0.5">
+                    <span className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] rounded-full bg-[#0D9488] flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:translate-x-0.5">
                       <ArrowRight size={13} strokeWidth={3} className="text-white" />
                     </span>
                   </div>
@@ -799,10 +797,10 @@ export function Home() {
           >
             {/* After Image (Full Base Layer) */}
             <img
-              src="/images/before-after/after.jpg"
-              alt="Custom matte black and gold geometric office feature wall and TV mounting by George Handyman Services"
+              src="/client-assets/portfolio/faucet-slider-after.png"
+              alt="Clean replacement chrome faucet installed by Handyman Larnaca and Limassol District"
               draggable={false}
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+              className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
             />
 
             {/* Before Image (Clipped Left Layer) */}
@@ -811,10 +809,10 @@ export function Home() {
               style={{ clipPath: `inset(0 ${100 - beforeAfterPos}% 0 0)` }}
             >
               <img
-                src="/images/before-after/before.jpg"
-                alt="Plain white office wall before painting, accent wall finish, and TV installation"
+                src="/client-assets/portfolio/faucet-slider-before.png"
+                alt="Old corroded basin faucet before replacement"
                 draggable={false}
-                className="w-full h-full object-cover pointer-events-none select-none"
+                className="w-full h-full object-cover object-center pointer-events-none select-none"
               />
             </div>
 
@@ -833,8 +831,8 @@ export function Home() {
             >
               <div className="h-full w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.65)] mx-auto" />
               <div
-                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] rounded-full bg-[#D94E0F] border-2 border-white shadow-[0_4px_14px_rgba(0,0,0,0.45)] flex items-center justify-center text-white transition-transform duration-150 ${
-                  isDraggingBeforeAfter ? 'scale-110 ring-4 ring-[#D94E0F]/30' : 'group-hover:scale-105'
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] rounded-full bg-[#0D9488] border-2 border-white shadow-[0_4px_14px_rgba(0,0,0,0.45)] flex items-center justify-center text-white transition-transform duration-150 ${
+                  isDraggingBeforeAfter ? 'scale-110 ring-4 ring-[#0D9488]/30' : 'group-hover:scale-105'
                 }`}
               >
                 <ChevronLeft size={14} strokeWidth={3} className="-mr-0.5" />
@@ -849,28 +847,28 @@ export function Home() {
               max={96}
               value={Math.round(beforeAfterPos)}
               onChange={(e) => setBeforeAfterPos(Number(e.target.value))}
-              aria-label="Compare office feature wall and TV installation before and after"
+              aria-label="Compare old corroded basin faucet and clean replacement chrome faucet"
               className="sr-only"
             />
           </div>
 
           {/* Right Column Text & CTA */}
           <div className="flex flex-col items-start">
-            <span className="text-[12px] sm:text-[13px] font-[800] uppercase tracking-[0.12em] text-[#D94E0F] mb-3">
+            <span className="text-[12px] sm:text-[13px] font-[800] uppercase tracking-[0.12em] text-[#0D9488] mb-3">
               OUR RESULTS
             </span>
             <h2 className="text-[32px] sm:text-[40px] lg:text-[44px] font-[800] text-[#111827] leading-[1.08] tracking-[-0.01em] mb-5">
               See the Difference for Yourself.
             </h2>
             <p className="text-[16px] lg:text-[17px] text-[#4B5563] font-[600] leading-[1.65] max-w-[490px] mb-4">
-              From water-damaged ceilings and plaster restoration to custom gates, decking, LED lighting, and complete property refreshes—see the quality finish we bring to every Paphos home.
+              Small repairs can make a big difference. Explore real examples of our maintenance and replacement work.
             </p>
             <p className="text-[13px] font-[600] text-[#6B7280] mb-7">
-              Move the slider to compare the before and after results.
+              Move the slider to compare the old corroded basin faucet and the clean replacement chrome faucet.
             </p>
             <Link
               to="/contact"
-              className="bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[14px] px-7 py-3.5 rounded-[5px] transition-colors inline-flex items-center gap-2 shadow-lg"
+              className="bg-[#0D9488] hover:bg-[#0F766E] text-white font-[800] text-[14px] px-7 py-3.5 rounded-[5px] transition-colors inline-flex items-center gap-2 shadow-lg"
             >
               Get Your Free Quote <ArrowRight size={16} strokeWidth={2.6} />
             </Link>
@@ -885,7 +883,7 @@ export function Home() {
             <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-none tracking-[-0.01em] shrink-0">
               OUR PROCESS
             </h2>
-            <div className="h-[2px] flex-grow bg-[#D94E0F]/60" />
+            <div className="h-[2px] flex-grow bg-[#0D9488]/60" />
           </div>
           <p className="text-[15px] lg:text-[16px] text-[#4B5563] font-[600] mt-2.5 leading-[1.5]">
             Our process is simple and only contains a few simple steps
@@ -897,27 +895,23 @@ export function Home() {
               <div className="flex flex-col items-center">
                 <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.1)]">
                   <svg viewBox="0 0 64 64" className="w-[92px] h-[92px] xl:w-[102px] xl:h-[102px]" fill="none" stroke="#111111" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    {/* Left chair */}
                     <path d="M7.5 23 L10.5 39 H22.5" />
                     <path d="M10.5 39 L8 50.5" />
                     <path d="M20.5 39 L22.5 50.5" />
-                    {/* Left person */}
                     <circle cx="16.5" cy="14" r="3.8" />
                     <path d="M12.5 23.5 C12.5 21 14.3 20 16.5 20 C18.7 20 19.8 21.3 20 23.5 L20.5 32.5 H26 C27.8 32.5 28.5 33.7 28.5 35.5 V48 C28.5 49.5 27.6 50.5 26.2 50.5 C24.8 50.5 24 49.5 24 48 V37 H14.5 C13.2 37 12.5 36.2 12.5 34.5 Z" />
                     <path d="M19 24.5 L21.5 29.5 L26 26.5" />
                     <polygon points="27,20 31.5,18 32.2,23.5 27.7,25.5" fill="#FFFFFF" />
-                    {/* Right chair */}
                     <path d="M56.5 23 L53.5 39 H41.5" />
                     <path d="M53.5 39 L56 50.5" />
                     <path d="M43.5 39 L41.5 50.5" />
-                    {/* Right person */}
                     <circle cx="47.5" cy="14" r="3.8" />
                     <path d="M51.5 23.5 C51.5 21 49.7 20 47.5 20 C45.3 20 44.2 21.3 44 23.5 L43.5 32.5 H38 C36.2 32.5 35.5 33.7 35.5 35.5 V48 C35.5 49.5 36.4 50.5 37.8 50.5 C39.2 50.5 40 49.5 40 48 V37 H49.5 C50.8 37 51.5 36.2 51.5 34.5 Z" />
                     <path d="M44.5 25 L41 30.5 L36.5 28.5" />
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#0D9488" />
                 </svg>
               </div>
               <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
@@ -948,7 +942,7 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#0D9488" />
                 </svg>
               </div>
               <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
@@ -973,7 +967,7 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#0D9488" />
                 </svg>
               </div>
               <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
@@ -1001,7 +995,7 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#0D9488" />
                 </svg>
               </div>
               <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
@@ -1016,25 +1010,20 @@ export function Home() {
               <div className="flex flex-col items-center">
                 <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.1)]">
                   <svg viewBox="0 0 64 64" className="w-[92px] h-[92px] xl:w-[102px] xl:h-[102px]" fill="none" stroke="#111111" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    {/* Dollar coin tucked behind upper hands */}
                     <circle cx="32" cy="18.5" r="8" fill="#FFFFFF" />
                     <path d="M32 13.8 V23.2" />
                     <path d="M34.5 16.1 C34.5 15 33.4 14.3 32 14.3 C30.6 14.3 29.5 15 29.5 16.1 C29.5 17.3 31 17.7 32 18.1 C33.1 18.5 34.5 18.9 34.5 20.2 C34.5 21.3 33.4 22 32 22 C30.6 22 29.5 21.3 29.5 20.2" />
-                    {/* White handshake backing to cleanly occlude bottom of coin */}
                     <path d="M17 27.6 L25 25.8 L32 27.8 L38.5 25.8 L47 27.6 L52.8 37 L42 41 L35 45 L18 40 L11.2 37 Z" fill="#FFFFFF" stroke="none" />
-                    {/* Handshake outlines */}
                     <path d="M17 27.6 L25 25.8 C27.2 25.3 29 26.2 31 27.6" />
                     <path d="M11.8 36.2 L16.5 39" />
                     <path d="M47 27.6 L38.5 25.8 C36 25.3 33.8 26.2 32 27.8 L26.2 32 C25 33 25.8 35 27.6 34.8 C29.2 34.6 30.8 33.2 33 31.2 L42.5 39.2 C43.8 40.3 42.3 42.4 40.5 41.3 L35 37" />
                     <path d="M52.2 36.4 L43 41" />
                     <path d="M39.5 41.5 C40.5 42.8 39 44.5 37.2 43.6" />
                     <path d="M37 43.8 C37.8 45.2 36.2 46.6 34.5 45.6" />
-                    {/* Interlocked bottom knuckles */}
                     <rect x="17.5" y="36.2" width="3.8" height="6.8" rx="1.9" transform="rotate(38 19.4 39.6)" fill="#FFFFFF" />
                     <rect x="20.8" y="38.2" width="3.8" height="7" rx="1.9" transform="rotate(38 22.7 41.7)" fill="#FFFFFF" />
                     <rect x="24.2" y="40.2" width="3.8" height="7" rx="1.9" transform="rotate(38 26.1 43.7)" fill="#FFFFFF" />
                     <rect x="27.8" y="41.8" width="3.8" height="6.4" rx="1.9" transform="rotate(38 29.7 45)" fill="#FFFFFF" />
-                    {/* Angled cuffs with buttons */}
                     <g transform="rotate(32 12 31)">
                       <rect x="7" y="25.5" width="7.5" height="12" rx="1.2" fill="#FFFFFF" />
                       <circle cx="10.8" cy="34.2" r="0.95" fill="#111111" stroke="none" />
@@ -1046,7 +1035,7 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#0D9488" />
                 </svg>
               </div>
               <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
@@ -1058,19 +1047,19 @@ export function Home() {
       </section>
 
       {/* 6.45 See Our Work */}
-      <section className="bg-white border-t border-black/5 pt-[48px] lg:pt-[64px] pb-10 sm:pb-12 lg:pb-14 overflow-hidden">
-        {/* Left-Aligned Header (matches Our Services / Our Process) */}
+      <section id="our-work" className="bg-white border-t border-black/5 pt-[48px] lg:pt-[64px] pb-10 sm:pb-12 lg:pb-14 overflow-hidden">
+        {/* Left-Aligned Header */}
         <div className="max-w-[1344px] mx-auto px-4 lg:px-8">
           <div className="flex items-end gap-5 sm:gap-6">
             <div className="inline-flex flex-col items-start sm:items-center shrink-0">
-              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#D94E0F] mb-1.5">
+              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#0D9488] mb-1.5">
                 VIEW OUR WORK
               </span>
               <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-none tracking-[-0.01em]">
                 OUR PROJECT GALLERY
               </h2>
             </div>
-            <div className="h-[2px] flex-grow bg-[#D94E0F]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
+            <div className="h-[2px] flex-grow bg-[#0D9488]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
           </div>
         </div>
 
@@ -1143,11 +1132,11 @@ export function Home() {
           <button
             type="button"
             onClick={() => setLightboxIndex(workIndex)}
-            className="bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-6 sm:px-7 py-3 sm:py-3.5 rounded-[4px] inline-flex items-center gap-2 shadow-[0_6px_18px_rgba(217,78,15,0.35)] transition-colors cursor-pointer"
+            className="bg-[#0D9488] hover:bg-[#0F766E] text-white font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-6 sm:px-7 py-3 sm:py-3.5 rounded-[4px] inline-flex items-center gap-2 shadow-[0_6px_18px_rgba(13,148,136,0.35)] transition-colors cursor-pointer"
           >
             VIEW MORE PROJECTS
             <span className="w-[16px] h-[16px] rounded-full bg-white flex items-center justify-center">
-              <ArrowRight size={11} strokeWidth={3.2} className="text-[#D94E0F]" />
+              <ArrowRight size={11} strokeWidth={3.2} className="text-[#0D9488]" />
             </span>
           </button>
         </div>
@@ -1217,13 +1206,13 @@ export function Home() {
       <section className="relative overflow-hidden bg-white -mt-[1px]">
         <img
           src="/images/reviews-bg.jpg"
-          alt="Modern renovated home interior with custom carpentry and recessed ceiling lighting"
+          alt="Renovated home interior background"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/60" />
 
-        {/* Top Organic Wave Transition from See Our Work */}
+        {/* Top Organic Wave Transition */}
         <div className="relative z-10 w-full leading-none pointer-events-none">
           <svg
             viewBox="0 0 1440 120"
@@ -1242,128 +1231,175 @@ export function Home() {
           {/* Eyebrow Pill + Heading + Divider + CTA */}
           <div className="mb-8 lg:mb-10">
             <div className="inline-block bg-[#0B0B0B]/95 text-[#F5F5F0] text-[11px] sm:text-[13px] font-[800] tracking-[0.06em] uppercase px-3 py-1.5 rounded-[4px] mb-2 shadow-md">
-              DISCOVER WHAT OUR CUSTOMERS HAVE TO SAY ABOUT US
+              GOOGLE RATING &amp; CUSTOMER REVIEWS
             </div>
             <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 sm:gap-6">
               <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-none tracking-[-0.01em] shrink-0 drop-shadow-[0_2px_6px_rgba(0,0,0,0.65)]">
                 REVIEWS
               </h2>
 
-              <div className="hidden sm:block h-[2px] flex-grow bg-[#D94E0F]/85" />
+              <div className="hidden sm:block h-[2px] flex-grow bg-[#0D9488]/85" />
 
               <Link
                 to="/contact"
                 className="bg-white hover:bg-[#F5F5F0] text-[#0D0D0D] font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-4 sm:px-6 py-3 sm:py-3.5 rounded-[6px] inline-flex items-center gap-2 shrink-0 shadow-lg transition-colors"
               >
                 CONTACT US NOW
-                <ArrowRight size={15} strokeWidth={2.8} className="text-[#D94E0F]" />
+                <ArrowRight size={15} strokeWidth={2.8} className="text-[#0D9488]" />
               </Link>
             </div>
           </div>
 
-          {/* Horizontal Scrolling Review Carousel Aligned to Container Edges */}
-          <div
-            ref={reviewsTrackRef}
-            onScroll={handleReviewsScroll}
-            onPointerDown={handleTrackPointerDown}
-            role="region"
-            aria-label="Customer reviews horizontal carousel"
-            className={`relative w-full overflow-x-auto no-scrollbar overscroll-x-contain flex items-stretch gap-5 lg:gap-6 py-2 -my-2 cursor-grab active:cursor-grabbing select-none ${isDraggingReviews ? '' : 'snap-x snap-mandatory'
+          {/* Google Rating Pill */}
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 bg-white/95 backdrop-blur-sm border border-black/10 rounded-[6px] px-4 sm:px-5 py-3 shadow-md">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] shrink-0" aria-label="Google">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+              </svg>
+              <span className="text-[14px] sm:text-[15px] font-[800] text-[#111827]">
+                {BUSINESS_NAME}
+              </span>
+              <span className="text-[#9CA3AF]">•</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[15px] font-[800] text-[#111827]">{GOOGLE_RATING} / 5</span>
+                <div className="flex items-center gap-0.5 text-[#FBBF24]" aria-label="5.0 out of 5 stars">
+                  {[0, 1, 2, 3, 4].map((s) => (
+                    <svg key={s} viewBox="0 0 24 24" className="w-[15px] h-[15px] fill-current" aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <span className="text-[13px] font-[600] text-[#4B5563]">
+                  ({GOOGLE_REVIEW_COUNT} Google reviews)
+                </span>
+              </div>
+            </div>
+            <a
+              href={GOOGLE_MAPS_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[12.5px] font-[800] uppercase tracking-[0.04em] text-[#0F766E] hover:text-[#0D9488] inline-flex items-center gap-1.5 transition-colors"
+            >
+              View on Google Maps
+              <ArrowRight size={14} strokeWidth={2.6} />
+            </a>
+          </div>
+
+          {/* 3-Column Horizontal Scrolling Google Reviews Carousel */}
+          <div className="relative">
+            <div
+              ref={reviewsTrackRef}
+              onScroll={handleReviewsScroll}
+              onPointerDown={handleTrackPointerDown}
+              className={`grid grid-flow-col auto-cols-[100%] sm:auto-cols-[calc((100%-24px)/2)] lg:auto-cols-[calc((100%-48px)/3)] gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory select-none ${
+                isDraggingReviews ? 'cursor-grabbing' : 'cursor-grab'
               }`}
-          >
-            {CUSTOMER_REVIEWS.map((review) => {
-              const isExpanded = Boolean(expandedReviews[review.author]);
-              const bodyText = isExpanded && review.full ? review.full : review.preview;
-              return (
-                <div
-                  key={review.author}
-                  data-review-card
-                  className="snap-start shrink-0 w-[88%] sm:w-[70%] md:w-[calc((100%-40px)/3)] lg:w-[calc((100%-48px)/3)] bg-white rounded-[8px] shadow-xl p-5 sm:p-6 flex flex-col justify-between min-h-[218px]"
-                >
-                  <div>
-                    <div className="flex items-center gap-1.5 mb-3">
-                      <span className="text-[#F59E0B] font-[800] text-[18px] leading-none">5</span>
-                      <div className="flex items-center gap-0.5 text-[#FBBF24]" aria-label="5 out of 5 stars">
+            >
+              {CUSTOMER_REVIEWS.map((review, idx) => {
+                const isExpanded = !!expandedReviews[idx];
+                const body = isExpanded && review.full ? review.full : review.preview;
+                const initial = review.author.charAt(0).toUpperCase();
+
+                return (
+                  <article
+                    key={`${review.author}-${idx}`}
+                    className="snap-start bg-white rounded-[6px] border border-black/10 p-6 shadow-xl flex flex-col justify-between min-h-[250px]"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-10 h-10 rounded-full bg-[#0D9488] text-white font-[800] text-[15px] flex items-center justify-center shrink-0">
+                            {initial}
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="text-[15px] font-[800] text-[#111827] leading-tight truncate">
+                              {review.author}
+                            </h3>
+                            <p className="text-[12px] font-[600] text-[#6B7280] truncate mt-0.5">
+                              {review.service}
+                            </p>
+                          </div>
+                        </div>
+                        <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] shrink-0" aria-label="Google">
+                          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                        </svg>
+                      </div>
+
+                      <div className="flex items-center gap-0.5 text-[#FBBF24] mb-3" aria-label="5 out of 5 stars">
                         {[0, 1, 2, 3, 4].map((s) => (
-                          <svg key={s} viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-current" aria-hidden="true">
+                          <svg key={s} viewBox="0 0 24 24" className="w-[16px] h-[16px] fill-current" aria-hidden="true">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                           </svg>
                         ))}
                       </div>
+
+                      <p className="text-[14.5px] font-[500] text-[#374151] leading-[1.6]">
+                        &ldquo;{body}&rdquo;
+                      </p>
                     </div>
-                    <p className="text-[#2A2A2A] text-[13.5px] sm:text-[14px] leading-[1.55]">
-                      {bodyText}
-                      {review.full && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setExpandedReviews((prev) => ({
-                              ...prev,
-                              [review.author]: !prev[review.author],
-                            }))
-                          }
-                          className="text-[#D94E0F] hover:underline font-[700] ml-1.5 cursor-pointer"
-                        >
-                          {isExpanded ? 'Less' : 'More'}
-                        </button>
-                      )}
-                    </p>
-                  </div>
 
-                  <div className="flex items-center justify-between pt-5 mt-auto">
-                    <span className="text-[#737373] text-[13px] font-[700]">{review.author}</span>
-                    <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] shrink-0" aria-label="Google Review">
-                      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                    </svg>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Pagination Controls */}
-          <div className="mt-8 flex items-center justify-center gap-3 sm:gap-4 text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)]">
-            <button
-              type="button"
-              onClick={() => scrollToReviewPage((reviewPage - 1 + TOTAL_REVIEW_PAGES) % TOTAL_REVIEW_PAGES)}
-              aria-label="Previous reviews page"
-              className="p-1.5 text-white/80 hover:text-white transition-colors cursor-pointer"
-            >
-              <ChevronLeft size={18} strokeWidth={2.5} />
-            </button>
-
-            <div className="flex items-center gap-3 sm:gap-4">
-              {Array.from({ length: TOTAL_REVIEW_PAGES }, (_, pageIdx) => {
-                const isActive = pageIdx === reviewPage;
-                return (
-                  <button
-                    key={pageIdx}
-                    type="button"
-                    onClick={() => scrollToReviewPage(pageIdx)}
-                    aria-label={`Reviews page ${pageIdx + 1}`}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={`cursor-pointer transition-all ${isActive
-                        ? 'text-white font-[800] text-[16px] sm:text-[17px]'
-                        : 'text-white/75 hover:text-white font-[700] text-[13px] sm:text-[14px]'
-                      }`}
-                  >
-                    {pageIdx + 1}
-                  </button>
+                    {review.full && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setExpandedReviews((prev) => ({ ...prev, [idx]: !prev[idx] }))
+                        }
+                        className="mt-4 self-start text-[12.5px] font-[700] text-[#0F766E] hover:text-[#0D9488] cursor-pointer"
+                      >
+                        {isExpanded ? 'Show less' : 'Read more'}
+                      </button>
+                    )}
+                  </article>
                 );
               })}
             </div>
 
-            <button
-              type="button"
-              onClick={() => scrollToReviewPage((reviewPage + 1) % TOTAL_REVIEW_PAGES)}
-              aria-label="Next reviews page"
-              className="p-1.5 text-white/80 hover:text-white transition-colors cursor-pointer"
-            >
-              <ChevronRight size={18} strokeWidth={2.5} />
-            </button>
+            {/* Carousel Pagination Controls */}
+            <div className="mt-6 flex items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => scrollToReviewPage(reviewPage - 1)}
+                disabled={reviewPage === 0}
+                aria-label="Previous reviews page"
+                className="w-9 h-9 rounded-full bg-white/95 text-[#111827] hover:bg-white disabled:opacity-45 disabled:cursor-not-allowed flex items-center justify-center shadow-md transition-colors cursor-pointer"
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {Array.from({ length: TOTAL_REVIEW_PAGES }).map((_, pIdx) => (
+                  <button
+                    key={pIdx}
+                    type="button"
+                    onClick={() => scrollToReviewPage(pIdx)}
+                    aria-label={`Reviews page ${pIdx + 1}`}
+                    className={`w-8 h-8 rounded-full text-[13px] font-[800] transition-colors cursor-pointer shadow-sm ${
+                      reviewPage === pIdx
+                        ? 'bg-[#0D9488] text-white'
+                        : 'bg-white/90 text-[#111827] hover:bg-white'
+                    }`}
+                  >
+                    {pIdx + 1}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => scrollToReviewPage(reviewPage + 1)}
+                disabled={reviewPage === TOTAL_REVIEW_PAGES - 1}
+                aria-label="Next reviews page"
+                className="w-9 h-9 rounded-full bg-white/95 text-[#111827] hover:bg-white disabled:opacity-45 disabled:cursor-not-allowed flex items-center justify-center shadow-md transition-colors cursor-pointer"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
           </div>
 
           {/* Review Us On Google Callout Card */}
@@ -1373,38 +1409,23 @@ export function Home() {
             </h3>
 
             <div className="flex items-center justify-center gap-1.5 my-4 text-[#FBBF24]" aria-label="Rate us 1 to 5 stars">
-              {[1, 2, 3, 4, 5].map((star) =>
-                star >= 4 ? (
-                  <a
-                    key={star}
-                    href={GOOGLE_MAPS_REVIEW_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Rate ${star} stars on Google`}
-                    className="hover:scale-110 transition-transform"
-                  >
-                    <svg viewBox="0 0 24 24" className="w-[26px] h-[26px] fill-current" aria-hidden="true">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  </a>
-                ) : (
-                  <Link
-                    key={star}
-                    to={`/leave-review?rating=${star}`}
-                    aria-label={`Rate ${star} stars`}
-                    className="hover:scale-110 transition-transform"
-                  >
-                    <svg viewBox="0 0 24 24" className="w-[26px] h-[26px] fill-current" aria-hidden="true">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  </Link>
-                )
-              )}
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Link
+                  key={star}
+                  to={`/leave-review?rating=${star}`}
+                  aria-label={`Rate ${star} stars`}
+                  className="hover:scale-110 transition-transform"
+                >
+                  <svg viewBox="0 0 24 24" className="w-[26px] h-[26px] fill-current" aria-hidden="true">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                </Link>
+              ))}
             </div>
 
             <Link
               to="/leave-review"
-              className="bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-[0.04em] px-8 sm:px-10 py-3.5 rounded-[5px] transition-colors shadow-md inline-block"
+              className="bg-[#0D9488] hover:bg-[#0F766E] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-[0.04em] px-8 sm:px-10 py-3.5 rounded-[5px] transition-colors shadow-md inline-block"
             >
               LEAVE US A REVIEW
             </Link>
@@ -1452,7 +1473,7 @@ export function Home() {
                         className={`text-[#111827] shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
                           }`}
                       />
-                      <span className="text-[16px] sm:text-[18px] lg:text-[19px] font-[800] text-[#111827] group-hover:text-[#D94E0F] leading-[1.4] transition-colors">
+                      <span className="text-[16px] sm:text-[18px] lg:text-[19px] font-[800] text-[#111827] group-hover:text-[#0F766E] leading-[1.4] transition-colors">
                         {faq.q}
                       </span>
                     </button>
@@ -1470,8 +1491,8 @@ export function Home() {
           <div className="w-full lg:mt-3">
             <div className="rounded-[8px] overflow-hidden bg-[#F3F4F6] border border-black/10 shadow-xl aspect-[4/3] lg:aspect-[1.05/1]">
               <img
-                src="/images/work/work-2.jpg"
-                alt="Completed LED ceiling lighting installation by George Handyman Services in Paphos"
+                src="/client-assets/portfolio/pergola-string-lights-view-2.png"
+                alt="Completed pergola decorative lighting installation by Handyman Larnaca and Limassol District"
                 loading="lazy"
                 className="w-full h-full object-cover"
               />
@@ -1480,26 +1501,29 @@ export function Home() {
         </div>
       </section>
 
-      {/* 6.495 Proudly Serving These Areas */}
+      {/* 6.495 Proudly Serving Larnaca & Limassol */}
       <section className="bg-[#F8FAFC] border-t border-black/10 pt-[48px] lg:pt-[64px] pb-[48px] lg:pb-[64px]">
         <div className="max-w-[1344px] mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-[1.06fr_0.94fr] gap-10 lg:gap-14 items-start">
           {/* Interactive Map + Business Place Card */}
           <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[470px] bg-[#E5E7EB] rounded-[8px] border border-black/10 overflow-hidden shadow-lg">
             <iframe
-              title="Paphos handyman services Service Area Map — Paphos, Cyprus"
-              src="https://maps.google.com/maps?q=Paphos,+Cyprus&t=&z=12&ie=UTF8&iwloc=&output=embed"
+              title="Larnaca and Limassol Districts Service Region Map — Cyprus"
+              src="https://maps.google.com/maps?ll=34.80,33.32&z=10&ie=UTF8&output=embed"
               className="w-full h-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
 
             {/* Google Maps Business Info Card Overlay */}
-            <div className="absolute top-[10px] left-[10px] z-10 bg-white rounded-[2px] shadow-[0_1px_4px_rgba(0,0,0,0.3)] px-3.5 py-2.5 min-w-[225px] text-left">
-              <div className="text-[14px] font-[700] text-[#202124] leading-tight">
-                Paphos handyman services
+            <div className="absolute top-[10px] left-[10px] z-10 bg-white rounded-[2px] shadow-[0_1px_4px_rgba(0,0,0,0.3)] px-3.5 py-2.5 max-w-[270px] text-left">
+              <div className="text-[13.5px] font-[700] text-[#202124] leading-tight">
+                {BUSINESS_NAME}
+              </div>
+              <div className="text-[11px] font-[600] text-[#5f6368] leading-snug mt-0.5">
+                {GREEK_IDENTITY}
               </div>
               <div className="mt-1 flex items-center gap-1 text-[12px]">
-                <span className="text-[#70757a] font-[700]">5.0</span>
+                <span className="text-[#70757a] font-[700]">{GOOGLE_RATING}</span>
                 <div className="flex items-center text-[#fbbc04]" aria-label="5.0 out of 5 stars">
                   {[0, 1, 2, 3, 4].map((s) => (
                     <svg key={s} viewBox="0 0 24 24" className="w-[13px] h-[13px] fill-current" aria-hidden="true">
@@ -1513,7 +1537,7 @@ export function Home() {
                   rel="noopener noreferrer"
                   className="text-[#1a73e8] hover:underline font-[700] ml-0.5"
                 >
-                  8 reviews
+                  {GOOGLE_REVIEW_COUNT} reviews
                 </a>
               </div>
               <a
@@ -1522,144 +1546,154 @@ export function Home() {
                 rel="noopener noreferrer"
                 className="mt-1.5 inline-block text-[12px] text-[#1a73e8] hover:underline font-[700]"
               >
-                View larger map
+                View on Google Maps
               </a>
             </div>
           </div>
 
           {/* Areas Column */}
           <div className="lg:pt-2">
-            <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-[1.08] tracking-[-0.01em] mb-8 lg:mb-10">
+            <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-[1.08] tracking-[-0.01em] mb-6 lg:mb-8">
               PROUDLY SERVING
               <br />
-              THESE AREAS
+              LARNACA &amp; LIMASSOL
             </h2>
 
-            <div className="grid grid-cols-2 gap-x-8 sm:gap-x-12 gap-y-5 sm:gap-y-6 max-w-[500px]">
-              {SERVICE_AREA_LINKS.map((area) => (
-                <Link
-                  key={area.name}
-                  to={area.to}
-                  className="text-[17px] sm:text-[19px] lg:text-[20px] font-[700] text-[#111827] hover:text-[#D94E0F] transition-colors leading-snug"
-                >
-                  {area.name}
-                </Link>
-              ))}
+            <p className="text-[16px] lg:text-[17px] text-[#4B5563] font-[600] leading-[1.65] max-w-[500px] mb-7">
+              We provide indoor and outdoor handyman services across both the Larnaca and Limassol districts in Cyprus. Call {PHONE_NUMBER} to confirm availability for your area and discuss your job.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[500px]">
+              <Link
+                to="/service-areas/larnaca"
+                className="bg-white border border-black/10 rounded-[6px] p-5 hover:border-[#0D9488] transition-colors shadow-sm group"
+              >
+                <div className="text-[18px] font-[800] text-[#111827] group-hover:text-[#0F766E] transition-colors">
+                  Larnaca District
+                </div>
+                <div className="text-[13px] font-[600] text-[#6B7280] mt-1">
+                  View district service details &rarr;
+                </div>
+              </Link>
+              <Link
+                to="/service-areas/limassol"
+                className="bg-white border border-black/10 rounded-[6px] p-5 hover:border-[#0D9488] transition-colors shadow-sm group"
+              >
+                <div className="text-[18px] font-[800] text-[#111827] group-hover:text-[#0F766E] transition-colors">
+                  Limassol District
+                </div>
+                <div className="text-[13px] font-[600] text-[#6B7280] mt-1">
+                  View district service details &rarr;
+                </div>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6.498 Follow Us on Instagram */}
+      {/* 6.498 Follow Us on Facebook */}
       <section className="bg-white border-t border-black/5 pt-[56px] lg:pt-[76px] pb-[28px] lg:pb-[40px]">
         <div className="max-w-[1040px] mx-auto px-4 lg:px-8">
           {/* Centered Section Header */}
           <div className="text-center mb-8 sm:mb-10">
-            <span className="block text-[14px] sm:text-[15px] font-[800] uppercase tracking-[0.06em] text-[#D94E0F] mb-1.5">
-              INSTAGRAM
+            <span className="block text-[14px] sm:text-[15px] font-[800] uppercase tracking-[0.06em] text-[#0D9488] mb-1.5">
+              FACEBOOK
             </span>
             <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] uppercase font-[800] text-[#111827] leading-[1.08] tracking-[-0.01em]">
-              FOLLOW US ON INSTAGRAM
+              FOLLOW US ON FACEBOOK
             </h2>
           </div>
 
-          {/* 4x2 Square Post Grid */}
+          {/* 4x2 Square Facebook Posts Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] bg-[#E5E7EB] border border-black/10 rounded-[4px] overflow-hidden shadow-sm">
-            {INSTAGRAM_POSTS.slice(0, visibleIgCount).map((post, idx) => (
-              <button
-                key={post.id}
-                type="button"
-                onClick={() => setActiveIgPostIndex(idx)}
-                aria-label={`Open Instagram post ${idx + 1} by @${INSTAGRAM_USERNAME}`}
-                className="group relative aspect-square w-full overflow-hidden bg-[#F3F4F6] p-0 text-left cursor-pointer focus:outline-none"
-              >
-                <img
-                  src={post.images[0]}
-                  alt={`@${INSTAGRAM_USERNAME} post ${idx + 1}`}
-                  loading="lazy"
-                  className="w-full h-full object-cover"
-                />
+            {FACEBOOK_GRID_TILES.slice(0, visibleFbCount).map((tile, idx) => {
+              const post = FACEBOOK_POSTS[tile.postIndex];
+              return (
+                <button
+                  key={tile.id}
+                  type="button"
+                  onClick={() => {
+                    setFbSlideIndexes((prev) => ({ ...prev, [post.id]: tile.slideIndex }));
+                    setActiveFbPostIndex(tile.postIndex);
+                  }}
+                  aria-label={`Open Facebook post ${idx + 1}: ${post.caption}`}
+                  className="group relative aspect-square w-full overflow-hidden bg-[#F3F4F6] p-0 text-left cursor-pointer focus:outline-none"
+                >
+                  <img
+                    src={tile.image}
+                    alt={`${post.caption} — ${BUSINESS_SHORT_NAME}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
 
-                {/* Top-Right Media Type Badge (Carousel or Reel) */}
-                {post.mediaType === 'carousel' && (
-                  <div className="absolute top-2.5 right-2.5 z-10 text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.65)] pointer-events-none">
-                    <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] fill-current" aria-hidden="true">
-                      <path d="M19 5.5h-1.5V4A2.5 2.5 0 0 0 15 1.5H4A2.5 2.5 0 0 0 1.5 4v11A2.5 2.5 0 0 0 4 17.5h1.5V19A2.5 2.5 0 0 0 8 21.5h11a2.5 2.5 0 0 0 2.5-2.5V8A2.5 2.5 0 0 0 19 5.5zM4 15.5a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1.5H8A2.5 2.5 0 0 0 5.5 8v7.5H4zm15.5 3.5a.5.5 0 0 1-.5.5H8a.5.5 0 0 1-.5-.5V8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v11z" />
-                    </svg>
-                  </div>
-                )}
-                {post.mediaType === 'reel' && (
-                  <div className="absolute top-2.5 right-2.5 z-10 text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.65)] pointer-events-none">
-                    <svg viewBox="0 0 24 24" className="w-[21px] h-[21px] fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <rect x="2.5" y="5" width="14" height="14" rx="2.5" />
-                      <path d="M16.5 10l5-3v10l-5-3v-4z" fill="currentColor" />
-                    </svg>
-                  </div>
-                )}
+                  {/* Top-Right Multi-Photo Album Badge */}
+                  {post.images.length > 1 && (
+                    <div className="absolute top-2.5 right-2.5 z-10 text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.65)] pointer-events-none">
+                      <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] fill-current" aria-hidden="true">
+                        <path d="M19 5.5h-1.5V4A2.5 2.5 0 0 0 15 1.5H4A2.5 2.5 0 0 0 1.5 4v11A2.5 2.5 0 0 0 4 17.5h1.5V19A2.5 2.5 0 0 0 8 21.5h11a2.5 2.5 0 0 0 2.5-2.5V8A2.5 2.5 0 0 0 19 5.5zM4 15.5a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1.5H8A2.5 2.5 0 0 0 5.5 8v7.5H4zm15.5 3.5a.5.5 0 0 1-.5.5H8a.5.5 0 0 1-.5-.5V8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v11z" />
+                      </svg>
+                    </div>
+                  )}
 
-                {/* Hover Overlay with Likes, Comments & Caption Preview */}
-                <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center p-4 text-center text-white">
-                  <div className="flex items-center justify-center gap-5 text-[14px] font-[700] mb-3">
-                    <span className="inline-flex items-center gap-1.5">
-                      <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-none stroke-current" strokeWidth="2.2" aria-hidden="true">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  {/* Hover Overlay with Post Caption & Date */}
+                  <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center p-4 text-center text-white">
+                    <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#1877F2] mb-2.5">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white" aria-hidden="true">
+                        <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z" />
                       </svg>
-                      {post.likes}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5">
-                      <svg viewBox="0 0 24 24" className="w-[18px] h-[18px] fill-none stroke-current" strokeWidth="2.2" aria-hidden="true">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                      </svg>
-                      {post.comments}
+                    </div>
+                    <p className="text-[12px] font-[600] leading-[1.4] text-white line-clamp-3 max-w-[210px] mb-1.5">
+                      {post.caption}
+                    </p>
+                    <span className="text-[10.5px] font-[700] uppercase tracking-[0.06em] text-white/75">
+                      {post.date}
                     </span>
                   </div>
-                  <p className="text-[12px] sm:text-[12.5px] font-[600] leading-[1.4] text-white/95 line-clamp-4 max-w-[210px]">
-                    {post.caption}
-                  </p>
-                </div>
-              </button>
-            ))}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Load More / View on Instagram Button */}
+          {/* Load More / View on Facebook Button */}
           <div className="mt-7 flex justify-center">
-            {visibleIgCount < INSTAGRAM_POSTS.length ? (
+            {visibleFbCount < FACEBOOK_GRID_TILES.length ? (
               <button
                 type="button"
-                onClick={() => setVisibleIgCount(INSTAGRAM_POSTS.length)}
-                className="bg-[#D94E0F] hover:bg-[#B8400B] text-white text-[13px] font-[700] px-14 py-2.5 rounded-[4px] transition-colors shadow-md cursor-pointer"
+                onClick={() => setVisibleFbCount(FACEBOOK_GRID_TILES.length)}
+                className="bg-[#0D9488] hover:bg-[#0F766E] text-white text-[13px] font-[700] px-14 py-2.5 rounded-[4px] transition-colors shadow-md cursor-pointer"
               >
                 Load more
               </button>
             ) : (
               <a
-                href={INSTAGRAM_PROFILE_URL}
+                href={FACEBOOK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#D94E0F] hover:bg-[#B8400B] text-white text-[13px] font-[700] px-10 py-2.5 rounded-[4px] transition-colors shadow-md inline-flex items-center gap-2"
+                className="bg-[#0D9488] hover:bg-[#0F766E] text-white text-[13px] font-[700] px-10 py-2.5 rounded-[4px] transition-colors shadow-md inline-flex items-center gap-2"
               >
-                View more on Instagram
+                View more on Facebook
+                <ArrowRight size={15} strokeWidth={2.6} />
               </a>
             )}
           </div>
         </div>
       </section>
 
-      {/* In-Website Scrollable Instagram Feed Modal */}
-      {activeIgPostIndex !== null && (
+      {/* In-Website Scrollable Facebook Posts Modal */}
+      {activeFbPostIndex !== null && (
         <div
-          ref={igModalFeedRef}
-          onClick={() => setActiveIgPostIndex(null)}
+          ref={fbModalFeedRef}
+          onClick={() => setActiveFbPostIndex(null)}
           role="dialog"
           aria-modal="true"
-          aria-label="Instagram feed viewer"
+          aria-label="Facebook posts feed viewer"
           className="fixed inset-0 z-[110] bg-black/80 backdrop-blur-[2px] overflow-y-auto py-4 sm:py-8 px-3 sm:px-4"
         >
           {/* Fixed Close Button positioned to the right of the centered column */}
           <button
             type="button"
-            onClick={() => setActiveIgPostIndex(null)}
-            aria-label="Close Instagram feed"
+            onClick={() => setActiveFbPostIndex(null)}
+            aria-label="Close Facebook feed"
             className="fixed top-4 right-4 sm:top-6 sm:right-[calc(50%-325px)] z-[120] w-10 h-10 rounded-full bg-black/50 sm:bg-transparent hover:bg-white/15 text-white/90 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
           >
             <X size={26} strokeWidth={1.8} />
@@ -1670,74 +1704,77 @@ export function Home() {
             onClick={(e) => e.stopPropagation()}
             className="max-w-[540px] w-full mx-auto bg-white text-[#1A1A1A] rounded-[4px] shadow-[0_20px_60px_rgba(0,0,0,0.75)] overflow-hidden divide-y divide-black/10"
           >
-            {INSTAGRAM_POSTS.map((post, postIdx) => {
-              const currentSlide = igSlideIndexes[post.id] ?? 0;
+            {FACEBOOK_POSTS.map((post, postIdx) => {
+              const currentSlide = fbSlideIndexes[post.id] ?? 0;
               const totalSlides = post.images.length;
 
               return (
                 <article
                   key={post.id}
-                  data-ig-post-index={postIdx}
+                  data-fb-post-index={postIdx}
                   className="bg-white scroll-mt-4"
                 >
                   {/* Post Top Header Bar */}
                   <div className="px-4 py-3 flex items-center justify-between gap-3">
                     <a
-                      href={INSTAGRAM_PROFILE_URL}
+                      href={FACEBOOK_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2.5 group min-w-0"
                     >
-                      <span className="p-[2px] rounded-full bg-[linear-gradient(45deg,#f09433_0%,#e6683c_25%,#dc2743_50%,#cc2366_75%,#bc1888_100%)] shrink-0">
+                      <span className="p-[2px] rounded-full bg-[#1877F2] shrink-0">
                         <img
-                          src={INSTAGRAM_AVATAR}
-                          alt={INSTAGRAM_USERNAME}
-                          className="w-8 h-8 rounded-full object-cover bg-white p-[1px]"
+                          src="/client-assets/references/handyman-logo-reference.png"
+                          alt={BUSINESS_SHORT_NAME}
+                          className="w-8 h-8 rounded-full object-contain bg-white p-[1px]"
                         />
                       </span>
-                      <span className="text-[13.5px] font-[700] text-[#1A1A1A] group-hover:underline truncate">
-                        {INSTAGRAM_USERNAME}
-                      </span>
+                      <div className="min-w-0">
+                        <div className="text-[13.5px] font-[700] text-[#1A1A1A] group-hover:underline truncate">
+                          {BUSINESS_SHORT_NAME}
+                        </div>
+                        <div className="text-[11px] font-[600] text-[#65676B] truncate">
+                          {GREEK_IDENTITY}
+                        </div>
+                      </div>
                     </a>
 
                     <div className="flex items-center gap-3 shrink-0">
                       <a
-                        href={INSTAGRAM_PROFILE_URL}
+                        href={FACEBOOK_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[13px] font-[700] text-[#0095F6] hover:text-[#00376B] transition-colors"
+                        className="text-[13px] font-[700] text-[#1877F2] hover:text-[#165CD3] transition-colors"
                       >
                         Follow
                       </a>
                       <a
-                        href={post.permalink}
+                        href={FACEBOOK_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Open post on Instagram"
-                        className="text-[#1A1A1A] hover:text-[#0095F6] transition-colors"
+                        aria-label="Open Facebook business page"
+                        className="w-7 h-7 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:bg-[#165CD3] transition-colors"
                       >
-                        <svg viewBox="0 0 24 24" className="w-[20px] h-[20px] fill-none stroke-current" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          <rect x="2.5" y="2.5" width="19" height="19" rx="5" ry="5" />
-                          <circle cx="12" cy="12" r="4.5" />
-                          <circle cx="17.5" cy="6.5" r="1" className="fill-current stroke-none" />
+                        <svg viewBox="0 0 24 24" className="w-[15px] h-[15px] fill-current" aria-hidden="true">
+                          <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.5V21h3z" />
                         </svg>
                       </a>
                     </div>
                   </div>
 
-                  {/* Post Media (with Multi-Photo Carousel Controls if applicable) */}
+                  {/* Post Media Carousel */}
                   <div className="relative w-full bg-[#F5F5F5] overflow-hidden select-none">
                     <a
-                      href={post.permalink}
+                      href={FACEBOOK_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block w-full"
-                      title="View post on Instagram"
+                      title="View on Facebook"
                     >
                       <img
                         src={post.images[currentSlide]}
-                        alt={`${INSTAGRAM_USERNAME} post ${postIdx + 1}`}
-                        className="w-full max-h-[620px] object-cover block"
+                        alt={`${post.caption} — ${BUSINESS_SHORT_NAME}`}
+                        className="w-full max-h-[580px] object-cover block"
                       />
                     </a>
 
@@ -1747,12 +1784,12 @@ export function Home() {
                           <button
                             type="button"
                             onClick={() =>
-                              setIgSlideIndexes((prev) => ({
+                              setFbSlideIndexes((prev) => ({
                                 ...prev,
                                 [post.id]: currentSlide - 1,
                               }))
                             }
-                            aria-label="Previous slide"
+                            aria-label="Previous photo"
                             className="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/55 hover:bg-black/75 text-white flex items-center justify-center transition-colors cursor-pointer"
                           >
                             <ChevronLeft size={18} />
@@ -1762,12 +1799,12 @@ export function Home() {
                           <button
                             type="button"
                             onClick={() =>
-                              setIgSlideIndexes((prev) => ({
+                              setFbSlideIndexes((prev) => ({
                                 ...prev,
                                 [post.id]: currentSlide + 1,
                               }))
                             }
-                            aria-label="Next slide"
+                            aria-label="Next photo"
                             className="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/55 hover:bg-black/75 text-white flex items-center justify-center transition-colors cursor-pointer"
                           >
                             <ChevronRight size={18} />
@@ -1787,53 +1824,32 @@ export function Home() {
                     )}
                   </div>
 
-                  {/* Post Footer: Likes, Share, Caption & Date */}
-                  <div className="px-4 pt-3.5 pb-4">
+                  {/* Post Footer: Reactions, Caption, Date & Share */}
+                  <div className="px-4 pt-3 pb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[13.5px] font-[700] text-[#1A1A1A]">
-                        {post.likes} likes
-                      </span>
+                      {post.reactions > 0 ? (
+                        <span className="text-[13.5px] font-[700] text-[#1A1A1A]">
+                          {post.reactions} {post.reactions === 1 ? 'reaction' : 'reactions'}
+                        </span>
+                      ) : (
+                        <span className="text-[12.5px] font-[600] text-[#65676B]">
+                          Posted on Facebook
+                        </span>
+                      )}
                       <a
-                        href={post.permalink}
+                        href={FACEBOOK_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[13px] font-[600] text-[#1A1A1A] hover:text-[#0095F6] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-[13px] font-[700] text-[#1877F2] hover:underline"
                       >
-                        <svg viewBox="0 0 24 24" className="w-[16px] h-[16px] fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          <path d="M15 14l5-5-5-5" />
-                          <path d="M4 20v-7a4 4 0 0 1 4-4h12" />
-                        </svg>
-                        Share
+                        View on Facebook &rarr;
                       </a>
                     </div>
-
-                    <p className="text-[13.5px] leading-[1.45] text-[#262626] font-[500]">
-                      <a
-                        href={INSTAGRAM_PROFILE_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-[700] text-[#1A1A1A] hover:underline mr-1.5"
-                      >
-                        {INSTAGRAM_USERNAME}
-                      </a>
-                      {post.caption.split(' ').map((word, wIdx) =>
-                        word.startsWith('#') || word.startsWith('@') ? (
-                          <a
-                            key={wIdx}
-                            href={INSTAGRAM_PROFILE_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[#00376B] hover:underline"
-                          >
-                            {word}{' '}
-                          </a>
-                        ) : (
-                          <span key={wIdx}>{word} </span>
-                        )
-                      )}
+                    <p className="text-[13.5px] leading-[1.45] text-[#1A1A1A]">
+                      <span className="font-[700] mr-1.5">{BUSINESS_SHORT_NAME}</span>
+                      <span>{post.caption}</span>
                     </p>
-
-                    <div className="mt-2.5 text-[10.5px] font-[600] uppercase tracking-[0.04em] text-[#8E8E8E]">
+                    <div className="mt-2 text-[11px] font-[600] uppercase tracking-[0.04em] text-[#65676B]">
                       {post.date}
                     </div>
                   </div>
@@ -1879,7 +1895,7 @@ export function Home() {
           </h2>
           <Link
             to="/contact"
-            className="mt-6 inline-flex items-center justify-center bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-wider px-8 py-4 rounded-[4px] transition-colors shadow-lg"
+            className="mt-6 inline-flex items-center justify-center bg-[#0D9488] hover:bg-[#0F766E] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-wider px-8 py-4 rounded-[4px] transition-colors shadow-lg"
           >
             GET FREE QUOTE
           </Link>

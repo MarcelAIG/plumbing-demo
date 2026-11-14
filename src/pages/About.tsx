@@ -1,28 +1,39 @@
 import { Helmet } from 'react-helmet-async';
-import { Award, Shield, CheckCircle, Droplets, Clock, Target } from 'lucide-react';
+import { Wrench, Droplets, Lightbulb, Trees } from 'lucide-react';
 import { CTABand } from '../components/Layout';
+import {
+  BUSINESS_NAME,
+  GREEK_IDENTITY,
+  PHONE_NUMBER,
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
+  FACEBOOK_URL,
+} from '../config';
 
 export function About() {
   return (
     <>
       <Helmet>
-        <title>About Us | George Handyman Services — Paphos, Cyprus</title>
-        <meta name="description" content="Trusted handyman & property maintenance services across Paphos, Cyprus. Gates, fencing, carpentry, ceiling & drywall repair, painting, lighting, and home repairs." />
+        <title>{`About Us | ${BUSINESS_NAME}`}</title>
+        <meta
+          name="description"
+          content={`${BUSINESS_NAME} (${GREEK_IDENTITY}) provides plumbing works, carpentry, electrical & lighting, and garden & yard work across Larnaca and Limassol districts, Cyprus.`}
+        />
         <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "George Handyman Services",
-              "telephone": "+357 99 233225",
-              "areaServed": "Paphos, Cyprus",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5.0",
-                "reviewCount": "8"
-              }
-            }
-          `}
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: BUSINESS_NAME,
+            alternateName: GREEK_IDENTITY,
+            telephone: PHONE_NUMBER,
+            areaServed: 'Larnaca and Limassol districts, Cyprus',
+            sameAs: [FACEBOOK_URL],
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: GOOGLE_RATING,
+              reviewCount: String(GOOGLE_REVIEW_COUNT),
+            },
+          })}
         </script>
       </Helmet>
 
@@ -30,106 +41,80 @@ export function About() {
       <section className="w-full bg-[#1A1A1A] min-h-[500px] flex items-center px-4 pt-[104px] pb-16 lg:pt-[120px]">
         <div className="max-w-[1280px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
           <div>
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">ABOUT GEORGE HANDYMAN SERVICES</span>
+            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#2DD4BF]">ABOUT US</span>
             <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.08] mt-2">
-              Quality handyman craftsmanship across Paphos.
+              {BUSINESS_NAME}
             </h1>
+            <p className="text-[15px] font-[700] text-[#F59E0B] mt-2">
+              {GREEK_IDENTITY}
+            </p>
             <p className="text-[18px] text-[#F5F5F0]/85 mt-4 leading-[1.6]">
-              From custom gates, timber fencing, and pergolas to ceiling repairs, LED lighting, feature walls, and general home maintenance across Paphos, Cyprus.
+              From plumbing repairs and furniture assembly to lighting installations and outdoor maintenance across the Larnaca and Limassol districts in Cyprus.
             </p>
           </div>
           <div className="h-full min-h-[400px] bg-[#242424] rounded-[4px] relative overflow-hidden flex items-center justify-center">
-             <img src="/images/work/work-1.webp" className="absolute inset-0 w-full h-full object-cover opacity-85" alt="George Handyman Services carpentry and gate work in Paphos" />
+            <img
+              src="/client-assets/portfolio/pergola-string-lights-view-1.png"
+              className="absolute inset-0 w-full h-full object-cover opacity-90"
+              alt="Pergola decorative lighting installation by Handyman Larnaca and Limassol District"
+            />
           </div>
         </div>
       </section>
 
-      {/* 11.2 Our Story */}
+      {/* 11.2 Overview */}
       <section className="bg-[#242424] py-[70px] lg:py-[100px] px-4">
-        <div className="max-w-[800px] mx-auto text-[17px] text-[#F5F5F0]/90 leading-[1.6] flex flex-col gap-6">
+        <div className="max-w-[800px] mx-auto text-[17px] text-[#F5F5F0]/90 leading-[1.65] flex flex-col gap-6">
           <p>
-            We founded this business on a single frustration: the plumbing industry's failure to respond quickly when it actually mattered. Most "24/7" plumbers route you to a sleepy answering service that leaves a message for a technician who might call you back at 7am. When your basement is actively flooding, that's not good enough.
+            {BUSINESS_NAME} ({GREEK_IDENTITY}) helps homeowners and residents across the Larnaca and Limassol districts stay on top of everyday repairs, installations, and general property upkeep.
           </p>
           <p>
-            So we built a dispatch-first operation. We invested in our own dispatch center, staffed by real people who know plumbing and know the city grid. We stocked our trucks specifically for emergency extraction, isolation, and repair—not for building new bathrooms.
+            Small jobs often make the biggest difference in how a home looks and functions—whether that means replacing a corroded bathroom basin faucet, assembling outdoor storage furniture, securely mounting a ceiling light fixture, or tidying up a garden and fence.
           </p>
           <p>
-            As we expanded our coverage area across Portland, three things remained non-negotiable: we employ real dispatchers, we never use an answering service, and we absolutely never use subcontracted labor. The person at your door works for us, is trained by us, and is held to our standards.
-          </p>
-          <p>
-            Today, we run multiple trucks nightly, hold a Master Plumber License, maintain EPA-compliant water damage protocols, and proudly hold a 4.9-star average across hundreds of reviews. But our most important metric is still our internal SLA: getting a truck to your door in an average of 30 minutes.
+            With a {GOOGLE_RATING} / 5 rating from {GOOGLE_REVIEW_COUNT} Google reviews, we focus on straightforward communication, tidy workmanship, and practical solutions for indoor and outdoor tasks.
           </p>
         </div>
       </section>
 
-      {/* 11.3 Meet the Team */}
+      {/* 11.3 Core Capabilities */}
       <section className="bg-[#1A1A1A] py-[70px] lg:py-[100px] px-4">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center mb-12 flex flex-col items-center">
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">THE TEAM</span>
-            <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mt-2">Who answers when you call.</h2>
-            <p className="text-[17px] text-[#9C9C96] max-w-[600px] mt-4 leading-[1.6]">
-              Every dispatcher and technician is directly employed — no call center, no subcontracted labor.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <TeamMember name="David H." role="Founder & Master Plumber" tenure="12y" imgUrl="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200" />
-            <TeamMember name="Sarah M." role="Lead Dispatcher" tenure="8y" imgUrl="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200" />
-            <TeamMember name="Marcus T." role="Senior Emergency Technician" tenure="10y" imgUrl="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&q=80&w=200" />
-            <TeamMember name="John R." role="Emergency Technician" tenure="5y" imgUrl="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200" />
-            <TeamMember name="Elena K." role="Emergency Technician" tenure="4y" imgUrl="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200" />
-            <TeamMember name="Michael B." role="Night-Shift Dispatcher" tenure="6y" imgUrl="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200" />
-          </div>
-        </div>
-      </section>
-
-      {/* 11.4 Credentials & Certifications */}
-      <section className="bg-[#242424] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Award size={20} /></div>
-            <span className="text-[16px] font-[700] text-[#F5F5F0]">Master Plumber License #MP-78291</span>
+          <div className="bg-[#242424] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#1A1A1A] text-[#2DD4BF] flex items-center justify-center rounded-full shrink-0"><Droplets size={20} /></div>
+            <span className="text-[16px] font-[700] text-[#F5F5F0]">Plumbing Works — faucets, sinks &amp; minor plumbing</span>
           </div>
-          <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Shield size={20} /></div>
-            <span className="text-[16px] font-[700] text-[#F5F5F0]">Full liability & workers' comp insurance</span>
+          <div className="bg-[#242424] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#1A1A1A] text-[#2DD4BF] flex items-center justify-center rounded-full shrink-0"><Wrench size={20} /></div>
+            <span className="text-[16px] font-[700] text-[#F5F5F0]">Carpentry — assembly, cabinets, drawers &amp; parquet</span>
           </div>
-          <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><CheckCircle size={20} /></div>
-            <span className="text-[16px] font-[700] text-[#F5F5F0]">State-certified backflow prevention</span>
+          <div className="bg-[#242424] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#1A1A1A] text-[#F59E0B] flex items-center justify-center rounded-full shrink-0"><Lightbulb size={20} /></div>
+            <span className="text-[16px] font-[700] text-[#F5F5F0]">Electrical &amp; Lighting — fixtures, switches, sockets &amp; decorative lighting</span>
           </div>
-          <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Droplets size={20} /></div>
-            <span className="text-[16px] font-[700] text-[#F5F5F0]">EPA-compliant water damage protocols</span>
-          </div>
-          <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Target size={20} /></div>
-            <span className="text-[16px] font-[700] text-[#F5F5F0]">Better Business Bureau accredited</span>
-          </div>
-          <div className="bg-[#1A1A1A] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#242424] text-[#1F46B4] flex items-center justify-center rounded-full"><Clock size={20} /></div>
-            <span className="text-[16px] font-[700] text-[#F5F5F0]">24/7 dispatch certification (internal SLA)</span>
+          <div className="bg-[#242424] border border-white/5 p-6 rounded-[2px] flex items-center gap-4">
+            <div className="w-12 h-12 bg-[#1A1A1A] text-[#2DD4BF] flex items-center justify-center rounded-full shrink-0"><Trees size={20} /></div>
+            <span className="text-[16px] font-[700] text-[#F5F5F0]">Garden &amp; Yard Work — cleaning, weeding, pruning &amp; fencing</span>
           </div>
         </div>
       </section>
 
-      {/* 11.5 What We Won't Compromise On */}
-      <section className="bg-[#1A1A1A] py-[70px] lg:py-[100px] px-4">
+      {/* 11.4 Core Commitments */}
+      <section className="bg-[#242424] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[1280px] mx-auto text-center">
-          <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mb-12">What we won't compromise on</h2>
+          <h2 className="text-[30px] lg:text-[46px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mb-12">How we work</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
-              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Answer every call live.</span>
+            <div className="bg-[#1A1A1A] p-8 border-t-4 border-[#0D9488] rounded-[2px]">
+              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Direct phone &amp; message contact.</span>
             </div>
-            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
-              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Quote the price before we dispatch.</span>
+            <div className="bg-[#1A1A1A] p-8 border-t-4 border-[#0D9488] rounded-[2px]">
+              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Clear scope agreed before starting.</span>
             </div>
-            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
-              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Staff our own trucks — no subcontractors.</span>
+            <div className="bg-[#1A1A1A] p-8 border-t-4 border-[#F59E0B] rounded-[2px]">
+              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Indoor &amp; outdoor jobs welcome.</span>
             </div>
-            <div className="bg-[#242424] p-8 border-t-4 border-[#1F46B4] rounded-[2px]">
-              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Show up in the window we promise.</span>
+            <div className="bg-[#1A1A1A] p-8 border-t-4 border-[#0D9488] rounded-[2px]">
+              <span className="text-[18px] lg:text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase leading-[1.2]">Serving Larnaca &amp; Limassol districts.</span>
             </div>
           </div>
         </div>
@@ -137,18 +122,5 @@ export function About() {
 
       <CTABand />
     </>
-  );
-}
-
-function TeamMember({ name, role, tenure, imgUrl }: { name: string, role: string, tenure: string, imgUrl: string }) {
-  return (
-    <div className="bg-[#242424] border border-white/5 rounded-[4px] p-6 flex flex-col items-start text-left">
-      <div className="w-16 h-16 bg-[#1A1A1A] rounded-full mb-4 border-2 border-white/10 flex items-center justify-center overflow-hidden">
-        <img src={imgUrl} alt={name} className="w-full h-full object-cover grayscale" />
-      </div>
-      <span className="text-[20px] font-[700] font-oswald text-[#F5F5F0] uppercase">{name}</span>
-      <span className="text-[15px] font-[600] text-[#1F46B4] mt-1">{role}</span>
-      <span className="text-[14px] text-[#9C9C96] mt-2">{tenure} tenure</span>
-    </div>
   );
 }

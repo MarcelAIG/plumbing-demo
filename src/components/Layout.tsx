@@ -84,11 +84,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="hidden lg:flex items-center gap-3 xl:gap-4">
-            <a href="tel:+35799233225" className="bg-[#111827] text-white font-[800] text-[14px] xl:text-[15px] px-4 xl:px-[20px] py-[12px] rounded-[4px] tracking-wide hover:bg-[#1F2937] active:scale-[0.98] transition-all flex items-center gap-2 border-2 border-[#111827] whitespace-nowrap shadow-sm">
-              <Phone size={18} className="text-[#FB923C]" />
+            <a href="tel:+35799233225" className="group bg-[#111827] text-white font-[800] text-[14px] xl:text-[15px] px-4 xl:px-[20px] py-[12px] rounded-[4px] tracking-wide hover:bg-white hover:text-[#111827] active:scale-[0.98] flex items-center gap-2 border-2 border-[#111827] whitespace-nowrap shadow-sm">
+              <Phone size={18} className="text-[#FB923C] group-hover:text-[#C2410C]" />
               +357 99 233225
             </a>
-            <Link to="/contact" className="bg-[#D94E0F] text-white font-[800] text-[14px] px-5 xl:px-[26px] py-[13px] border-2 border-[#D94E0F] rounded-[4px] uppercase tracking-wide hover:bg-[#B8400B] hover:border-[#B8400B] transition-colors whitespace-nowrap shadow-sm">
+            <Link to="/contact" className="bg-[#D94E0F] text-white font-[800] text-[14px] px-5 xl:px-[26px] py-[13px] border-2 border-[#D94E0F] rounded-[4px] uppercase tracking-wide hover:bg-white hover:text-[#C2410C] active:scale-[0.98] whitespace-nowrap shadow-sm">
               Get Free Quote
             </Link>
           </div>

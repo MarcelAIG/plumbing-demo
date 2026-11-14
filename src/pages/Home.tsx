@@ -532,7 +532,7 @@ export function Home() {
       </Helmet>
 
       {/* 6.1 Hero */}
-      <section className="relative w-full min-h-screen lg:min-h-[780px] flex items-start lg:items-end pt-[112px] lg:pt-[120px] pb-[48px] lg:pb-0 bg-[#111827]">
+      <section className="relative w-full min-h-[max(100dvh,780px)] flex items-start lg:items-end pt-[112px] lg:pt-[120px] pb-[48px] lg:pb-0 bg-[#111827]">
         <div className="absolute inset-0 z-0 overflow-hidden bg-[#111827]">
           <img
             src="/images/hero-bg.jpg"
@@ -555,11 +555,11 @@ export function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-[28px] w-full sm:w-auto">
-              <a href="tel:+35799233225" className="bg-[#D94E0F] text-white font-[800] px-8 py-4 rounded-[4px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-[#B8400B] active:scale-[0.98] transition-all border-2 border-[#D94E0F] hover:border-[#B8400B] shadow-lg w-full sm:w-auto">
+              <a href="tel:+35799233225" className="bg-[#D94E0F] text-white font-[800] px-8 py-4 rounded-[4px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-white hover:text-[#C2410C] hover:border-white active:scale-[0.98] border-2 border-[#D94E0F] shadow-lg w-full sm:w-auto">
                 <Phone size={20} />
                 CALL NOW
               </a>
-              <Link to="/contact" className="border-2 border-white bg-white/95 text-[#111827] font-[800] px-8 py-4 rounded-[4px] text-center uppercase tracking-wide hover:bg-white transition-colors shadow-lg w-full sm:w-auto">
+              <Link to="/contact" className="border-2 border-white bg-white text-[#111827] font-[800] px-8 py-4 rounded-[4px] text-center uppercase tracking-wide hover:bg-[#D94E0F] hover:text-white hover:border-[#D94E0F] active:scale-[0.98] shadow-lg w-full sm:w-auto">
                 Get Free Quote
               </Link>
             </div>
@@ -610,7 +610,7 @@ export function Home() {
                   provided by the company. By providing my phone number, I agree to receive text messages from the business.
                 </label>
               </div>
-              <button type="submit" className="mt-2 bg-[#D94E0F] text-white font-[800] py-4 rounded-[4px] text-[16px] uppercase tracking-wide hover:bg-[#B8400B] transition-colors w-full shadow-md cursor-pointer">
+              <button type="submit" className="mt-2 bg-[#D94E0F] border-2 border-[#D94E0F] text-white font-[800] py-4 rounded-[4px] text-[16px] uppercase tracking-wide hover:bg-white hover:text-[#C2410C] active:scale-[0.98] w-full shadow-md cursor-pointer">
                 SEND
               </button>
             </form>

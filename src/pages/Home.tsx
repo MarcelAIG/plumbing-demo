@@ -3,97 +3,97 @@ import { Link } from 'react-router-dom';
 import { HOME_FAQS } from '../data/faqs';
 import { useState, useEffect, useRef, type PointerEvent as ReactPointerEvent, type CSSProperties } from 'react';
 import { ChevronDown, Phone, Check, MapPin, Clock, ShieldCheck, Award, ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { PHONE_NUMBER } from '../config';
+import { PHONE_NUMBER, GOOGLE_MAPS_REVIEW_URL } from '../config';
 import { Logo } from '../components/Logo';
 
 const SERVICE_TILES = [
   {
-    title: 'BURST PIPE REPAIR',
-    image: '/images/services/burst-pipe-repair.jpg',
-    to: '/services/burst-pipe-repair',
-    description: 'Emergency water shutoff and on-the-spot copper or PEX pipe repair to stop flooding damage fast.',
-  },
-  {
-    title: 'DRAIN CLEANING',
-    image: '/images/services/drain-cleaning.jpg',
-    to: '/services/emergency-drain-clearing',
-    description: 'Fast clearing for backed-up sinks, showers, toilets, and floor drains—restoring smooth flow safely.',
-  },
-  {
-    title: 'WATER HEATERS',
-    image: '/images/services/water-heaters.jpg',
-    to: '/services/no-heat-no-hot-water',
-    description: 'Same-day gas, electric, and tankless water heater diagnostics, repair, and complete replacement.',
-  },
-  {
-    title: 'SEWER LINES',
-    image: '/images/services/sewer-lines.jpg',
-    to: '/services/sewer-backup-emergency',
-    description: 'Main sewer line root clearing, hazmat-aware backup containment, and trenchless-ready repairs.',
-  },
-  {
-    title: 'FLOOD EXTRACTION',
-    image: '/images/services/flood-extraction.jpg',
-    to: '/services/flood-water-extraction',
-    description: 'Industrial submersible pumping, rapid water removal, and moisture mapping to stop mold early.',
-  },
-  {
-    title: 'LEAK DETECTION',
-    image: '/images/services/leak-detection.jpg',
-    to: '/services/burst-pipe-repair',
-    description: 'Thermal imaging and acoustic pinpointing to locate hidden wall, ceiling, and slab water leaks.',
-  },
-  {
-    title: 'BOILER REPAIR',
-    image: '/images/services/boiler-repair.jpg',
-    to: '/services/no-heat-no-hot-water',
-    description: 'Licensed hydronic heating and boiler repair to restore heat fast before Portland pipes can freeze.',
-  },
-  {
-    title: 'HYDRO JETTING',
-    image: '/images/services/hydro-jetting.jpg',
-    to: '/services/emergency-drain-clearing',
-    description: 'High-pressure water jetting that scours stubborn grease, scale, and tree roots from main drain lines.',
-  },
-  {
-    title: 'SUMP PUMPS',
-    image: '/images/services/sump-pumps.jpg',
-    to: '/services/flood-water-extraction',
-    description: 'Primary and battery-backup sump pump installation, check valves, and testing to keep basements dry.',
-  },
-  {
-    title: 'PIPE REPLACEMENT',
-    image: '/images/services/pipe-replacement.jpg',
-    to: '/services/burst-pipe-repair',
-    description: 'Whole-home copper and PEX repiping, manifold upgrades, and shutoff valve replacements built to last.',
-  },
-  {
-    title: 'FIXTURE REPAIR',
-    image: '/images/services/fixture-repair.jpg',
+    title: 'GATE & FENCE INSTALL',
+    image: '/images/services/gate-fence.webp',
     to: '/services',
-    description: 'Clean installation and leak-free repair for kitchen faucets, disposals, toilets, and shower valves.',
+    description: 'Custom timber perimeter fencing, aluminum entry gates, latches, and weather-sealed outdoor woodwork.',
   },
   {
-    title: 'CAMERA INSPECTION',
-    image: '/images/services/camera-inspection.jpg',
-    to: '/services/sewer-backup-emergency',
-    description: 'HD fiber-optic drain scopes pinpointing blockages, bellies, and broken sewer joints with live video.',
+    title: 'CEILING & DRYWALL REPAIR',
+    image: '/images/services/ceiling-repair.jpg',
+    to: '/services',
+    description: 'Plaster patching, recessed tray ceiling restoration, crack repair, and seamless interior finishes.',
+  },
+  {
+    title: 'LED LIGHTING SYSTEMS',
+    image: '/images/services/led-lighting.jpg',
+    to: '/services',
+    description: 'Modern hexagonal LED ceiling arrays, recessed spots, dimmers, and clean lighting fixture installations.',
+  },
+  {
+    title: 'DECK RESTORATION',
+    image: '/images/services/deck-staining.jpg',
+    to: '/services',
+    description: 'Sanding, pressure cleaning, oil staining, and UV sealing for timber decks, balconies, and patio floors.',
+  },
+  {
+    title: 'FEATURE WALLS & TV MOUNTS',
+    image: '/images/services/feature-walls.jpg',
+    to: '/services',
+    description: 'Geometric accent walls, precision paintwork, heavy-duty TV wall mounting, and office or living room upgrades.',
+  },
+  {
+    title: 'ALUMINUM & COURTYARD GATES',
+    image: '/images/services/aluminum-gate.webp',
+    to: '/services',
+    description: 'Precision-fitted metal slat gates, masonry pillar anchoring, hinges, and curb-appeal entrance upgrades.',
+  },
+  {
+    title: 'PERGOLA & WOOD CARPENTRY',
+    image: '/images/services/pergola-carpentry.jpg',
+    to: '/services',
+    description: 'Outdoor pergola roof beams, bamboo shading, custom framing, and weather-resistant timber structures.',
+  },
+  {
+    title: 'EXTERIOR PAINTING',
+    image: '/images/services/exterior-painting.jpg',
+    to: '/services',
+    description: 'Balcony, facade, and exterior wall preparation, plaster repair, and crisp Mediterranean-grade coatings.',
+  },
+  {
+    title: 'CUSTOM PRIVACY FENCING',
+    image: '/images/services/privacy-fencing.jpg',
+    to: '/services',
+    description: 'Made-to-measure wooden boundary fences and courtyard dividers built neatly to match your property.',
+  },
+  {
+    title: 'PLUMBING & AC CARE',
+    image: '/images/services/ac-plumbing.jpg',
+    to: '/services',
+    description: 'Rooftop solar water lines, pipe checks, AC bracket & drain servicing, taps, and general household plumbing fixes.',
+  },
+  {
+    title: 'UPHOLSTERY CARE',
+    image: '/images/services/upholstery-care.png',
+    to: '/services',
+    description: 'Deep fabric and furniture restoration, dining chair cleaning, and surface refreshes alongside home maintenance.',
+  },
+  {
+    title: 'PLASTER & SURFACE PREP',
+    image: '/images/services/plaster-prep.jpg',
+    to: '/services',
+    description: 'Full lath exposure, damp-damage remediation, skimming, and priming before final coat painting.',
   },
 ];
 
 const WORK_GALLERY = [
-  { image: '/images/work/work-01.jpg', alt: 'Copper pressure tank supply piping and brass ball valve assembly' },
-  { image: '/images/work/work-02.jpg', alt: 'Completed luxury bathroom with freestanding soaking tub, glass shower, and floating vanity' },
-  { image: '/images/work/work-03.jpg', alt: 'Dual pipe wrenches tightening galvanized threaded elbow fitting' },
-  { image: '/images/work/work-04.jpg', alt: 'Polished solid brass wall-mounted twin faucets over white subway tile' },
-  { image: '/images/work/work-05.jpg', alt: 'Technician servicing residential gas water heater control valve' },
-  { image: '/images/work/work-06.jpg', alt: 'Pipe wrenches, PTFE thread seal tape, and pipe cutter on threaded water line' },
-  { image: '/images/work/work-07.jpg', alt: 'Residential heating boiler digital temperature controller and bar pressure gauge' },
-  { image: '/images/work/work-08.jpg', alt: 'Custom bathroom sink, wall-mounted chrome mixer faucet, and deep soaking tub' },
-  { image: '/images/work/work-09.jpg', alt: 'Copper manifold upgrade with ball valves, pressure switch, and pressure gauge' },
-  { image: '/images/work/work-10.jpg', alt: 'Dual chrome rainfall and handheld showerhead fixture installation' },
-  { image: '/images/work/work-11.jpg', alt: 'Copper supply line with brass compression stopcock shutoff valve' },
-  { image: '/images/work/work-12.jpg', alt: 'Stone-tiled alcove bath, ceiling rain shower, and vanity sink installation' },
+  { image: '/images/work/work-1.webp', alt: 'Custom stained timber fence and matching pedestrian gate installed by George Handyman Services' },
+  { image: '/images/work/work-2.jpg', alt: 'Hexagonal LED architectural ceiling lighting installation in Paphos' },
+  { image: '/images/work/work-3.jpg', alt: 'Balcony hardwood decking mid-staining and protective timber oil finish' },
+  { image: '/images/work/work-4.jpg', alt: 'Geometric black and gold feature wall with mounted flatscreen TV' },
+  { image: '/images/work/work-5.webp', alt: 'Modern white horizontal-slat courtyard gate installation' },
+  { image: '/images/work/work-6.jpg', alt: 'Restored recessed ceiling with perimeter cove LED lighting and center fixture' },
+  { image: '/images/work/work-7.jpg', alt: 'Outdoor wooden pergola roof structure completed in Paphos' },
+  { image: '/images/work/work-8.jpg', alt: 'Freshly painted exterior apartment balcony facade and trim' },
+  { image: '/images/work/work-9.jpg', alt: 'Custom horizontal wooden garden privacy fence project' },
+  { image: '/images/work/work-10.webp', alt: 'Stained solid wood perimeter gate detail and hinge alignment' },
+  { image: '/images/work/work-11.jpg', alt: 'Ceiling lath and plaster preparation prior to full restoration' },
+  { image: '/images/work/work-12.jpg', alt: 'Rooftop water piping and AC condenser unit servicing in Paphos' },
 ];
 
 type CustomerReview = {
@@ -104,97 +104,35 @@ type CustomerReview = {
 
 const CUSTOMER_REVIEWS: CustomerReview[] = [
   {
-    author: 'Sarah Mitchell',
+    author: 'Andreas Georgiou',
     preview:
-      'SOLO Plumbing & Heating saved us when our water heater burst. The plumber arrived fast, gave a clear quote before starting, and fixed it perfectly. Highly recommend!',
+      'George installed our custom timber fence and gate in Kato Paphos with incredible attention to detail. Clean work, fair price, and finished right on schedule.',
   },
   {
-    author: 'James Turner',
+    author: 'Elena Papadopoulou',
     preview:
-      'Very professional and upfront about the pricing. They cleared our emergency main line backup in no time. The tech was clean, respectful, and knew exactly what to do.',
+      'Had water damage in our bathroom tray ceiling and George restored it seamlessly—looks brand new! Punctual, tidy, and easy to communicate with.',
   },
   {
-    author: 'Donna Garcia',
+    author: 'Markos Christodoulou',
     preview:
-      'I absolutely love this company! SOLO Plumbing & Heating does amazing work—very prompt, dependable, reasonably priced and keeps our home plumbing...',
-    full: 'I absolutely love this company! SOLO Plumbing & Heating does amazing work—very prompt, dependable, reasonably priced and keeps our home plumbing running like clockwork every year. They repiped our basement supply lines and tested every shutoff before leaving.',
+      'Called George Handyman Services for our courtyard aluminum gate and exterior painting in Chloraka. Very professional from quote to final cleanup...',
+    full: 'Called George Handyman Services for our courtyard aluminum gate and exterior painting in Chloraka. Very professional from quote to final cleanup, with zero shortcuts on hardware or weatherproofing.',
   },
   {
-    author: 'Michael Reynolds',
+    author: 'Sarah Jenkins',
     preview:
-      'Fast local response just like they promised. Had a major leak in the ceiling and they stopped it before it caused more damage. Trustworthy and reliable service.',
+      'Our go-to handyman in Tala! Varnished our whole wooden balcony deck, mounted two TVs, and fixed several tricky door locks in a single day.',
   },
   {
-    author: 'David Lawson',
+    author: 'Nikos Constantinou',
     preview:
-      'Absolutely fantastic service! The team was knowledgeable and polite. They fixed our clogged kitchen line quickly. Definitely calling them for every plumbing job.',
+      'Top-quality finish on our studio hexagonal LED ceiling lights and accent wall. Always arrives on time and takes real pride in his craftsmanship.',
   },
   {
-    author: 'Robert Green',
+    author: 'Claire Bennett',
     preview:
-      'Excellent and speedy service. Woke up to water in our basement—their tech arrived fast, isolated the burst valve right away, and left the utility area spotless.',
-  },
-  {
-    author: 'Elena Wright',
-    preview:
-      'Could not believe how quickly they dispatched someone on a Sunday evening. Everything was explained clearly before work started and the final bill matched the quote.',
-  },
-  {
-    author: 'Chris Kim',
-    preview:
-      'Honest pricing and clean workmanship. Replaced our leaking copper tee and added quarter-turn shutoff valves without trying to upsell anything unnecessary.',
-  },
-  {
-    author: 'Jessica Hayes',
-    preview:
-      'Top-notch plumbers. Called them at 2 AM during a freeze snap and they showed up stocked with the parts needed to restore heat and hot water before sunrise.',
-  },
-  {
-    author: 'Michael Bennett',
-    preview:
-      'Had a sudden leak under our main bath vanity and SOLO arrived within the hour. Fixed the drain assembly completely and walked us through the pressure check.',
-  },
-  {
-    author: 'Tom Lin',
-    preview:
-      'SOLO is our go-to plumbing crew across Portland now. Used them twice this year for boiler maintenance and fixture upgrades—outstanding communication every time.',
-  },
-  {
-    author: 'Kevin Sullivan',
-    preview:
-      'Cleared a stubborn main sewer backup with their hydro jetter and camera scope. They showed us live video of the pipe afterward so we had total peace of mind.',
-  },
-  {
-    author: 'Rachel Brooks',
-    preview:
-      'Our hydronic boiler stopped heating on the coldest night of January. SOLO diagnosed the circulator pump fast and restored full radiator warmth the same evening...',
-    full: 'Our hydronic boiler stopped heating on the coldest night of January. SOLO diagnosed the failed circulator pump fast, had the replacement on the truck, purged every zone carefully, and restored full radiator warmth the very same evening.',
-  },
-  {
-    author: 'Daniel Cooper',
-    preview:
-      'Swapped out our failing 50-gallon gas water heater for a high-efficiency tankless unit. Clean copper manifold soldering, neat venting, and zero mess left behind.',
-  },
-  {
-    author: 'Lauren Patterson',
-    preview:
-      'Installed a battery-backup sump pump before heavy November rains hit our Laurelhurst basement. Thorough testing, tidy wiring, and super courteous crew.',
-  },
-  {
-    author: 'Mark Henderson',
-    preview:
-      'Repiped our 1920s Craftsman from corroded galvanized steel to Type-L copper and PEX headers. Water pressure in the upstairs shower feels brand new again...',
-    full: 'Repiped our 1920s Craftsman from corroded galvanized steel to clean Type-L copper manifolds and PEX runs. Water pressure in the upstairs shower feels brand new again, and every drywall access cutout was kept minimal.',
-  },
-  {
-    author: 'Amanda Ross',
-    preview:
-      'Prompt arrival, boot covers at the door, and transparent pricing from the first phone call. Repaired a hidden slab-adjacent supply leak without tearing up our tile.',
-  },
-  {
-    author: 'Olivia Morales',
-    preview:
-      'Five stars from start to finish. They upgraded our master bathroom fixtures, checked static water pressure, and installed a new pressure-reducing valve on the main.',
+      'Reliable, honest, and super skilled. George repaired our outdoor pergola beams and checked our rooftop solar pipework before summer. Highly recommended!',
   },
 ];
 
@@ -202,24 +140,24 @@ const REVIEWS_PER_PAGE = 3;
 const TOTAL_REVIEW_PAGES = Math.ceil(CUSTOMER_REVIEWS.length / REVIEWS_PER_PAGE);
 
 const SERVICE_AREA_LINKS = [
-  { name: 'Downtown', to: '/service-areas/downtown' },
-  { name: 'Riverside', to: '/service-areas/riverside' },
-  { name: 'Oakwood', to: '/service-areas/oakwood' },
-  { name: 'Highland Park', to: '/service-areas/highland-park' },
-  { name: 'Eastside', to: '/service-areas/eastside' },
-  { name: 'Westgate', to: '/service-areas/westgate' },
-  { name: 'Beaverton', to: '/service-areas' },
-  { name: 'Lake Oswego', to: '/service-areas' },
-  { name: 'Tigard', to: '/service-areas' },
-  { name: 'Gresham', to: '/service-areas' },
-  { name: 'Milwaukie', to: '/service-areas' },
-  { name: 'Oregon City', to: '/service-areas' },
-  { name: 'Hillsboro', to: '/service-areas' },
-  { name: 'Vancouver', to: '/service-areas' },
+  { name: 'Kato Paphos', to: '/service-areas' },
+  { name: 'Chloraka', to: '/service-areas' },
+  { name: 'Peyia', to: '/service-areas' },
+  { name: 'Coral Bay', to: '/service-areas' },
+  { name: 'Tala', to: '/service-areas' },
+  { name: 'Kissonerga', to: '/service-areas' },
+  { name: 'Geroskipou', to: '/service-areas' },
+  { name: 'Empa', to: '/service-areas' },
+  { name: 'Tremithousa', to: '/service-areas' },
+  { name: 'Mesogi', to: '/service-areas' },
+  { name: 'Konia', to: '/service-areas' },
+  { name: 'Anarita', to: '/service-areas' },
+  { name: 'Mandria', to: '/service-areas' },
+  { name: 'Polis Chrysochous', to: '/service-areas' },
 ];
 
-const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/doggroomingby_julia/';
-const INSTAGRAM_USERNAME = 'doggroomingby_julia';
+const INSTAGRAM_PROFILE_URL = 'https://www.instagram.com/paphos_handyman/';
+const INSTAGRAM_USERNAME = 'paphos_handyman';
 const INSTAGRAM_AVATAR = '/images/instagram/avatar.jpg';
 
 type InstagramPost = {
@@ -237,146 +175,157 @@ const INSTAGRAM_POSTS: InstagramPost[] = [
   {
     id: 'ig-1',
     images: [
-      '/images/instagram/post-01.jpg',
-      '/images/instagram/post-02.jpg',
-      '/images/instagram/post-03.jpg',
+      '/images/instagram/real-01-01.webp',
+      '/images/instagram/real-01-02.webp',
+      '/images/instagram/real-01-03.webp',
+      '/images/instagram/real-01-04.webp',
     ],
     mediaType: 'carousel',
-    likes: 73,
-    comments: 5,
-    caption:
-      'Fresh fluffy blowout & full teddy bear trim for this sweet little Pomeranian in Polis, Paphos! ✂️🐾 Bath, brush, and full styling session. DM to book or call 99073343 #doggroomingbyjulia #paphosdogs #polischrysochous #pomeraniangrooming #petstylist',
-    date: 'DECEMBER 25, 2024',
-    permalink: 'https://www.instagram.com/p/DdW5tJdAK-Z/',
+    likes: 3,
+    comments: 0,
+    caption: '👌 Custom timber perimeter fence & gate installation in Paphos. @paphos_handyman',
+    date: 'OCTOBER 13, 2026',
+    permalink: 'https://www.instagram.com/p/DebbOanAAha/',
   },
   {
     id: 'ig-2',
     images: [
-      '/images/instagram/post-04.jpg',
-      '/images/instagram/post-05.jpg',
-      '/images/instagram/post-06.jpg',
+      '/images/instagram/real-02-01.webp',
+      '/images/instagram/real-02-02.webp',
     ],
     mediaType: 'carousel',
-    likes: 64,
-    comments: 4,
-    caption:
-      'Happy, fresh, and ready for park walks after a warm spa bath, deshedding, and tidy scissor finish! 🐶✨ Thank you for trusting Dog Grooming by Julia. #doggrooming #cyprusdogs #paphos #fluffydog #groomingspa',
-    date: 'DECEMBER 18, 2024',
-    permalink: 'https://www.instagram.com/p/DYPK8r8kftn/',
+    likes: 0,
+    comments: 0,
+    caption: '🦾🦾🦾 Modern white courtyard entry gate fitted cleanly to stone entrance pillars.',
+    date: 'JULY 11, 2026',
+    permalink: 'https://www.instagram.com/p/DapJaJWArl1/',
   },
   {
     id: 'ig-3',
     images: [
-      '/images/instagram/post-07.jpg',
-      '/images/instagram/post-08.jpg',
-      '/images/instagram/post-09.jpg',
+      '/images/instagram/real-03-01.jpg',
     ],
     mediaType: 'reel',
-    likes: 58,
-    comments: 6,
-    caption:
-      'Golden hour glow after a full coat conditioning treatment, ear cleaning, and paw pad trim! 🐾✂️ Every pup gets gentle, one-on-one care in our Polis studio. #doggroomingbyjulia #petgroomer #pomeranian #polis #cyprus',
-    date: 'DECEMBER 9, 2024',
-    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+    likes: 1,
+    comments: 0,
+    caption: 'Rooftop solar piping, AC condenser units & outdoor maintenance check in Paphos.',
+    date: 'JUNE 20, 2026',
+    permalink: 'https://www.instagram.com/p/DZzX3WTAv7t/',
   },
   {
     id: 'ig-4',
-    images: ['/images/instagram/post-02.jpg', '/images/instagram/post-01.jpg'],
+    images: [
+      '/images/instagram/real-04-01.jpg',
+      '/images/instagram/real-04-02.jpg',
+      '/images/instagram/real-04-03.jpg',
+      '/images/instagram/real-04-04.jpg',
+    ],
     mediaType: 'carousel',
-    likes: 81,
-    comments: 7,
-    caption:
-      'Look at that big smile! 🐾 Full bath, gentle blow dry, sanitary tidy, and nail clipping completed today. Book your pup’s next appointment via DM! #doggroomingbyjulia #dogsofcyprus #petstylist #happyclient',
-    date: 'NOVEMBER 29, 2024',
-    permalink: 'https://www.instagram.com/p/DdW5tJdAK-Z/',
+    likes: 0,
+    comments: 0,
+    caption: '😉 Timber pergola shading and overhead beam work completed cleanly.',
+    date: 'MAY 26, 2026',
+    permalink: 'https://www.instagram.com/p/DYy0BrEgDX2/',
   },
   {
     id: 'ig-5',
-    images: ['/images/instagram/post-05.jpg', '/images/instagram/post-06.jpg'],
-    mediaType: 'reel',
-    likes: 50,
-    comments: 3,
-    caption:
-      'Nothing beats the feeling of a fresh, tangle-free coat! ✂️🫧 Warm hydro-bath, blueberry facial, and custom breed styling. 📍Polis, Paphos – Cyprus | 📞 99073343 #doggroomer #paphoscyprus #dogspa',
-    date: 'NOVEMBER 21, 2024',
-    permalink: 'https://www.instagram.com/p/DYPK8r8kftn/',
+    images: [
+      '/images/instagram/real-05-01.jpg',
+      '/images/instagram/real-05-02.jpg',
+      '/images/instagram/real-05-03.jpg',
+      '/images/instagram/real-05-04.jpg',
+      '/images/instagram/real-05-05.jpg',
+      '/images/instagram/real-05-06.jpg',
+    ],
+    mediaType: 'carousel',
+    likes: 2,
+    comments: 0,
+    caption: '😎 Exterior balcony facade repair & crisp weather-resistant paint finish.',
+    date: 'MAY 26, 2026',
+    permalink: 'https://www.instagram.com/p/DYytnRzAFNd/',
   },
   {
     id: 'ig-6',
-    images: ['/images/instagram/post-08.jpg', '/images/instagram/post-09.jpg'],
+    images: [
+      '/images/instagram/real-06-01.jpg',
+      '/images/instagram/real-06-02.jpg',
+      '/images/instagram/real-06-03.jpg',
+      '/images/instagram/real-06-04.jpg',
+      '/images/instagram/real-06-05.jpg',
+    ],
     mediaType: 'carousel',
-    likes: 69,
-    comments: 5,
-    caption:
-      'Soft, cloud-like fluff! ☁️🐶 Gentle undercoat removal and precision scissoring to keep this handsome boy looking his absolute best. #doggroomingbyjulia #pomeranianlove #groomingday #cypruslife',
-    date: 'NOVEMBER 14, 2024',
-    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+    likes: 4,
+    comments: 0,
+    caption: '😎 Custom-built horizontal timber privacy fence panels from framing to finish.',
+    date: 'MARCH 25, 2026',
+    permalink: 'https://www.instagram.com/p/DWTZSdPDFB_/',
   },
   {
     id: 'ig-7',
-    images: ['/images/instagram/post-10.jpg'],
-    mediaType: 'reel',
-    likes: 54,
-    comments: 4,
-    caption:
-      'Bath time bliss! 🛁🐾 Deep cleansing shampoo, coat mask, and warm towel wrap for our golden guest today. #doggroomingbyjulia #dogbath #goldenretriever #petcare #paphos',
-    date: 'NOVEMBER 5, 2024',
-    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+    images: [
+      '/images/before-after/before.jpg',
+      '/images/before-after/after.jpg',
+      '/images/services/plaster-prep.jpg',
+    ],
+    mediaType: 'carousel',
+    likes: 11,
+    comments: 2,
+    caption: 'Recessed ceiling water-damage repair, plaster skimming & bright perimeter lighting finish!',
+    date: 'MARCH 12, 2026',
+    permalink: 'https://www.instagram.com/paphos_handyman/',
   },
   {
     id: 'ig-8',
-    images: ['/images/instagram/post-03.jpg', '/images/instagram/post-01.jpg'],
+    images: [
+      '/images/services/deck-staining.jpg',
+      '/images/services/led-lighting.jpg',
+    ],
     mediaType: 'carousel',
-    likes: 76,
-    comments: 8,
-    caption:
-      'Best friends enjoying the sunshine right after a full grooming makeover! ✂️🐾 Send us a DM or call 99073343 to reserve your spot this week. #doggroomingbyjulia #petstylist #polischrysochous #paphos',
-    date: 'OCTOBER 28, 2024',
-    permalink: 'https://www.instagram.com/p/DdW5tJdAK-Z/',
+    likes: 9,
+    comments: 1,
+    caption: 'Balcony hardwood deck sanding & oil staining — protecting timber against the Paphos sun.',
+    date: 'FEBRUARY 28, 2026',
+    permalink: 'https://www.instagram.com/paphos_handyman/',
   },
   {
     id: 'ig-9',
-    images: ['/images/instagram/post-06.jpg'],
+    images: ['/images/services/led-lighting.jpg'],
     mediaType: 'photo',
-    likes: 62,
-    comments: 3,
-    caption:
-      'Little white cloud ready for the weekend! 🐾✨ Full hygiene trim, nail filing, and fluff dry. #doggroomingbyjulia #pomeranian #cyprusdogs',
-    date: 'OCTOBER 19, 2024',
-    permalink: 'https://www.instagram.com/p/DYPK8r8kftn/',
+    likes: 14,
+    comments: 1,
+    caption: 'Hexagonal LED ceiling grid & studio ambient lighting installed cleanly from scratch.',
+    date: 'FEBRUARY 14, 2026',
+    permalink: 'https://www.instagram.com/paphos_handyman/',
   },
   {
     id: 'ig-10',
-    images: ['/images/instagram/post-09.jpg'],
-    mediaType: 'reel',
-    likes: 48,
+    images: ['/images/services/feature-walls.jpg'],
+    mediaType: 'carousel',
+    likes: 12,
     comments: 2,
-    caption:
-      'Freshly groomed and posing like a pro! 📸🐶 Book your dog’s bath, haircut, or nail trim in Polis, Paphos. #doggroomingbyjulia #petgrooming #dogstyle',
-    date: 'OCTOBER 11, 2024',
-    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+    caption: 'Custom geometric black & gold feature wall + clean flatscreen TV mounting.',
+    date: 'JANUARY 30, 2026',
+    permalink: 'https://www.instagram.com/paphos_handyman/',
   },
   {
     id: 'ig-11',
-    images: ['/images/instagram/post-11.jpg'],
+    images: ['/images/services/upholstery-care.png'],
     mediaType: 'photo',
-    likes: 57,
-    comments: 4,
-    caption:
-      'Puppy’s first groom! Gentle introduction to the dryer, comb, and nail trimmers with lots of treats and patience. 🐾💛 #puppygroom #doggroomingbyjulia #paphos',
-    date: 'OCTOBER 3, 2024',
-    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+    likes: 8,
+    comments: 0,
+    caption: 'Tufted dining chair deep stain extraction & upholstery refresh.',
+    date: 'JANUARY 15, 2026',
+    permalink: 'https://www.instagram.com/paphos_handyman/',
   },
   {
     id: 'ig-12',
-    images: ['/images/instagram/post-12.jpg'],
+    images: ['/images/instagram/real-01-02.webp', '/images/instagram/real-06-05.jpg'],
     mediaType: 'carousel',
-    likes: 65,
-    comments: 5,
-    caption:
-      'Clean paws, shiny coat, and happy tail wags! 🐾✂️ Thank you to all our wonderful clients in Polis & Paphos. #doggroomingbyjulia #doglovers #petstylist',
-    date: 'SEPTEMBER 24, 2024',
-    permalink: 'https://www.instagram.com/doggroomingby_julia/',
+    likes: 10,
+    comments: 1,
+    caption: 'Clean timber joinery & outdoor residential handyman projects across Paphos, Cyprus.',
+    date: 'JANUARY 4, 2026',
+    permalink: 'https://www.instagram.com/paphos_handyman/',
   },
 ];
 
@@ -394,6 +343,18 @@ export function Home() {
   const [isWorkPaused, setIsWorkPaused] = useState(false);
   const [isMobileGallery, setIsMobileGallery] = useState(false);
   const workTouchStartXRef = useRef<number | null>(null);
+  const [beforeAfterPos, setBeforeAfterPos] = useState(50);
+  const [isDraggingBeforeAfter, setIsDraggingBeforeAfter] = useState(false);
+  const beforeAfterRef = useRef<HTMLDivElement>(null);
+
+  const updateBeforeAfterPosition = (clientX: number) => {
+    const el = beforeAfterRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.width <= 0) return;
+    const pct = ((clientX - rect.left) / rect.width) * 100;
+    setBeforeAfterPos(Math.max(4, Math.min(96, pct)));
+  };
 
   const goToWork = (dir: 1 | -1) => {
     setWorkIndex((prev) => (prev + dir + WORK_GALLERY.length) % WORK_GALLERY.length);
@@ -566,57 +527,60 @@ export function Home() {
   return (
     <>
       <Helmet>
-        <title>Emergency Plumber in Portland | SOLO Plumbing & Heating</title>
-        <meta name="description" content="The fastest, most reliable emergency plumbing line in Portland. Real dispatchers, real trucks stocked and ready." />
-        <script src="https://api.izadsystems.dev/js/form_embed.js" async></script>
+        <title>George Handyman Services | Handyman &amp; Home Repairs in Paphos</title>
+        <meta name="description" content="Trusted handyman, carpentry, ceiling &amp; drywall restoration, gates, fencing, painting, and home maintenance across Paphos, Cyprus. Call +357 99 233225." />
       </Helmet>
 
       {/* 6.1 Hero */}
-      <section className="relative w-full min-h-screen lg:min-h-[780px] flex items-start lg:items-end pt-[104px] lg:pt-[112px] pb-[40px] lg:pb-0">
-        <div className="absolute inset-0 z-0 overflow-hidden bg-[#1A1A1A]">
-          {/* Placeholder for documentary photo */}
-          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&q=80&w=2000" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale mix-blend-luminosity" alt="Emergency plumbing truck rushing to a call" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/90 to-[#1A1A1A]/20 bottom-0 h-full" />
+      <section className="relative w-full min-h-screen lg:min-h-[780px] flex items-start lg:items-end pt-[112px] lg:pt-[120px] pb-[48px] lg:pb-0 bg-[#111827]">
+        <div className="absolute inset-0 z-0 overflow-hidden bg-[#111827]">
+          <img
+            src="/images/hero-bg.jpg"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            alt="George Handyman Services crafting timber pergola in Paphos, Cyprus"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-black/25" />
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/55 to-transparent" />
         </div>
 
-        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 lg:px-8 pb-[60px] lg:pb-[90px] flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+        <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 lg:px-8 pb-[56px] lg:pb-[88px] flex flex-col lg:flex-row lg:items-end justify-between gap-12">
           <div className="max-w-[640px] flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 lg:pb-[48px]">
-            <h1 className="text-[32px] sm:text-[42px] lg:text-[54px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.05] tracking-[-0.01em]">
-              Water's rising{' '}
+            <h1 className="text-[32px] sm:text-[42px] lg:text-[54px] uppercase font-[800] text-white font-oswald leading-[1.05] tracking-[-0.01em] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
+              Quality Repairs{' '}
               <br />
-              We're already on the way
+              Built To Last
             </h1>
-            <p className="text-[17px] lg:text-[19px] text-[#F5F5F0]/85 max-w-[500px] mt-[20px] leading-[1.55]">
-              Fast, reliable plumbing help for homes and businesses across Portland. Call now to check availability or request service online.
+            <p className="text-[17px] lg:text-[19px] text-white/90 font-[600] max-w-[500px] mt-[20px] leading-[1.55] drop-shadow-[0_1px_4px_rgba(0,0,0,0.45)]">
+              Fast, dependable handyman &amp; property maintenance across Paphos, Cyprus. Call +357 99 233225 or request a free quote online.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-[28px] w-full sm:w-auto">
-              <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="bg-[#F2131A] text-white font-[800] px-8 py-4 rounded-[2px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-transparent hover:text-[#F2131A] border-2 border-[#F2131A] active:scale-[0.98] transition-all w-full sm:w-auto">
+              <a href="tel:+35799233225" className="bg-[#D94E0F] text-white font-[800] px-8 py-4 rounded-[4px] text-center flex items-center justify-center gap-2 uppercase tracking-wide hover:bg-[#B8400B] active:scale-[0.98] transition-all border-2 border-[#D94E0F] hover:border-[#B8400B] shadow-lg w-full sm:w-auto">
                 <Phone size={20} />
                 CALL NOW
               </a>
-              <Link to="/contact" className="border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] px-8 py-4 rounded-[2px] text-center uppercase tracking-wide hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors w-full sm:w-auto">
+              <Link to="/contact" className="border-2 border-white bg-white/95 text-[#111827] font-[800] px-8 py-4 rounded-[4px] text-center uppercase tracking-wide hover:bg-white transition-colors shadow-lg w-full sm:w-auto">
                 Get Free Quote
               </Link>
             </div>
           </div>
 
-          <div className="w-full max-w-[460px] mx-auto lg:mx-0 bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/10 rounded-[4px] p-6 lg:p-8 flex-shrink-0 lg:mr-16 xl:mr-32">
-            <h3 className="text-[24px] lg:text-[28px] text-center uppercase font-[800] text-[#1F46B4] font-oswald leading-none tracking-[0.02em] mb-7">
+          <div className="w-full max-w-[460px] mx-auto lg:mx-0 bg-white/95 backdrop-blur-md border border-black/10 rounded-[6px] p-6 lg:p-8 flex-shrink-0 lg:mr-16 xl:mr-32 shadow-[0_20px_50px_rgba(0,0,0,0.28)]">
+            <h3 className="text-[24px] lg:text-[28px] text-center uppercase font-[800] text-[#C2410C] font-oswald leading-none tracking-[0.02em] mb-7">
               GET A FREE QUOTE
             </h3>
             <form className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Full Name *</label>
-                <input type="text" placeholder="John Smith" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px]" required />
+                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Full Name *</label>
+                <input type="text" placeholder="Your full name" className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#EA580C] outline-none text-[15px]" required />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Phone *</label>
-                <input type="tel" placeholder="(808) 555-1234" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px]" required />
+                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Phone *</label>
+                <input type="tel" placeholder="+357 99 233225" className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#EA580C] outline-none text-[15px]" required />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">Short message about your needs *</label>
-                <textarea rows={3} placeholder="Your message goes straight to my phone, I'll get back to you as soon as I'm available" className="bg-[#242424] border border-white/5 rounded-[2px] p-3 text-[#F5F5F0] placeholder-[#F5F5F0]/30 focus:border-[#1F46B4] outline-none text-[15px] resize-none" required></textarea>
+                <label className="text-[12px] font-[800] tracking-[0.1em] uppercase text-[#111827]">Short message about your needs *</label>
+                <textarea rows={3} placeholder="Tell us what needs repairing or installing in Paphos" className="bg-[#F3F4F6] border border-black/10 rounded-[3px] p-3 text-[#111827] placeholder-[#6B7280] focus:border-[#EA580C] outline-none text-[15px] resize-none" required></textarea>
               </div>
               <div className="flex items-start gap-3 mt-1">
                 <div className="relative flex items-center mt-[2px] shrink-0">
@@ -624,7 +588,7 @@ export function Home() {
                     id="terms-consent"
                     type="checkbox"
                     required
-                    className="peer appearance-none w-4 h-4 rounded-[2px] bg-[#F5F5F0] border border-white/20 checked:bg-[#1F46B4] checked:border-[#1F46B4] cursor-pointer transition-colors"
+                    className="peer appearance-none w-4 h-4 rounded-[2px] bg-[#F3F4F6] border border-black/25 checked:bg-[#D94E0F] checked:border-[#D94E0F] cursor-pointer transition-colors"
                   />
                   <Check
                     size={12}
@@ -632,13 +596,13 @@ export function Home() {
                     className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
                   />
                 </div>
-                <label htmlFor="terms-consent" className="text-[12px] text-[#F5F5F0]/85 leading-[1.45] cursor-pointer select-none">
+                <label htmlFor="terms-consent" className="text-[12px] text-[#4B5563] leading-[1.45] cursor-pointer select-none">
                   I agree to{' '}
                   <Link
                     to="/terms"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#5C85F6] hover:text-[#82A3FA] underline underline-offset-2 transition-colors"
+                    className="text-[#C2410C] hover:text-[#9A3412] underline underline-offset-2 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
                     terms &amp; conditions
@@ -646,7 +610,7 @@ export function Home() {
                   provided by the company. By providing my phone number, I agree to receive text messages from the business.
                 </label>
               </div>
-              <button type="submit" className="mt-2 bg-[#1F46B4] text-white font-[800] py-4 rounded-[2px] text-[16px] uppercase tracking-wide hover:bg-[#183890] transition-colors w-full">
+              <button type="submit" className="mt-2 bg-[#D94E0F] text-white font-[800] py-4 rounded-[4px] text-[16px] uppercase tracking-wide hover:bg-[#B8400B] transition-colors w-full shadow-md cursor-pointer">
                 SEND
               </button>
             </form>
@@ -655,23 +619,23 @@ export function Home() {
       </section>
 
       {/* 6.2 About Us & Highlights */}
-      <section className="bg-[#0D0D0D] border-t border-white/5 pt-[64px] lg:pt-[96px] pb-[44px] lg:pb-[64px] px-4 lg:px-8">
+      <section className="bg-white border-t border-black/5 pt-[56px] lg:pt-[84px] pb-[44px] lg:pb-[64px] px-4 lg:px-8">
         <div className="max-w-[1280px] mx-auto">
           <div className="grid grid-cols-2 lg:flex lg:justify-between lg:items-center gap-6 lg:gap-8">
-            <div className="flex items-center gap-2.5 text-[#F5F5F0]">
-              <MapPin size={20} className="shrink-0 text-[#F5F5F0]" />
+            <div className="flex items-center gap-2.5 text-[#111827]">
+              <MapPin size={20} className="shrink-0 text-[#D94E0F]" />
               <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">100% LOCAL</span>
             </div>
-            <div className="flex items-center gap-2.5 text-[#F5F5F0]">
-              <Clock size={20} className="shrink-0 text-[#F5F5F0]" />
+            <div className="flex items-center gap-2.5 text-[#111827]">
+              <Clock size={20} className="shrink-0 text-[#D94E0F]" />
               <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">10+ YEARS EXPERIENCE</span>
             </div>
-            <div className="flex items-center gap-2.5 text-[#F5F5F0]">
-              <ShieldCheck size={20} className="shrink-0 text-[#F5F5F0]" />
+            <div className="flex items-center gap-2.5 text-[#111827]">
+              <ShieldCheck size={20} className="shrink-0 text-[#D94E0F]" />
               <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">INSURED</span>
             </div>
-            <div className="flex items-center gap-2.5 text-[#F5F5F0]">
-              <Award size={20} className="shrink-0 text-[#F5F5F0]" />
+            <div className="flex items-center gap-2.5 text-[#111827]">
+              <Award size={20} className="shrink-0 text-[#D94E0F]" />
               <span className="text-[13px] sm:text-[14px] lg:text-[15px] font-[800] uppercase tracking-[0.04em]">HIGH QUALITY</span>
             </div>
           </div>
@@ -679,13 +643,13 @@ export function Home() {
           <div className="mt-14 lg:mt-20 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-16 items-center">
             <div className="flex flex-col">
               <div className="flex items-center gap-5 mb-5">
-                <h2 className="text-[32px] lg:text-[44px] font-[800] uppercase text-[#F5F5F0] leading-none tracking-[-0.01em] shrink-0">
+                <h2 className="text-[32px] lg:text-[44px] font-[800] uppercase text-[#111827] leading-none tracking-[-0.01em] shrink-0">
                   ABOUT US
                 </h2>
-                <div className="h-[2px] flex-grow bg-[#1F46B4]/60" />
+                <div className="h-[2px] flex-grow bg-[#D94E0F]/60" />
               </div>
-              <p className="text-[16px] lg:text-[17px] text-[#F5F5F0]/80 leading-[1.65] max-w-[540px]">
-                SOLO Plumbing &amp; Heating is your local go-to for all things plumbing and heating. We're a quality-driven, licensed and insured crew solving tough plumbing problems across Portland—one home at a time.
+              <p className="text-[16px] lg:text-[17px] text-[#4B5563] font-[600] leading-[1.65] max-w-[540px]">
+                George Handyman Services is your trusted local choice in Paphos, Cyprus for reliable repairs and home improvements—from custom gates, fencing, and pergolas to ceiling restoration, lighting, painting, and everyday maintenance.
               </p>
               <div className="mt-7 flex items-center gap-5">
                 <a
@@ -761,26 +725,26 @@ export function Home() {
       </section>
 
       {/* 6.3 Our Services */}
-      <section className="bg-[#0D0D0D] pt-[28px] lg:pt-[40px] pb-[70px] lg:pb-[100px] px-4 lg:px-8">
+      <section className="bg-[#F8FAFC] border-t border-black/5 pt-[44px] lg:pt-[64px] pb-[70px] lg:pb-[100px] px-4 lg:px-8">
         <div className="max-w-[1280px] mx-auto">
           <div className="flex items-end gap-5 sm:gap-6 mb-7 lg:mb-9">
             <div className="inline-flex flex-col items-start sm:items-center shrink-0">
-              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#F5F5F0] mb-1.5">
+              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#D94E0F] mb-1.5">
                 WHAT WE ARE BEST AT
               </span>
-              <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-none tracking-[-0.01em]">
+              <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-none tracking-[-0.01em]">
                 OUR SERVICES
               </h2>
             </div>
-            <div className="h-[2px] flex-grow bg-[#1F46B4]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
+            <div className="h-[2px] flex-grow bg-[#D94E0F]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2px] bg-[#262626] border border-white/15">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[3px] bg-[#E5E7EB] border border-black/10 rounded-[4px] overflow-hidden shadow-sm">
             {SERVICE_TILES.map((service) => (
               <Link
                 key={service.title}
                 to={service.to}
-                className="group relative aspect-[4/3] overflow-hidden bg-[#1A1A1A] block"
+                className="group relative aspect-[4/3] overflow-hidden bg-[#E5E7EB] block"
               >
                 <img
                   src={service.image}
@@ -794,7 +758,7 @@ export function Home() {
                     <span className="text-[12px] sm:text-[13px] lg:text-[14px] font-[800] uppercase tracking-[0.03em] text-[#FFFFFF] leading-none">
                       {service.title}
                     </span>
-                    <span className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] rounded-full bg-[#1F46B4] flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:translate-x-0.5">
+                    <span className="w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] rounded-full bg-[#D94E0F] flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:translate-x-0.5">
                       <ArrowRight size={13} strokeWidth={3} className="text-white" />
                     </span>
                   </div>
@@ -814,16 +778,116 @@ export function Home() {
         </div>
       </section>
 
+      {/* 6.35 Before & After Results Slider */}
+      <section className="bg-white py-[52px] lg:py-[80px] px-4 lg:px-8 border-t border-black/5">
+        <div className="max-w-[1160px] mx-auto grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-10 lg:gap-14 items-center">
+          {/* Interactive Before / After Slider */}
+          <div
+            ref={beforeAfterRef}
+            onPointerDown={(e) => {
+              setIsDraggingBeforeAfter(true);
+              e.currentTarget.setPointerCapture(e.pointerId);
+              updateBeforeAfterPosition(e.clientX);
+            }}
+            onPointerMove={(e) => {
+              if (!isDraggingBeforeAfter) return;
+              updateBeforeAfterPosition(e.clientX);
+            }}
+            onPointerUp={() => setIsDraggingBeforeAfter(false)}
+            onPointerCancel={() => setIsDraggingBeforeAfter(false)}
+            className="group relative w-full aspect-[20/11] rounded-[12px] overflow-hidden bg-[#F3F4F6] shadow-[0_20px_45px_rgba(15,23,42,0.14)] select-none touch-none cursor-ew-resize border border-black/10"
+          >
+            {/* After Image (Full Base Layer) */}
+            <img
+              src="/images/before-after/after.jpg"
+              alt="Custom matte black and gold geometric office feature wall and TV mounting by George Handyman Services"
+              draggable={false}
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+            />
+
+            {/* Before Image (Clipped Left Layer) */}
+            <div
+              className="absolute inset-0 pointer-events-none select-none"
+              style={{ clipPath: `inset(0 ${100 - beforeAfterPos}% 0 0)` }}
+            >
+              <img
+                src="/images/before-after/before.jpg"
+                alt="Plain white office wall before painting, accent wall finish, and TV installation"
+                draggable={false}
+                className="w-full h-full object-cover pointer-events-none select-none"
+              />
+            </div>
+
+            {/* Top Left BEFORE Badge & Top Right AFTER Badge */}
+            <span className="absolute top-3.5 left-3.5 z-10 bg-black/75 backdrop-blur-sm text-white text-[11px] font-[800] uppercase tracking-[0.06em] px-2.5 py-1 rounded-[4px] pointer-events-none">
+              BEFORE
+            </span>
+            <span className="absolute top-3.5 right-3.5 z-10 bg-black/75 backdrop-blur-sm text-white text-[11px] font-[800] uppercase tracking-[0.06em] px-2.5 py-1 rounded-[4px] pointer-events-none">
+              AFTER
+            </span>
+
+            {/* Vertical Split Line + Center Handle */}
+            <div
+              className="absolute inset-y-0 z-20 pointer-events-none"
+              style={{ left: `${beforeAfterPos}%`, transform: 'translateX(-50%)' }}
+            >
+              <div className="h-full w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.65)] mx-auto" />
+              <div
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40px] h-[40px] rounded-full bg-[#D94E0F] border-2 border-white shadow-[0_4px_14px_rgba(0,0,0,0.45)] flex items-center justify-center text-white transition-transform duration-150 ${
+                  isDraggingBeforeAfter ? 'scale-110 ring-4 ring-[#D94E0F]/30' : 'group-hover:scale-105'
+                }`}
+              >
+                <ChevronLeft size={14} strokeWidth={3} className="-mr-0.5" />
+                <ChevronRight size={14} strokeWidth={3} className="-ml-0.5" />
+              </div>
+            </div>
+
+            {/* Keyboard Accessible Range Slider */}
+            <input
+              type="range"
+              min={4}
+              max={96}
+              value={Math.round(beforeAfterPos)}
+              onChange={(e) => setBeforeAfterPos(Number(e.target.value))}
+              aria-label="Compare office feature wall and TV installation before and after"
+              className="sr-only"
+            />
+          </div>
+
+          {/* Right Column Text & CTA */}
+          <div className="flex flex-col items-start">
+            <span className="text-[12px] sm:text-[13px] font-[800] uppercase tracking-[0.12em] text-[#D94E0F] mb-3">
+              OUR RESULTS
+            </span>
+            <h2 className="text-[32px] sm:text-[40px] lg:text-[44px] font-[800] text-[#111827] leading-[1.08] tracking-[-0.01em] mb-5">
+              See the Difference for Yourself.
+            </h2>
+            <p className="text-[16px] lg:text-[17px] text-[#4B5563] font-[600] leading-[1.65] max-w-[490px] mb-4">
+              From water-damaged ceilings and plaster restoration to custom gates, decking, LED lighting, and complete property refreshes—see the quality finish we bring to every Paphos home.
+            </p>
+            <p className="text-[13px] font-[600] text-[#6B7280] mb-7">
+              Move the slider to compare the before and after results.
+            </p>
+            <Link
+              to="/contact"
+              className="bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[14px] px-7 py-3.5 rounded-[5px] transition-colors inline-flex items-center gap-2 shadow-lg"
+            >
+              Get Your Free Quote <ArrowRight size={16} strokeWidth={2.6} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 6.4 Our Process */}
-      <section className="bg-[#0D0D0D] pt-[12px] lg:pt-[20px] pb-[76px] lg:pb-[108px] px-4 lg:px-8">
+      <section className="bg-[#F8FAFC] border-t border-black/5 pt-[52px] lg:pt-[68px] pb-[76px] lg:pb-[108px] px-4 lg:px-8">
         <div className="max-w-[1280px] mx-auto">
           <div className="flex items-center gap-5 sm:gap-6">
-            <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-none tracking-[-0.01em] shrink-0">
+            <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-none tracking-[-0.01em] shrink-0">
               OUR PROCESS
             </h2>
-            <div className="h-[2px] flex-grow bg-[#1F46B4]/60" />
+            <div className="h-[2px] flex-grow bg-[#D94E0F]/60" />
           </div>
-          <p className="text-[15px] lg:text-[16px] text-[#F5F5F0]/80 mt-2.5 leading-[1.5]">
+          <p className="text-[15px] lg:text-[16px] text-[#4B5563] font-[600] mt-2.5 leading-[1.5]">
             Our process is simple and only contains a few simple steps
           </p>
 
@@ -831,7 +895,7 @@ export function Home() {
             {/* Step 1: Free Consult */}
             <div className="flex flex-col items-center text-center w-[156px] sm:w-[180px] lg:w-auto">
               <div className="flex flex-col items-center">
-                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white flex items-center justify-center shadow-lg">
+                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.1)]">
                   <svg viewBox="0 0 64 64" className="w-[92px] h-[92px] xl:w-[102px] xl:h-[102px]" fill="none" stroke="#111111" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     {/* Left chair */}
                     <path d="M7.5 23 L10.5 39 H22.5" />
@@ -853,10 +917,10 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#FFFFFF" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
                 </svg>
               </div>
-              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#F5F5F0] leading-[1.3]">
+              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
                 Free Consult
               </span>
             </div>
@@ -864,7 +928,7 @@ export function Home() {
             {/* Step 2: Estimation & Proposal */}
             <div className="flex flex-col items-center text-center w-[156px] sm:w-[180px] lg:w-auto">
               <div className="flex flex-col items-center">
-                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white flex items-center justify-center shadow-lg">
+                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.1)]">
                   <svg viewBox="0 0 64 64" className="w-[92px] h-[92px] xl:w-[102px] xl:h-[102px]" fill="none" stroke="#111111" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <rect x="13" y="10" width="25" height="36" rx="2.5" />
                     <path d="M18 16.5 H33" />
@@ -884,10 +948,10 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#FFFFFF" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
                 </svg>
               </div>
-              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#F5F5F0] leading-[1.3]">
+              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
                 Estimation &amp;
                 <br />
                 Proposal
@@ -897,7 +961,7 @@ export function Home() {
             {/* Step 3: We do the work */}
             <div className="flex flex-col items-center text-center w-[156px] sm:w-[180px] lg:w-auto">
               <div className="flex flex-col items-center">
-                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white flex items-center justify-center shadow-lg">
+                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.1)]">
                   <svg viewBox="0 0 64 64" className="w-[92px] h-[92px] xl:w-[102px] xl:h-[102px]" fill="none" stroke="#111111" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M35.2 26.1 Q35.5 26.9 36.4 27.1 L38.6 27.4 Q39.5 27.5 39.5 28.4 L39.5 30.6 Q39.5 31.5 38.6 31.6 L36.4 31.9 Q35.5 32.1 35.2 32.9 L34.3 35.0 Q34.0 35.8 34.5 36.5 L35.8 38.3 Q36.3 39.1 35.7 39.7 L34.2 41.2 Q33.6 41.8 32.8 41.3 L31.0 40.0 Q30.3 39.5 29.5 39.8 L27.4 40.7 Q26.6 41.0 26.4 41.9 L26.1 44.1 Q26.0 45.0 25.1 45.0 L22.9 45.0 Q22.0 45.0 21.9 44.1 L21.6 41.9 Q21.4 41.0 20.6 40.7 L18.5 39.8 Q17.7 39.5 17.0 40.0 L15.2 41.3 Q14.4 41.8 13.8 41.2 L12.3 39.7 Q11.7 39.1 12.2 38.3 L13.5 36.5 Q14.0 35.8 13.7 35.0 L12.8 32.9 Q12.5 32.1 11.6 31.9 L9.4 31.6 Q8.5 31.5 8.5 30.6 L8.5 28.4 Q8.5 27.5 9.4 27.4 L11.6 27.1 Q12.5 26.9 12.8 26.1 L13.7 24.0 Q14.0 23.2 13.5 22.5 L12.2 20.7 Q11.7 19.9 12.3 19.3 L13.8 17.8 Q14.4 17.2 15.2 17.7 L17.0 19.0 Q17.7 19.5 18.5 19.2 L20.6 18.3 Q21.4 18.0 21.6 17.1 L21.9 14.9 Q22.0 14.0 22.9 14.0 L25.1 14.0 Q26.0 14.0 26.1 14.9 L26.4 17.1 Q26.6 18.0 27.4 18.3 L29.5 19.2 Q30.3 19.5 31.0 19.0 L32.8 17.7 Q33.6 17.2 34.2 17.8 L35.7 19.3 Q36.3 19.9 35.8 20.7 L34.5 22.5 Q34.0 23.2 34.3 24.0 Z" fill="#FFFFFF" />
                     <circle cx="24" cy="29.5" r="8.2" />
@@ -909,10 +973,10 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#FFFFFF" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
                 </svg>
               </div>
-              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#F5F5F0] leading-[1.3]">
+              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
                 We do
                 <br />
                 the work
@@ -922,7 +986,7 @@ export function Home() {
             {/* Step 4: Final Inspection */}
             <div className="flex flex-col items-center text-center w-[156px] sm:w-[180px] lg:w-auto">
               <div className="flex flex-col items-center">
-                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white flex items-center justify-center shadow-lg">
+                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.1)]">
                   <svg viewBox="0 0 64 64" className="w-[92px] h-[92px] xl:w-[102px] xl:h-[102px]" fill="none" stroke="#111111" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <rect x="22" y="10" width="25" height="36" rx="2.5" fill="#FFFFFF" />
                     <path d="M31 17.5 H42" />
@@ -937,10 +1001,10 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#FFFFFF" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
                 </svg>
               </div>
-              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#F5F5F0] leading-[1.3]">
+              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
                 Final
                 <br />
                 Inspection
@@ -950,7 +1014,7 @@ export function Home() {
             {/* Step 5: Payment */}
             <div className="flex flex-col items-center text-center w-[156px] sm:w-[180px] lg:w-auto">
               <div className="flex flex-col items-center">
-                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white flex items-center justify-center shadow-lg">
+                <div className="w-[144px] h-[144px] xl:w-[160px] xl:h-[160px] rounded-full bg-white border border-black/10 flex items-center justify-center shadow-[0_12px_28px_rgba(15,23,42,0.1)]">
                   <svg viewBox="0 0 64 64" className="w-[92px] h-[92px] xl:w-[102px] xl:h-[102px]" fill="none" stroke="#111111" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     {/* Dollar coin tucked behind upper hands */}
                     <circle cx="32" cy="18.5" r="8" fill="#FFFFFF" />
@@ -982,10 +1046,10 @@ export function Home() {
                   </svg>
                 </div>
                 <svg viewBox="0 0 32 28" className="w-[28px] h-[24px] -mt-[3px]" aria-hidden="true">
-                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#FFFFFF" />
+                  <path d="M2 0 L14.7 12.5 V28 H17.3 V12.5 L30 0 Z" fill="#D94E0F" />
                 </svg>
               </div>
-              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#F5F5F0] leading-[1.3]">
+              <span className="mt-2.5 text-[15px] lg:text-[16px] font-[800] text-[#111827] leading-[1.3]">
                 Payment
               </span>
             </div>
@@ -994,19 +1058,19 @@ export function Home() {
       </section>
 
       {/* 6.45 See Our Work */}
-      <section className="bg-[#0D0D0D] pt-[24px] lg:pt-[40px] pb-10 sm:pb-12 lg:pb-14 overflow-hidden">
+      <section className="bg-white border-t border-black/5 pt-[48px] lg:pt-[64px] pb-10 sm:pb-12 lg:pb-14 overflow-hidden">
         {/* Left-Aligned Header (matches Our Services / Our Process) */}
         <div className="max-w-[1344px] mx-auto px-4 lg:px-8">
           <div className="flex items-end gap-5 sm:gap-6">
             <div className="inline-flex flex-col items-start sm:items-center shrink-0">
-              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#F5F5F0] mb-1.5">
+              <span className="text-[12px] sm:text-[13px] font-[800] tracking-[0.08em] uppercase text-[#D94E0F] mb-1.5">
                 VIEW OUR WORK
               </span>
-              <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-none tracking-[-0.01em]">
+              <h2 className="text-[32px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-none tracking-[-0.01em]">
                 OUR PROJECT GALLERY
               </h2>
             </div>
-            <div className="h-[2px] flex-grow bg-[#1F46B4]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
+            <div className="h-[2px] flex-grow bg-[#D94E0F]/60 mb-[15px] sm:mb-[18px] lg:mb-[22px]" />
           </div>
         </div>
 
@@ -1060,17 +1124,17 @@ export function Home() {
             type="button"
             onClick={() => goToWork(-1)}
             aria-label="Previous project"
-            className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-40 w-10 h-14 flex items-center justify-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] hover:scale-110 transition-transform cursor-pointer"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-[#111827] border border-black/10 shadow-lg flex items-center justify-center hover:scale-110 transition-all cursor-pointer"
           >
-            <ChevronLeft size={40} strokeWidth={1.75} />
+            <ChevronLeft size={28} strokeWidth={2} />
           </button>
           <button
             type="button"
             onClick={() => goToWork(1)}
             aria-label="Next project"
-            className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-40 w-10 h-14 flex items-center justify-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] hover:scale-110 transition-transform cursor-pointer"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-40 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-[#111827] border border-black/10 shadow-lg flex items-center justify-center hover:scale-110 transition-all cursor-pointer"
           >
-            <ChevronRight size={40} strokeWidth={1.75} />
+            <ChevronRight size={28} strokeWidth={2} />
           </button>
         </div>
 
@@ -1079,11 +1143,11 @@ export function Home() {
           <button
             type="button"
             onClick={() => setLightboxIndex(workIndex)}
-            className="bg-[#1F46B4] hover:bg-[#183890] text-white font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-6 sm:px-7 py-3 sm:py-3.5 rounded-[4px] inline-flex items-center gap-2 shadow-[0_6px_18px_rgba(31,70,180,0.35)] transition-colors cursor-pointer"
+            className="bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-6 sm:px-7 py-3 sm:py-3.5 rounded-[4px] inline-flex items-center gap-2 shadow-[0_6px_18px_rgba(217,78,15,0.35)] transition-colors cursor-pointer"
           >
             VIEW MORE PROJECTS
             <span className="w-[16px] h-[16px] rounded-full bg-white flex items-center justify-center">
-              <ArrowRight size={11} strokeWidth={3.2} className="text-[#1F46B4]" />
+              <ArrowRight size={11} strokeWidth={3.2} className="text-[#D94E0F]" />
             </span>
           </button>
         </div>
@@ -1150,14 +1214,14 @@ export function Home() {
       )}
 
       {/* 6.48 Reviews */}
-      <section className="relative overflow-hidden bg-[#1A1A1A] -mt-[1px]">
+      <section className="relative overflow-hidden bg-white -mt-[1px]">
         <img
           src="/images/reviews-bg.jpg"
-          alt="Custom residential plumbing and freestanding bath installation"
+          alt="Modern renovated home interior with custom carpentry and recessed ceiling lighting"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/30 to-black/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/60" />
 
         {/* Top Organic Wave Transition from See Our Work */}
         <div className="relative z-10 w-full leading-none pointer-events-none">
@@ -1169,7 +1233,7 @@ export function Home() {
           >
             <path
               d="M0,0 L0,10 C130,20 320,108 525,108 C700,108 810,36 965,36 C1085,36 1150,92 1245,92 C1335,92 1395,50 1440,22 L1440,0 Z"
-              fill="#0D0D0D"
+              fill="#FFFFFF"
             />
           </svg>
         </div>
@@ -1185,14 +1249,14 @@ export function Home() {
                 REVIEWS
               </h2>
 
-              <div className="hidden sm:block h-[2px] flex-grow bg-[#1F46B4]/85" />
+              <div className="hidden sm:block h-[2px] flex-grow bg-[#D94E0F]/85" />
 
               <Link
                 to="/contact"
                 className="bg-white hover:bg-[#F5F5F0] text-[#0D0D0D] font-[800] text-[12px] sm:text-[13px] uppercase tracking-[0.04em] px-4 sm:px-6 py-3 sm:py-3.5 rounded-[6px] inline-flex items-center gap-2 shrink-0 shadow-lg transition-colors"
               >
                 CONTACT US NOW
-                <ArrowRight size={15} strokeWidth={2.8} className="text-[#1F46B4]" />
+                <ArrowRight size={15} strokeWidth={2.8} className="text-[#D94E0F]" />
               </Link>
             </div>
           </div>
@@ -1238,7 +1302,7 @@ export function Home() {
                               [review.author]: !prev[review.author],
                             }))
                           }
-                          className="text-[#1F46B4] hover:underline font-[700] ml-1.5 cursor-pointer"
+                          className="text-[#D94E0F] hover:underline font-[700] ml-1.5 cursor-pointer"
                         >
                           {isExpanded ? 'Less' : 'More'}
                         </button>
@@ -1308,17 +1372,39 @@ export function Home() {
               REVIEW US ON GOOGLE
             </h3>
 
-            <div className="flex items-center justify-center gap-1.5 my-4 text-[#FBBF24]" aria-label="5 stars">
-              {[0, 1, 2, 3, 4].map((s) => (
-                <svg key={s} viewBox="0 0 24 24" className="w-[26px] h-[26px] fill-current" aria-hidden="true">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              ))}
+            <div className="flex items-center justify-center gap-1.5 my-4 text-[#FBBF24]" aria-label="Rate us 1 to 5 stars">
+              {[1, 2, 3, 4, 5].map((star) =>
+                star >= 4 ? (
+                  <a
+                    key={star}
+                    href={GOOGLE_MAPS_REVIEW_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Rate ${star} stars on Google`}
+                    className="hover:scale-110 transition-transform"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-[26px] h-[26px] fill-current" aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  </a>
+                ) : (
+                  <Link
+                    key={star}
+                    to={`/leave-review?rating=${star}`}
+                    aria-label={`Rate ${star} stars`}
+                    className="hover:scale-110 transition-transform"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-[26px] h-[26px] fill-current" aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  </Link>
+                )
+              )}
             </div>
 
             <Link
               to="/leave-review"
-              className="bg-[#1F46B4] hover:bg-[#183890] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-[0.04em] px-8 sm:px-10 py-3.5 rounded-[5px] transition-colors shadow-md inline-block"
+              className="bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-[0.04em] px-8 sm:px-10 py-3.5 rounded-[5px] transition-colors shadow-md inline-block"
             >
               LEAVE US A REVIEW
             </Link>
@@ -1335,25 +1421,25 @@ export function Home() {
           >
             <path
               d="M0,24 C130,28 250,96 400,96 C555,96 665,12 815,12 C985,12 1185,122 1440,126 L1440,200 L0,200 Z"
-              fill="#0D0D0D"
+              fill="#FFFFFF"
             />
           </svg>
         </div>
       </section>
 
       {/* 6.49 Frequently Asked Questions */}
-      <section className="bg-[#0D0D0D] -mt-[1px] pt-[20px] lg:pt-[36px] pb-[84px] lg:pb-[116px] px-4 lg:px-8">
+      <section className="bg-white -mt-[1px] pt-[24px] lg:pt-[40px] pb-[84px] lg:pb-[116px] px-4 lg:px-8">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-[1.32fr_0.68fr] gap-10 lg:gap-14 items-start">
           <div>
-            <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] font-[800] text-[#F5F5F0] leading-[1.1] tracking-[-0.01em] mb-6 lg:mb-8">
+            <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] font-[800] text-[#111827] leading-[1.1] tracking-[-0.01em] mb-6 lg:mb-8">
               Frequently Asked Questions
             </h2>
 
-            <div className="border-t border-white/15">
+            <div className="border-t border-black/15">
               {HOME_FAQS.map((faq, i) => {
                 const isOpen = openFaq === i;
                 return (
-                  <div key={faq.q} className="border-b border-white/15">
+                  <div key={faq.q} className="border-b border-black/15">
                     <button
                       type="button"
                       className="w-full text-left py-5 sm:py-6 flex items-center gap-3.5 cursor-pointer group"
@@ -1363,15 +1449,15 @@ export function Home() {
                       <ChevronDown
                         size={17}
                         strokeWidth={2.6}
-                        className={`text-[#F5F5F0] shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
+                        className={`text-[#111827] shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
                           }`}
                       />
-                      <span className="text-[16px] sm:text-[18px] lg:text-[19px] font-[800] text-[#F5F5F0] group-hover:text-white leading-[1.4] transition-colors">
+                      <span className="text-[16px] sm:text-[18px] lg:text-[19px] font-[800] text-[#111827] group-hover:text-[#D94E0F] leading-[1.4] transition-colors">
                         {faq.q}
                       </span>
                     </button>
                     {isOpen && (
-                      <div className="pb-5 pl-[30px] pr-4 text-[15px] sm:text-[16px] text-[#F5F5F0]/80 leading-[1.65]">
+                      <div className="pb-5 pl-[30px] pr-4 text-[15px] sm:text-[16px] text-[#4B5563] font-[600] leading-[1.65]">
                         {faq.a}
                       </div>
                     )}
@@ -1382,10 +1468,10 @@ export function Home() {
           </div>
 
           <div className="w-full lg:mt-3">
-            <div className="rounded-[6px] sm:rounded-[8px] overflow-hidden bg-[#1A1A1A] shadow-2xl aspect-[4/3] lg:aspect-[1.05/1]">
+            <div className="rounded-[8px] overflow-hidden bg-[#F3F4F6] border border-black/10 shadow-xl aspect-[4/3] lg:aspect-[1.05/1]">
               <img
-                src="/images/work/work-02.jpg"
-                alt="Completed SOLO Plumbing & Heating bathroom installation"
+                src="/images/work/work-2.jpg"
+                alt="Completed LED ceiling lighting installation by George Handyman Services in Paphos"
                 loading="lazy"
                 className="w-full h-full object-cover"
               />
@@ -1395,38 +1481,43 @@ export function Home() {
       </section>
 
       {/* 6.495 Proudly Serving These Areas */}
-      <section className="bg-[#0D0D0D] border-t border-white/15 pt-[48px] lg:pt-[64px]">
+      <section className="bg-[#F8FAFC] border-t border-black/10 pt-[48px] lg:pt-[64px] pb-[48px] lg:pb-[64px]">
         <div className="max-w-[1344px] mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-[1.06fr_0.94fr] gap-10 lg:gap-14 items-start">
           {/* Interactive Map + Business Place Card */}
-          <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[470px] bg-[#1A1A1A] overflow-hidden shadow-2xl">
+          <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[470px] bg-[#E5E7EB] rounded-[8px] border border-black/10 overflow-hidden shadow-lg">
             <iframe
-              title="SOLO Plumbing & Heating Service Area Map — Greater Portland"
-              src="https://maps.google.com/maps?q=Portland,+OR&t=&z=8&ie=UTF8&iwloc=&output=embed"
+              title="Paphos handyman services Service Area Map — Paphos, Cyprus"
+              src="https://maps.google.com/maps?q=Paphos,+Cyprus&t=&z=12&ie=UTF8&iwloc=&output=embed"
               className="w-full h-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
 
             {/* Google Maps Business Info Card Overlay */}
-            <div className="absolute top-[10px] left-[10px] z-10 bg-white rounded-[2px] shadow-[0_1px_4px_rgba(0,0,0,0.3)] px-3.5 py-2.5 min-w-[215px] text-left">
+            <div className="absolute top-[10px] left-[10px] z-10 bg-white rounded-[2px] shadow-[0_1px_4px_rgba(0,0,0,0.3)] px-3.5 py-2.5 min-w-[225px] text-left">
               <div className="text-[14px] font-[700] text-[#202124] leading-tight">
-                SOLO Plumbing &amp; Heating
+                Paphos handyman services
               </div>
               <div className="mt-1 flex items-center gap-1 text-[12px]">
-                <span className="text-[#70757a] font-[700]">4.9</span>
-                <div className="flex items-center text-[#fbbc04]" aria-label="4.9 out of 5 stars">
+                <span className="text-[#70757a] font-[700]">5.0</span>
+                <div className="flex items-center text-[#fbbc04]" aria-label="5.0 out of 5 stars">
                   {[0, 1, 2, 3, 4].map((s) => (
                     <svg key={s} viewBox="0 0 24 24" className="w-[13px] h-[13px] fill-current" aria-hidden="true">
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                     </svg>
                   ))}
                 </div>
-                <Link to="/leave-review" className="text-[#1a73e8] hover:underline font-[700] ml-0.5">
-                  147 reviews
-                </Link>
+                <a
+                  href={GOOGLE_MAPS_REVIEW_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#1a73e8] hover:underline font-[700] ml-0.5"
+                >
+                  8 reviews
+                </a>
               </div>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=SOLO+Plumbing+%26+Heating+Portland+OR"
+                href={GOOGLE_MAPS_REVIEW_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-1.5 inline-block text-[12px] text-[#1a73e8] hover:underline font-[700]"
@@ -1438,7 +1529,7 @@ export function Home() {
 
           {/* Areas Column */}
           <div className="lg:pt-2">
-            <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-[1.08] tracking-[-0.01em] mb-8 lg:mb-10">
+            <h2 className="text-[32px] sm:text-[40px] lg:text-[46px] uppercase font-[800] text-[#111827] leading-[1.08] tracking-[-0.01em] mb-8 lg:mb-10">
               PROUDLY SERVING
               <br />
               THESE AREAS
@@ -1449,7 +1540,7 @@ export function Home() {
                 <Link
                   key={area.name}
                   to={area.to}
-                  className="text-[17px] sm:text-[19px] lg:text-[20px] font-[700] text-[#F5F5F0] hover:text-[#5C85F6] transition-colors leading-snug"
+                  className="text-[17px] sm:text-[19px] lg:text-[20px] font-[700] text-[#111827] hover:text-[#D94E0F] transition-colors leading-snug"
                 >
                   {area.name}
                 </Link>
@@ -1460,27 +1551,27 @@ export function Home() {
       </section>
 
       {/* 6.498 Follow Us on Instagram */}
-      <section className="bg-[#0D0D0D] pt-[56px] lg:pt-[76px] pb-[28px] lg:pb-[40px]">
+      <section className="bg-white border-t border-black/5 pt-[56px] lg:pt-[76px] pb-[28px] lg:pb-[40px]">
         <div className="max-w-[1040px] mx-auto px-4 lg:px-8">
           {/* Centered Section Header */}
           <div className="text-center mb-8 sm:mb-10">
-            <span className="block text-[14px] sm:text-[15px] font-[700] uppercase tracking-[0.06em] text-[#5C85F6] mb-1.5">
+            <span className="block text-[14px] sm:text-[15px] font-[800] uppercase tracking-[0.06em] text-[#D94E0F] mb-1.5">
               INSTAGRAM
             </span>
-            <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] uppercase font-[800] text-[#F5F5F0] leading-[1.08] tracking-[-0.01em]">
+            <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] uppercase font-[800] text-[#111827] leading-[1.08] tracking-[-0.01em]">
               FOLLOW US ON INSTAGRAM
             </h2>
           </div>
 
           {/* 4x2 Square Post Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px] bg-[#1A1A1A]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] bg-[#E5E7EB] border border-black/10 rounded-[4px] overflow-hidden shadow-sm">
             {INSTAGRAM_POSTS.slice(0, visibleIgCount).map((post, idx) => (
               <button
                 key={post.id}
                 type="button"
                 onClick={() => setActiveIgPostIndex(idx)}
                 aria-label={`Open Instagram post ${idx + 1} by @${INSTAGRAM_USERNAME}`}
-                className="group relative aspect-square w-full overflow-hidden bg-[#141414] p-0 text-left cursor-pointer focus:outline-none"
+                className="group relative aspect-square w-full overflow-hidden bg-[#F3F4F6] p-0 text-left cursor-pointer focus:outline-none"
               >
                 <img
                   src={post.images[0]}
@@ -1536,7 +1627,7 @@ export function Home() {
               <button
                 type="button"
                 onClick={() => setVisibleIgCount(INSTAGRAM_POSTS.length)}
-                className="bg-[#1F46B4] hover:bg-[#183890] text-white text-[13px] font-[700] px-14 py-2.5 rounded-[4px] transition-colors shadow-md cursor-pointer"
+                className="bg-[#D94E0F] hover:bg-[#B8400B] text-white text-[13px] font-[700] px-14 py-2.5 rounded-[4px] transition-colors shadow-md cursor-pointer"
               >
                 Load more
               </button>
@@ -1545,7 +1636,7 @@ export function Home() {
                 href={INSTAGRAM_PROFILE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#1F46B4] hover:bg-[#183890] text-white text-[13px] font-[700] px-10 py-2.5 rounded-[4px] transition-colors shadow-md inline-flex items-center gap-2"
+                className="bg-[#D94E0F] hover:bg-[#B8400B] text-white text-[13px] font-[700] px-10 py-2.5 rounded-[4px] transition-colors shadow-md inline-flex items-center gap-2"
               >
                 View more on Instagram
               </a>
@@ -1754,18 +1845,18 @@ export function Home() {
       )}
 
       {/* 6.5 Pre-Footer Photo CTA & Wave Transition into Footer */}
-      <section className="relative bg-[#0D0D0D] overflow-hidden -mt-[1px]">
+      <section className="relative bg-white overflow-hidden -mt-[1px]">
         {/* Background Photo */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/work/work-01.jpg')" }}
+          style={{ backgroundImage: "url('/images/ready-cta-bg.jpg')" }}
           aria-hidden="true"
         />
         <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
 
-        {/* Top Organic Wave from Proudly Serving These Areas */}
-        <div className="relative z-10 w-full overflow-hidden leading-none pt-6 sm:pt-8 lg:pt-10 bg-[#0D0D0D]">
-          <div className="h-[1px] w-full bg-[#0D0D0D]" />
+        {/* Top Organic Wave from White Page into Photo CTA */}
+        <div className="relative z-10 w-full overflow-hidden leading-none pt-6 sm:pt-8 lg:pt-10 bg-white">
+          <div className="h-[1px] w-full bg-white" />
         </div>
         <div className="relative z-10 w-full overflow-hidden leading-none -mt-[1px]">
           <svg
@@ -1776,19 +1867,19 @@ export function Home() {
           >
             <path
               d="M0,0 L0,14 C120,24 235,104 385,104 C545,104 685,14 850,14 C1025,14 1185,108 1355,108 C1395,108 1420,102 1440,94 L1440,0 Z"
-              fill="#0D0D0D"
+              fill="#FFFFFF"
             />
           </svg>
         </div>
 
         {/* Center CTA Content */}
         <div className="relative z-10 max-w-[960px] mx-auto px-4 lg:px-8 py-[44px] sm:py-[60px] text-center flex flex-col items-center">
-          <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-[#F5F5F0] leading-[1.08] tracking-[-0.01em] drop-shadow-md">
+          <h2 className="text-[28px] sm:text-[38px] lg:text-[46px] uppercase font-[800] text-white leading-[1.08] tracking-[-0.01em] drop-shadow-md">
             READY TO START YOUR PROJECT?
           </h2>
           <Link
             to="/contact"
-            className="mt-6 inline-flex items-center justify-center bg-[#1F46B4] hover:bg-[#193996] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-wider px-8 py-4 rounded-[4px] transition-colors shadow-lg"
+            className="mt-6 inline-flex items-center justify-center bg-[#D94E0F] hover:bg-[#B8400B] text-white font-[800] text-[13px] sm:text-[14px] uppercase tracking-wider px-8 py-4 rounded-[4px] transition-colors shadow-lg"
           >
             GET FREE QUOTE
           </Link>

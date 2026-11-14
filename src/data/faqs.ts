@@ -35,23 +35,23 @@ export const FAQS = [
 
 export const HOME_FAQS = [
   {
-    q: 'Can you provide references from past clients?',
-    a: 'Yes! We have hundreds of verified 5-star Google reviews from Portland homeowners and businesses, and we are happy to share local project references for repiping, water heater, boiler, or sewer jobs.',
+    q: 'Can you provide examples of past handyman work in Paphos?',
+    a: 'Yes! You can browse our Project Gallery and our @paphos_handyman Instagram feed right on this page, featuring real local projects including timber fences, courtyard gates, pergola roofs, ceiling repairs, and exterior painting.',
   },
   {
-    q: 'What sets you apart from other contractors in the area?',
-    a: 'We combine rapid local dispatch across Portland with upfront, fixed pricing before any work begins. Every truck comes fully stocked and is staffed by a licensed, insured technician under Master Plumber License #MP-78291.',
+    q: 'What sets George Handyman Services apart?',
+    a: 'We focus on clean, durable workmanship, punctual arrivals, and honest quotes before any job starts—handling both small indoor fixes and custom outdoor carpentry across Paphos.',
   },
   {
-    q: 'What types of services do you offer?',
-    a: 'We handle full-service residential and commercial plumbing and heating—including burst pipe repair, drain cleaning, water heaters, sewer lines, flood extraction, leak detection, boiler repair, hydro jetting, sump pumps, pipe replacement, fixture repair, and camera inspections.',
+    q: 'What types of handyman services do you offer?',
+    a: 'We handle custom wooden & aluminum gates, privacy fencing, pergolas, ceiling & drywall restoration, LED lighting installation, interior/exterior painting, deck staining, TV mounting, upholstery care, and general plumbing/AC maintenance.',
   },
   {
-    q: 'How fast can you actually get here?',
-    a: 'Average response is 30 minutes across most of Portland. Outlying areas can run up to 60 minutes—we tell you honestly on the call before you commit.',
+    q: 'Which areas around Paphos do you cover?',
+    a: 'We serve Kato Paphos, Chloraka, Peyia, Coral Bay, Tala, Kissonerga, Geroskipou, Empa, Tremithousa, Mesogi, Konia, Anarita, Mandria, and nearby villages.',
   },
   {
-    q: 'Is your emergency rate really fixed?',
-    a: 'Yes. You get the upfront price before work begins, not a vague estimate that changes once the truck is in your driveway.',
+    q: 'How can I get a free quote or book a visit?',
+    a: 'Call +357 99 233225 directly or send a quick message using the Free Quote form above and George will get back to you promptly.',
   },
 ];

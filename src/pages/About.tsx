@@ -6,18 +6,20 @@ export function About() {
   return (
     <>
       <Helmet>
-        <title>About Us — 24/7 Dispatch | SOLO Plumbing & Heating</title>
-        <meta name="description" content="A dispatch-first emergency plumbing operation serving Portland. Every truck stocked, every technician licensed, every dispatcher awake." />
+        <title>About Us | George Handyman Services — Paphos, Cyprus</title>
+        <meta name="description" content="Trusted handyman & property maintenance services across Paphos, Cyprus. Gates, fencing, carpentry, ceiling & drywall repair, painting, lighting, and home repairs." />
         <script type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "SOLO Plumbing & Heating",
+              "name": "George Handyman Services",
+              "telephone": "+357 99 233225",
+              "areaServed": "Paphos, Cyprus",
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "510"
+                "ratingValue": "5.0",
+                "reviewCount": "8"
               }
             }
           `}
@@ -28,16 +30,16 @@ export function About() {
       <section className="w-full bg-[#1A1A1A] min-h-[500px] flex items-center px-4 pt-[104px] pb-16 lg:pt-[120px]">
         <div className="max-w-[1280px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 items-center">
           <div>
-            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">ABOUT IRONCLAD PLUMBING</span>
+            <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">ABOUT GEORGE HANDYMAN SERVICES</span>
             <h1 className="text-[32px] sm:text-[40px] lg:text-[48px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.08] mt-2">
-              We built this for the 2am calls.
+              Quality handyman craftsmanship across Paphos.
             </h1>
             <p className="text-[18px] text-[#F5F5F0]/85 mt-4 leading-[1.6]">
-              A dispatch-first emergency plumbing operation serving Portland since 2014. Every truck stocked, every technician licensed, every dispatcher awake.
+              From custom gates, timber fencing, and pergolas to ceiling repairs, LED lighting, feature walls, and general home maintenance across Paphos, Cyprus.
             </p>
           </div>
           <div className="h-full min-h-[400px] bg-[#242424] rounded-[4px] relative overflow-hidden flex items-center justify-center">
-             <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=1000" className="absolute inset-0 w-full h-full object-cover opacity-70" alt="Plumbing team" />
+             <img src="/images/work/work-1.webp" className="absolute inset-0 w-full h-full object-cover opacity-85" alt="George Handyman Services carpentry and gate work in Paphos" />
           </div>
         </div>
       </section>

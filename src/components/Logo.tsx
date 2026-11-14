@@ -4,7 +4,7 @@ export function Logo({ className = "w-48" }: { className?: string }) {
   return (
     <img 
       src="/logo.png" 
-      alt="SOLO Plumbing & Heating" 
+      alt="George Handyman Services — Paphos" 
       className={`object-contain ${className}`}
     />
   );

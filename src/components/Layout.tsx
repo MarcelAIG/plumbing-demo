@@ -25,74 +25,79 @@ export function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isTransparentHeroHeader = !isScrolled && !mobileMenuOpen && pathname !== '/leave-review';
+
   return (
     <HelmetProvider>
-      <div className="flex flex-col min-h-screen pb-[74px] lg:pb-0 bg-[#1A1A1A] text-[#F5F5F0]">
+      <div className="flex flex-col min-h-screen pb-[74px] lg:pb-0 bg-white text-[#111827]">
         
         {/* 5.2 Main Navigation */}
         <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled || mobileMenuOpen
-            ? 'bg-[#1A1A1A]/95 backdrop-blur-md border-b border-white/5 shadow-lg' 
+            ? 'bg-white/95 backdrop-blur-md border-b border-black/10 shadow-md' 
             : 'bg-transparent border-b border-transparent'
         }`}>
-          <div className="w-full max-w-[1280px] mx-auto h-[64px] lg:h-[80px] px-4 lg:px-8 flex items-center justify-between">
-            <Link to="/" className="flex items-center mt-1 -ml-3 lg:-ml-[32px]" aria-label="Home">
-            <Logo className="w-24 lg:w-32" />
-          </Link>
+          <div className="w-full max-w-[1280px] mx-auto h-[72px] lg:h-[84px] px-4 lg:px-8 flex items-center justify-between">
+            <Link to="/" className="flex items-center shrink-0 py-1" aria-label="George Handyman Services Home">
+              <Logo className="h-[54px] lg:h-[66px] w-auto" />
+            </Link>
           
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8 relative lg:left-0 xl:-left-6 lg:translate-y-[6px]">
-            <NavLink to="/">Home</NavLink>
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8 relative lg:left-0 xl:-left-4">
+            <NavLink to="/" lightOnTransparent={isTransparentHeroHeader}>Home</NavLink>
             
-            <div className="relative group h-[80px] flex items-center">
-              <NavLink to="/services">
+            <div className="relative group h-[84px] flex items-center">
+              <NavLink to="/services" lightOnTransparent={isTransparentHeroHeader}>
                 <span>Services</span>
-                <ChevronDown size={14} strokeWidth={2} className="mt-[1px] opacity-75 transition-transform duration-200 group-hover:rotate-180" />
+                <ChevronDown size={14} strokeWidth={2} className="mt-[1px] opacity-80 transition-transform duration-200 group-hover:rotate-180" />
               </NavLink>
               <div className="absolute top-full left-0 hidden group-hover:block w-[240px]">
-                <div className="bg-[#1A1A1A] border border-white/10 rounded-[2px] shadow-xl py-2 flex flex-col">
-                  <Link to="/services/burst-pipe-repair" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Burst pipe repair</Link>
-                  <Link to="/services/sewer-backup-emergency" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Sewer backup emergency</Link>
-                  <Link to="/services/no-heat-no-hot-water" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">No heat / no hot water</Link>
-                  <Link to="/services/flood-water-extraction" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Flood water extraction</Link>
-                  <Link to="/services/emergency-drain-clearing" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Emergency drain clearing</Link>
-                  <Link to="/services" className="px-4 py-2 text-[15px] text-[#1F46B4] font-[600] mt-1 hover:bg-[#242424]">View all services &rarr;</Link>
+                <div className="bg-white border border-black/10 rounded-[4px] shadow-xl py-2 flex flex-col">
+                  <Link to="/services" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Gate &amp; Fence Installation</Link>
+                  <Link to="/services" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Ceiling &amp; Drywall Repair</Link>
+                  <Link to="/services" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">LED Lighting Systems</Link>
+                  <Link to="/services" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Deck Staining &amp; Pergolas</Link>
+                  <Link to="/services" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Feature Walls &amp; Painting</Link>
+                  <Link to="/services" className="px-4 py-2 text-[15px] text-[#C2410C] font-[700] mt-1 hover:bg-[#FFF7ED]">View all services &rarr;</Link>
                 </div>
               </div>
             </div>
 
-            <div className="relative group h-[80px] flex items-center">
-              <NavLink to="/service-areas">
+            <div className="relative group h-[84px] flex items-center">
+              <NavLink to="/service-areas" lightOnTransparent={isTransparentHeroHeader}>
                 <span>Service Areas</span>
-                <ChevronDown size={14} strokeWidth={2} className="mt-[1px] opacity-75 transition-transform duration-200 group-hover:rotate-180" />
+                <ChevronDown size={14} strokeWidth={2} className="mt-[1px] opacity-80 transition-transform duration-200 group-hover:rotate-180" />
               </NavLink>
-              <div className="absolute top-full left-0 hidden group-hover:block w-[200px]">
-                <div className="bg-[#1A1A1A] border border-white/10 rounded-[2px] shadow-xl py-2 flex flex-col">
-                  <Link to="/service-areas/downtown" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Downtown</Link>
-                  <Link to="/service-areas/riverside" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Riverside</Link>
-                  <Link to="/service-areas/oakwood" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Oakwood</Link>
-                  <Link to="/service-areas/highland-park" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Highland Park</Link>
-                  <Link to="/service-areas/eastside" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Eastside</Link>
-                  <Link to="/service-areas/westgate" className="px-4 py-2 text-[15px] text-[#F5F5F0] hover:bg-[#242424] hover:text-[#1F46B4]">Westgate</Link>
-                  <Link to="/service-areas" className="px-4 py-2 text-[15px] text-[#1F46B4] font-[600] mt-1 hover:bg-[#242424]">View all areas &rarr;</Link>
+              <div className="absolute top-full left-0 hidden group-hover:block w-[210px]">
+                <div className="bg-white border border-black/10 rounded-[4px] shadow-xl py-2 flex flex-col">
+                  <Link to="/service-areas" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Kato Paphos</Link>
+                  <Link to="/service-areas" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Chloraka</Link>
+                  <Link to="/service-areas" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Peyia &amp; Coral Bay</Link>
+                  <Link to="/service-areas" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Tala &amp; Kissonerga</Link>
+                  <Link to="/service-areas" className="px-4 py-2 text-[15px] text-[#1F2937] hover:bg-[#FFF7ED] hover:text-[#C2410C]">Geroskipou</Link>
+                  <Link to="/service-areas" className="px-4 py-2 text-[15px] text-[#C2410C] font-[700] mt-1 hover:bg-[#FFF7ED]">View all areas &rarr;</Link>
                 </div>
               </div>
             </div>
 
-            <NavLink to="/about">About</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/about" lightOnTransparent={isTransparentHeroHeader}>About</NavLink>
+            <NavLink to="/contact" lightOnTransparent={isTransparentHeroHeader}>Contact</NavLink>
           </div>
 
-          <div className="hidden lg:flex items-center gap-3 xl:gap-4 lg:translate-y-[6px]">
-            <a href="tel:6504871907" className="bg-[#F2131A] text-[#F5F5F0] font-[800] text-[14px] xl:text-[15px] px-4 xl:px-[20px] py-[13px] rounded-[2px] tracking-wide hover:bg-transparent hover:text-[#F2131A] active:scale-[0.98] transition-all flex items-center gap-2 border-2 border-[#F2131A] whitespace-nowrap">
-              <Phone size={18} />
-              (650) 487-1907
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4">
+            <a href="tel:+35799233225" className="bg-[#111827] text-white font-[800] text-[14px] xl:text-[15px] px-4 xl:px-[20px] py-[12px] rounded-[4px] tracking-wide hover:bg-[#1F2937] active:scale-[0.98] transition-all flex items-center gap-2 border-2 border-[#111827] whitespace-nowrap shadow-sm">
+              <Phone size={18} className="text-[#FB923C]" />
+              +357 99 233225
             </a>
-            <Link to="/contact" className="bg-[#1F46B4] text-white font-[800] text-[14px] px-5 xl:px-[28px] py-[14px] border-2 border-[#1F46B4] rounded-[2px] uppercase tracking-wide hover:bg-transparent hover:text-[#1F46B4] transition-colors whitespace-nowrap">
+            <Link to="/contact" className="bg-[#D94E0F] text-white font-[800] text-[14px] px-5 xl:px-[26px] py-[13px] border-2 border-[#D94E0F] rounded-[4px] uppercase tracking-wide hover:bg-[#B8400B] hover:border-[#B8400B] transition-colors whitespace-nowrap shadow-sm">
               Get Free Quote
             </Link>
           </div>
 
-          <button className="lg:hidden text-[#F5F5F0]" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
+          <button
+            className={`lg:hidden transition-colors ${isTransparentHeroHeader ? 'text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]' : 'text-[#111827]'}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
             {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
           </div>
@@ -100,7 +105,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-40 bg-[#1A1A1A] pt-[80px] px-6 flex flex-col gap-8 overflow-y-auto pb-[100px]">
+          <div className="fixed inset-0 z-40 bg-white pt-[88px] px-6 flex flex-col gap-8 overflow-y-auto pb-[100px]">
             <MobileNavLink to="/">Home</MobileNavLink>
             <MobileNavLink to="/services">Services</MobileNavLink>
             <MobileNavLink to="/service-areas">Service Areas</MobileNavLink>
@@ -115,13 +120,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <Footer />
 
+        {/* Floating WhatsApp Widget connected directly to +357 99 233225 */}
+        <a
+          href="https://wa.me/35799233225?text=Hello%20George%2C%20I%20found%20your%20website%20and%20would%20like%20to%20request%20a%20free%20quote."
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat on WhatsApp with George Handyman Services"
+          className="fixed bottom-[86px] lg:bottom-6 right-4 lg:right-6 z-50 group flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1EB954] text-white font-[800] rounded-full shadow-[0_10px_28px_rgba(0,0,0,0.28)] px-3.5 py-3.5 sm:px-5 sm:py-3.5 transition-all hover:scale-[1.04] active:scale-[0.97]"
+        >
+          <svg viewBox="0 0 32 32" className="w-[26px] h-[26px] fill-current shrink-0" aria-hidden="true">
+            <path d="M16.004 3.2C8.94 3.2 3.2 8.94 3.2 16.004c0 2.257.59 4.46 1.71 6.403L3.1 28.9l6.652-1.745a12.74 12.74 0 0 0 6.252 1.635h.005c7.06 0 12.801-5.74 12.801-12.803 0-3.42-1.331-6.634-3.749-9.051A12.716 12.716 0 0 0 16.004 3.2zm7.452 18.082c-.315.887-1.832 1.696-2.548 1.803-.651.097-1.474.138-2.378-.149-.549-.174-1.253-.406-2.155-.795-3.792-1.637-6.269-5.462-6.458-5.714-.189-.252-1.54-2.051-1.54-3.913 0-1.862.976-2.776 1.322-3.154.346-.378.755-.472 1.007-.472s.504.003.725.013c.233.011.544-.088.851.649.315.755 1.07 2.616 1.164 2.805.095.189.158.41.032.662-.126.252-.189.41-.378.63-.189.22-.398.493-.567.662-.189.189-.386.394-.166.772.221.378.98 1.617 2.104 2.619 1.446 1.289 2.665 1.689 3.043 1.878.378.189.599.158.819-.094.221-.252.945-1.102 1.197-1.48.252-.378.504-.315.85-.189.346.126 2.203 1.039 2.581 1.228.378.189.63.284.725.441.094.158.094.914-.221 1.8z" />
+          </svg>
+          <span className="hidden sm:inline text-[13.5px] tracking-wide whitespace-nowrap">
+            WhatsApp George
+          </span>
+        </a>
+
         {/* Mobile Sticky Action Buttons */}
-        <div className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden bg-[#1A1A1A] p-3 gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-          <a href="tel:6504871907" className="flex-1 bg-[#F2131A] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center gap-2 hover:bg-transparent hover:text-[#F2131A] border-2 border-[#F2131A] active:scale-[0.98] transition-all">
-            <Phone size={16} />
+        <div className="fixed bottom-0 left-0 right-0 z-[60] flex lg:hidden bg-white border-t border-black/10 p-3 gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.12)]">
+          <a href="tel:+35799233225" className="flex-1 bg-[#111827] text-white font-[800] py-3 rounded-[4px] text-center text-[14px] flex items-center justify-center gap-2 hover:bg-[#1F2937] border-2 border-[#111827] active:scale-[0.98] transition-all">
+            <Phone size={16} className="text-[#FB923C]" />
             CALL NOW
           </a>
-          <Link to="/contact" className="flex-1 border-2 border-[#F5F5F0] text-[#F5F5F0] font-[800] py-3 rounded-[2px] text-center text-[14px] flex items-center justify-center uppercase hover:bg-[#F5F5F0] hover:text-[#1A1A1A] transition-colors">
+          <Link to="/contact" className="flex-1 bg-[#D94E0F] border-2 border-[#D94E0F] text-white font-[800] py-3 rounded-[4px] text-center text-[14px] flex items-center justify-center uppercase hover:bg-[#B8400B] transition-colors">
             Get Free Quote
           </Link>
         </div>
@@ -130,11 +151,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-function NavLink({ to, children }: { to: string, children: React.ReactNode }) {
+function NavLink({ to, children, lightOnTransparent = false }: { to: string, children: React.ReactNode, lightOnTransparent?: boolean }) {
   const { pathname } = useLocation();
   const isActive = pathname === to || (to !== '/' && pathname.startsWith(to));
+  const colorClass = lightOnTransparent
+    ? isActive
+      ? 'text-[#FB923C] border-b-2 border-[#FB923C] drop-shadow-[0_1px_4px_rgba(0,0,0,0.85)]'
+      : 'text-white hover:text-[#FB923C] drop-shadow-[0_1px_4px_rgba(0,0,0,0.85)]'
+    : isActive
+      ? 'text-[#C2410C] border-b-2 border-[#C2410C]'
+      : 'text-[#111827] hover:text-[#C2410C]';
+
   return (
-    <Link to={to} className={`inline-flex items-center gap-1 text-[16px] font-[600] ${isActive ? 'text-[#1F46B4] border-b-2 border-[#1F46B4]' : 'text-[#F5F5F0] hover:text-[#1F46B4]'} pb-1 transition-colors`}>
+    <Link to={to} className={`inline-flex items-center gap-1 text-[16px] font-[700] ${colorClass} pb-1 transition-colors`}>
       {children}
     </Link>
   );
@@ -142,7 +171,7 @@ function NavLink({ to, children }: { to: string, children: React.ReactNode }) {
 
 function MobileNavLink({ to, children }: { to: string, children: React.ReactNode }) {
   return (
-    <Link to={to} className="text-[24px] font-[700] uppercase text-[#F5F5F0] font-oswald">
+    <Link to={to} className="text-[24px] font-[700] uppercase text-[#111827] font-oswald">
       {children}
     </Link>
   );
@@ -152,10 +181,10 @@ export function TrustBar() {
   return (
     <div className="w-full bg-[#242424] py-[32px] border-y-2 border-white/10 px-4">
       <div className="max-w-[1280px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8">
-        <TrustItem icon={<Clock className="text-[#1F46B4]" size={24} />} title="30-min dispatch" sub="Average time to truck rolling" />
-        <TrustItem icon={<ShieldCheck className="text-[#1F46B4]" size={24} />} title="Licensed & insured" sub="Master Plumber License #MP-78291" />
-        <TrustItem icon={<Truck className="text-[#1F46B4]" size={24} />} title="Trucks stocked 24/7" sub="No 'we'll order the part' delays" />
-        <TrustItem icon={<Star className="text-[#1F46B4]" size={24} />} title="4.9 from 510+ reviews" sub="Google & Yelp verified" />
+        <TrustItem icon={<Clock className="text-[#D94E0F]" size={24} />} title="30-min dispatch" sub="Average time to truck rolling" />
+        <TrustItem icon={<ShieldCheck className="text-[#D94E0F]" size={24} />} title="Licensed & insured" sub="Master Plumber License #MP-78291" />
+        <TrustItem icon={<Truck className="text-[#D94E0F]" size={24} />} title="Trucks stocked 24/7" sub="No 'we'll order the part' delays" />
+        <TrustItem icon={<Star className="text-[#D94E0F]" size={24} />} title="4.9 from 510+ reviews" sub="Google & Yelp verified" />
       </div>
     </div>
   );
@@ -175,18 +204,18 @@ function TrustItem({ icon, title, sub }: { icon: React.ReactNode, title: string,
 
 export function CTABand() {
   return (
-    <div className="w-full bg-[#1F46B4] py-[70px] lg:py-[100px] px-4">
+    <div className="w-full bg-[#D94E0F] py-[70px] lg:py-[100px] px-4">
       <div className="max-w-[720px] mx-auto text-center flex flex-col items-center">
-        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#F5F5F0]">STILL AN EMERGENCY?</span>
-        <h2 className="text-[30px] lg:text-[44px] font-[800] uppercase text-[#F5F5F0] mt-4 font-oswald leading-[1.1]">Every minute of flooding costs more.</h2>
-        <p className="text-[18px] text-[#F5F5F0]/85 mt-4 max-w-[580px]">
-          Dispatchers are standing by right now.
+        <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-white/95">NEED RELIABLE HANDYMAN HELP?</span>
+        <h2 className="text-[30px] lg:text-[44px] font-[800] uppercase text-white mt-4 font-oswald leading-[1.1]">Fast, clean repairs across Paphos.</h2>
+        <p className="text-[18px] text-white/90 mt-4 max-w-[580px]">
+          Call George directly for repairs, gates, carpentry, painting, and home maintenance.
         </p>
-        <a href={`tel:${PHONE_NUMBER.replace(/\D/g, '')}`} className="text-[36px] lg:text-[56px] font-[800] text-[#F2131A] mt-8 hover:text-[#F5F5F0] hover:scale-[1.02] active:scale-[0.98] transition-all inline-block">
-          CALL NOW
+        <a href="tel:+35799233225" className="text-[34px] lg:text-[52px] font-[800] text-[#111827] bg-white px-7 py-2.5 rounded-[4px] mt-8 hover:bg-[#111827] hover:text-white active:scale-[0.98] transition-all inline-block shadow-lg">
+          +357 99 233225
         </a>
-        <Link to="/contact" className="text-[16px] font-[600] text-[#F5F5F0]/80 underline mt-4 hover:text-[#F5F5F0]">
-          Not urgent? Book a scheduled visit &rarr;
+        <Link to="/contact" className="text-[16px] font-[700] text-white underline mt-5 hover:text-[#111827]">
+          Or request a free quote online &rarr;
         </Link>
       </div>
     </div>
@@ -195,35 +224,35 @@ export function CTABand() {
 
 function Footer() {
   const footerServices = [
-    { name: 'Emergency Plumbing', to: '/services/burst-pipe-repair' },
-    { name: 'Drain Cleaning', to: '/services/emergency-drain-clearing' },
-    { name: 'Water Heaters', to: '/services/no-heat-no-hot-water' },
-    { name: 'Sewer Line Repair', to: '/services/sewer-backup-emergency' },
-    { name: 'Leak Detection', to: '/services/burst-pipe-repair' },
-    { name: 'Pipe Repair & Repiping', to: '/services/burst-pipe-repair' },
-    { name: 'Hydro Jetting', to: '/services/emergency-drain-clearing' },
-    { name: 'Boiler & Heating', to: '/services/no-heat-no-hot-water' },
-    { name: 'Flood Extraction', to: '/services/flood-water-extraction' },
-    { name: 'Fixture Installation', to: '/services' },
-    { name: 'Sump Pumps', to: '/services/flood-water-extraction' },
-    { name: 'Camera Inspection', to: '/services/sewer-backup-emergency' },
+    { name: 'Gate & Fence Installation', to: '/services' },
+    { name: 'Ceiling & Drywall Repair', to: '/services' },
+    { name: 'LED Lighting Systems', to: '/services' },
+    { name: 'Deck Staining & Timber', to: '/services' },
+    { name: 'Feature Walls & TV Mounts', to: '/services' },
+    { name: 'Pergola & Wood Carpentry', to: '/services' },
+    { name: 'Exterior Facade Painting', to: '/services' },
+    { name: 'Custom Privacy Fencing', to: '/services' },
+    { name: 'Plumbing & AC Maintenance', to: '/services' },
+    { name: 'Upholstery & Deep Clean', to: '/services' },
+    { name: 'Doors, Locks & Hardware', to: '/services' },
+    { name: 'General Home Repairs', to: '/services' },
   ];
 
   const footerAreas = [
-    { name: 'Downtown', to: '/service-areas/downtown' },
-    { name: 'Riverside', to: '/service-areas/riverside' },
-    { name: 'Oakwood', to: '/service-areas/oakwood' },
-    { name: 'Highland Park', to: '/service-areas/highland-park' },
-    { name: 'Eastside', to: '/service-areas/eastside' },
-    { name: 'Westgate', to: '/service-areas/westgate' },
-    { name: 'Beaverton', to: '/service-areas' },
-    { name: 'Lake Oswego', to: '/service-areas' },
-    { name: 'Tigard', to: '/service-areas' },
-    { name: 'Gresham', to: '/service-areas' },
-    { name: 'Milwaukie', to: '/service-areas' },
-    { name: 'Oregon City', to: '/service-areas' },
-    { name: 'Hillsboro', to: '/service-areas' },
-    { name: 'Vancouver', to: '/service-areas' },
+    { name: 'Kato Paphos', to: '/service-areas' },
+    { name: 'Chloraka', to: '/service-areas' },
+    { name: 'Peyia', to: '/service-areas' },
+    { name: 'Coral Bay', to: '/service-areas' },
+    { name: 'Tala', to: '/service-areas' },
+    { name: 'Kissonerga', to: '/service-areas' },
+    { name: 'Geroskipou', to: '/service-areas' },
+    { name: 'Empa', to: '/service-areas' },
+    { name: 'Tremithousa', to: '/service-areas' },
+    { name: 'Mesogi', to: '/service-areas' },
+    { name: 'Konia', to: '/service-areas' },
+    { name: 'Anarita', to: '/service-areas' },
+    { name: 'Mandria', to: '/service-areas' },
+    { name: 'Polis Chrysochous', to: '/service-areas' },
   ];
 
   const operatingHours = [
@@ -232,8 +261,8 @@ function Footer() {
     'Tue: 8:00am - 6:00pm',
     'Wed: 8:00am - 6:00pm',
     'Thu: 8:00am - 6:00pm',
-    'Fri: 8:00am - 5:00pm',
-    'Sat: 8:00am - 6:00pm',
+    'Fri: 8:00am - 6:00pm',
+    'Sat: 8:00am - 4:00pm',
   ];
 
   return (
@@ -243,39 +272,34 @@ function Footer() {
           {/* Left White Business Card */}
           <div className="bg-white rounded-[6px] p-6 sm:p-7 text-[#1A1A1A] shadow-2xl max-w-[380px] w-full">
             {/* Top Logo + Contact Details */}
-            <div className="grid grid-cols-[125px_1fr] gap-4 items-center py-2">
-              <Link to="/" className="flex items-center justify-center overflow-hidden" aria-label="SOLO Plumbing & Heating Home">
-                <Logo className="w-[125px] h-auto scale-[1.22]" />
+            <div className="grid grid-cols-[118px_1fr] gap-4 items-center py-2">
+              <Link to="/" className="flex items-center justify-center overflow-hidden" aria-label="George Handyman Services Home">
+                <Logo className="w-[116px] h-[116px]" />
               </Link>
               <div className="min-w-0">
                 <div className="text-[16px] font-[800] text-[#1A1A1A] leading-tight mb-1.5">
-                  SOLO Plumbing
+                  George Handyman Services
                 </div>
                 <a
-                  href="tel:6504871907"
-                  className="block text-[13px] font-[600] text-[#333333] hover:text-[#1F46B4] transition-colors leading-relaxed"
+                  href="tel:+35799233225"
+                  className="block text-[13px] font-[700] text-[#333333] hover:text-[#C2410C] transition-colors leading-relaxed"
                 >
-                  (650) 487-1907
+                  +357 99 233225
                 </a>
-                <a
-                  href="mailto:contact.soloplumbing@gmail.com"
-                  className="block text-[13px] font-[600] text-[#333333] hover:text-[#1F46B4] transition-colors leading-snug mt-0.5 break-all"
-                >
-                  Contact.soloplumbing
-                  <br />
-                  @gmail.com
-                </a>
+                <div className="text-[12.5px] font-[600] text-[#555555] leading-snug mt-0.5">
+                  Paphos, Cyprus
+                </div>
               </div>
             </div>
 
             {/* Middle Contact + Get Quote Strip */}
-            <div className="bg-[#1F46B4] rounded-[4px] px-5 py-3.5 my-5 flex items-center justify-between gap-3">
+            <div className="bg-[#D94E0F] rounded-[4px] px-5 py-3.5 my-5 flex items-center justify-between gap-3">
               <span className="text-[15px] font-[800] uppercase tracking-wide text-white">
                 CONTACT
               </span>
               <Link
                 to="/contact"
-                className="bg-white text-[#0D0D0D] hover:bg-[#F5F5F0] text-[12px] font-[800] uppercase tracking-wide px-5 py-2.5 rounded-[4px] transition-colors whitespace-nowrap shadow-sm"
+                className="bg-white text-[#111827] hover:bg-[#111827] hover:text-white text-[12px] font-[800] uppercase tracking-wide px-5 py-2.5 rounded-[4px] transition-colors whitespace-nowrap shadow-sm"
               >
                 GET QUOTE
               </Link>
@@ -284,7 +308,7 @@ function Footer() {
             {/* Bottom 4 Circular Social Icons (Same as About Us Section) */}
             <div className="flex items-center justify-around pt-2">
               <a
-                href="https://www.instagram.com/doggroomingby_julia/"
+                href="https://www.instagram.com/paphos_handyman/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -439,13 +463,13 @@ function Footer() {
         <div className="max-w-[1280px] mx-auto px-4 lg:px-8 py-5 flex items-center justify-end gap-12 sm:gap-20">
           <Link
             to="/privacy"
-            className="text-[13px] font-[800] text-white hover:text-[#5C85F6] transition-colors"
+            className="text-[13px] font-[800] text-white hover:text-[#FB923C] transition-colors"
           >
             Privacy Policy
           </Link>
           <Link
             to="/terms"
-            className="text-[13px] font-[800] text-white hover:text-[#5C85F6] transition-colors"
+            className="text-[13px] font-[800] text-white hover:text-[#FB923C] transition-colors"
           >
             Terms &amp; Conditions
           </Link>

@@ -8,8 +8,8 @@
 }
 
 body {
-  background-color: #1A1A1A;
-  color: #F5F5F0;
+  background-color: #FFFFFF;
+  color: #111827;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin: 0;
@@ -20,7 +20,7 @@ body {
 
 /* Sharp focus outlines for accessibility */
 *:focus-visible {
-  outline: 3px solid #1F46B4 !important;
+  outline: 3px solid #EA580C !important;
   outline-offset: 2px !important;
 }
 
@@ -36,13 +36,4 @@ html {
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-/* Chat widget mobile adjustments */
-@media (max-width: 1024px) {
-  #chat-widget-container, div[id*="chat-widget"], iframe[id*="chat-widget"] {
-    transform: scale(0.85);
-    transform-origin: bottom right;
-    bottom: 84px !important; margin-bottom: 0 !important;
-  }
 }

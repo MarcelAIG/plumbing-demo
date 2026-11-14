@@ -6,18 +6,18 @@ export function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact Us — Request Dispatch | SOLO Plumbing & Heating</title>
-        <meta name="description" content="Call now, or request dispatch online. For active emergencies, always call. The form is for non-urgent scheduling." />
+        <title>Contact Us — Request a Quote | George Handyman Services</title>
+        <meta name="description" content="Call +357 99 233225 or request a free quote online for reliable handyman and maintenance services across Paphos, Cyprus." />
       </Helmet>
 
       {/* 13.1 Compact Hero */}
       <section className="bg-[#1A1A1A] pt-[124px] pb-[80px] lg:pt-[140px] lg:pb-[100px] px-4 text-center min-h-[340px] lg:min-h-[420px] flex flex-col justify-center items-center">
         <span className="text-[13px] font-[800] tracking-[0.1em] uppercase text-[#1F46B4]">GET IN TOUCH</span>
         <h1 className="text-[42px] lg:text-[52px] uppercase font-[800] text-[#F5F5F0] font-oswald leading-[1.1] mt-2 max-w-[800px]">
-          Call now, or request dispatch.
+          Call now, or request a free quote.
         </h1>
         <p className="text-[18px] text-[#9C9C96] max-w-[600px] mt-4 leading-[1.6]">
-          For active emergencies, always call. The form is for non-urgent scheduling.
+          Fast, dependable handyman &amp; home maintenance services across Paphos, Cyprus.
         </p>
       </section>
 
@@ -27,19 +27,19 @@ export function Contact() {
           <div className="bg-[#1A1A1A] border-t-4 border-[#F2131A] rounded-[2px] p-8 flex flex-col items-start gap-4">
             <Phone size={32} className="text-[#F2131A]" />
             <h3 className="text-[24px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Call (Primary)</h3>
-            <a href="tel:5552020199" className="text-[32px] font-[800] text-[#F2131A] font-oswald">555-202-0199</a>
+            <a href="tel:+35799233225" className="text-[30px] font-[800] text-[#F2131A] font-oswald">+357 99 233225</a>
           </div>
           
           <div className="bg-[#1A1A1A] border-t-4 border-[#1F46B4] rounded-[2px] p-8 flex flex-col items-start gap-4">
             <MousePointerClick size={32} className="text-[#1F46B4]" />
             <h3 className="text-[24px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Online</h3>
-            <a href="#dispatch-form" className="text-[18px] font-[600] text-[#F5F5F0] underline">Request dispatch online &rarr;</a>
+            <a href="#dispatch-form" className="text-[18px] font-[600] text-[#F5F5F0] underline">Request a quote online &rarr;</a>
           </div>
 
           <div className="bg-[#1A1A1A] border-t-4 border-white/20 rounded-[2px] p-8 flex flex-col items-start gap-4">
             <MapPin size={32} className="text-[#9C9C96]" />
-            <h3 className="text-[24px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Visit</h3>
-            <p className="text-[16px] text-[#9C9C96] leading-[1.6]">1420 NW Industrial St, Portland, OR 97209 <br/> Office visits by appointment only. Dispatch is phone-first.</p>
+            <h3 className="text-[24px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1]">Service Area</h3>
+            <p className="text-[16px] text-[#9C9C96] leading-[1.6]">Paphos, Cyprus &amp; Surrounding Areas <br/> On-site estimates &amp; scheduled visits.</p>
           </div>
         </div>
       </section>
@@ -47,8 +47,8 @@ export function Contact() {
       {/* 13.3 Dispatch Request Form */}
       <section id="dispatch-form" className="bg-[#1A1A1A] py-[70px] lg:py-[100px] px-4">
         <div className="max-w-[800px] mx-auto bg-[#242424] p-[32px] lg:p-[48px] rounded-[4px] border border-white/5">
-          <h2 className="text-[30px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mb-2">Request Dispatch</h2>
-          <p className="text-[15px] font-[600] text-[#F2131A] mb-8">Note: For active flooding or gas smell, call 555-202-0199 directly — do not wait for a form response.</p>
+          <h2 className="text-[30px] uppercase font-[700] text-[#F5F5F0] font-oswald leading-[1.1] mb-2">Request a Free Quote</h2>
+          <p className="text-[15px] font-[600] text-[#F2131A] mb-8">Need urgent help today? Call +357 99 233225 directly for faster scheduling.</p>
           
           <form className="flex flex-col gap-6" onSubmit={e => e.preventDefault()}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

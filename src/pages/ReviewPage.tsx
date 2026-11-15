@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ArrowLeft } from 'lucide-react';
 import { Logo } from '../components/Logo';
 import { BUSINESS_NAME, GREEK_IDENTITY, GOOGLE_MAPS_REVIEW_URL } from '../config';
 
@@ -51,7 +51,7 @@ export function ReviewPage() {
   const progress = step === 'rate' ? 0 : step === 'feedback' ? 50 : 100;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pt-[124px] lg:pt-[140px] pb-[90px] px-4 flex flex-col items-center">
+    <div className="min-h-screen bg-[#F8FAFC] pt-[148px] lg:pt-[164px] pb-[90px] px-4 flex flex-col items-center">
       <Helmet>
         <title>{`Leave Us a Review | ${BUSINESS_NAME}`}</title>
         <meta
@@ -199,7 +199,15 @@ export function ReviewPage() {
               </div>
             </div>
 
-            <div className="mt-4 flex justify-end">
+            <div className="mt-4 flex items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={() => setStep('rate')}
+                className="text-white/80 hover:text-white text-[13px] font-[700] px-2 py-2 inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <ArrowLeft size={14} />
+                Back
+              </button>
               <button
                 type="submit"
                 className="text-white hover:text-[#2DD4BF] text-[14px] font-[800] px-4 py-2 transition-colors cursor-pointer"

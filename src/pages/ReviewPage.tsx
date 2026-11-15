@@ -1,9 +1,9 @@
 import { useState, type FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
-import { CheckCircle2, ArrowLeft } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { Logo } from '../components/Logo';
-import { BUSINESS_NAME, GREEK_IDENTITY, GOOGLE_MAPS_REVIEW_URL, PHONE_NUMBER, PHONE_HREF } from '../config';
+import { BUSINESS_NAME, GREEK_IDENTITY, GOOGLE_MAPS_REVIEW_URL } from '../config';
 
 const STAR_OPTIONS = [
   { value: 5, label: '5 Stars' },
@@ -29,7 +29,7 @@ export function ReviewPage() {
   const handleSelectRating = (stars: number) => {
     setSelectedRating(stars);
     if (stars >= 4) {
-      window.open(GOOGLE_MAPS_REVIEW_URL, '_blank', 'noopener,noreferrer');
+      window.location.assign(GOOGLE_MAPS_REVIEW_URL);
       return;
     }
     setStep('feedback');
@@ -37,7 +37,7 @@ export function ReviewPage() {
 
   const handleNext = () => {
     if (selectedRating >= 4) {
-      window.open(GOOGLE_MAPS_REVIEW_URL, '_blank', 'noopener,noreferrer');
+      window.location.assign(GOOGLE_MAPS_REVIEW_URL);
       return;
     }
     setStep('feedback');
@@ -122,18 +122,6 @@ export function ReviewPage() {
                   );
                 })}
               </div>
-
-              {/* Public Google Review Option Always Available Regardless of Rating */}
-              <div className="mt-5 pt-4 border-t border-black/10 text-center">
-                <a
-                  href={GOOGLE_MAPS_REVIEW_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[12.5px] font-[700] text-[#0F766E] hover:underline"
-                >
-                  Or leave a public review directly on Google Maps &rarr;
-                </a>
-              </div>
             </div>
 
             <div className="mt-4">
@@ -152,63 +140,52 @@ export function ReviewPage() {
         )}
 
         {step === 'feedback' && (
-          <>
-            <h1 className="text-center text-[20px] sm:text-[23px] font-[800] text-white leading-[1.2] mb-5 px-2">
-              Share your feedback or post a public Google review
+          <form onSubmit={handleFeedbackSubmit}>
+            <h1 className="text-center text-[22px] sm:text-[26px] font-[800] text-white tracking-[-0.01em] mb-5">
+              How would you rate us?
             </h1>
 
-            <form
-              onSubmit={handleFeedbackSubmit}
-              className="bg-white rounded-[8px] p-5 sm:p-6 text-[#111317] shadow-inner flex flex-col gap-4"
-            >
-              <p className="text-[12.5px] font-[600] text-[#4B5563] leading-[1.45]">
-                You can leave a public review on Google Maps at any rating, or write a note below and contact us directly at{' '}
-                <a href={PHONE_HREF} className="text-[#0F766E] underline">
-                  {PHONE_NUMBER}
-                </a>
-                .
-              </p>
-
-              <a
-                href={GOOGLE_MAPS_REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-[#F0FDFA] border border-[#0D9488]/40 text-[#0F766E] hover:bg-[#CCFBF1] text-[12.5px] font-[800] py-2.5 px-3 rounded-[4px] text-center transition-colors"
-              >
-                Leave a Public Review on Google Maps &rarr;
-              </a>
+            <div className="bg-white rounded-[8px] p-5 sm:p-6 text-[#111317] shadow-inner flex flex-col gap-4">
+              <div className="pb-3 border-b border-[#E5E7EB]">
+                <h2 className="text-[20px] sm:text-[22px] font-[800] text-[#4B5563] leading-[1.2]">
+                  Sorry to hear that you&apos;re not satisfied.
+                </h2>
+                <p className="text-[12px] font-[600] text-[#6B7280] mt-1">
+                  Please provide us with your feedback and we&apos;ll do our best to improve.
+                </p>
+              </div>
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="review-name" className="text-[12px] font-[700] text-[#374151]">
-                  Name <span className="font-[500] text-[#6B7280]">(optional)</span>
+                  Name (optional)
                 </label>
                 <input
                   id="review-name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Your Name"
-                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488]"
+                  placeholder="Name"
+                  className="w-full rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488]"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="review-email" className="text-[12px] font-[700] text-[#374151]">
-                  Email <span className="font-[500] text-[#6B7280]">(optional)</span>
+                  Email (optional)
                 </label>
                 <input
                   id="review-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
-                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488]"
+                  placeholder="Email"
+                  className="w-full rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488]"
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="review-feedback" className="text-[12px] font-[700] text-[#374151]">
-                  Your Feedback
+                  Your Feedback (Please let us know what can we do to improve?)
                 </label>
                 <textarea
                   id="review-feedback"
@@ -216,59 +193,38 @@ export function ReviewPage() {
                   required
                   value={feedback}
                   onChange={(e) => setFeedback(e.target.value)}
-                  placeholder="Enter your feedback here..."
-                  className="w-full rounded-[4px] border border-[#D1D5DB] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488] resize-y"
+                  placeholder="Your Feedback"
+                  className="w-full rounded-[4px] border border-[#E5E7EB] bg-[#FAFAFA] px-3 py-2 text-[13px] text-[#111317] placeholder-[#9CA3AF] focus:outline-none focus:border-[#0D9488] resize-y"
                 />
               </div>
+            </div>
 
-              <div className="pt-1 flex items-center justify-between gap-3">
-                <button
-                  type="button"
-                  onClick={() => setStep('rate')}
-                  className="text-[12px] font-[700] text-[#6B7280] hover:text-[#111317] inline-flex items-center gap-1 cursor-pointer"
-                >
-                  <ArrowLeft size={13} /> Back
-                </button>
-                <button
-                  type="submit"
-                  className="bg-[#0B0D10] hover:bg-[#1F2937] text-white text-[13px] font-[700] px-6 py-2.5 rounded-[5px] transition-colors cursor-pointer"
-                >
-                  Continue
-                </button>
-              </div>
-            </form>
-          </>
+            <div className="mt-4 flex justify-end">
+              <button
+                type="submit"
+                className="text-white hover:text-[#2DD4BF] text-[14px] font-[800] px-4 py-2 transition-colors cursor-pointer"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         )}
 
         {step === 'submitted' && (
           <div className="bg-white rounded-[8px] p-6 sm:p-7 text-[#111317] text-center flex flex-col items-center gap-3">
             <CheckCircle2 size={42} className="text-[#0D9488]" />
             <h1 className="text-[20px] font-[800] text-[#111317]">
-              Thank you for sharing your feedback
+              Thank you for your feedback!
             </h1>
             <p className="text-[13px] text-[#4B5563] leading-[1.55]">
-              This static preview does not send messages automatically. You can still post your review publicly on Google Maps or reach {BUSINESS_NAME} directly at{' '}
-              <a href={PHONE_HREF} className="text-[#0F766E] underline font-[700]">
-                {PHONE_NUMBER}
-              </a>
-              .
+              We appreciate your input and will use it to improve our service across Larnaca and Limassol.
             </p>
-            <div className="flex flex-col gap-2 w-full mt-2">
-              <a
-                href={GOOGLE_MAPS_REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-[#0D9488] hover:bg-[#0F766E] text-white text-[12.5px] font-[800] uppercase tracking-wide px-6 py-2.5 rounded-[4px] transition-colors"
-              >
-                Post Review on Google Maps
-              </a>
-              <Link
-                to="/"
-                className="inline-block text-[#4B5563] hover:text-[#111827] text-[12.5px] font-[700] py-1.5"
-              >
-                Return Home
-              </Link>
-            </div>
+            <Link
+              to="/"
+              className="mt-2 inline-block bg-[#0D9488] hover:bg-[#0F766E] text-white text-[13px] font-[700] px-6 py-2.5 rounded-[5px] transition-colors"
+            >
+              Return Home
+            </Link>
           </div>
         )}
 

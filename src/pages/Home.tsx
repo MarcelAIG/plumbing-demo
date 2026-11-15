@@ -12,6 +12,7 @@ import {
   GREEK_IDENTITY,
   FACEBOOK_URL,
   GOOGLE_MAPS_REVIEW_URL,
+  GOOGLE_MAPS_EMBED_URL,
   GOOGLE_RATING,
   GOOGLE_REVIEW_COUNT,
 } from '../config';
@@ -1508,7 +1509,7 @@ export function Home() {
           <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[470px] bg-[#E5E7EB] rounded-[8px] border border-black/10 overflow-hidden shadow-lg">
             <iframe
               title="Larnaca and Limassol Districts Service Region Map — Cyprus"
-              src="https://maps.google.com/maps?ll=34.80,33.32&z=10&ie=UTF8&output=embed"
+              src={GOOGLE_MAPS_EMBED_URL}
               className="w-full h-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

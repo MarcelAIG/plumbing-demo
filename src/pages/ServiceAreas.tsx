@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TrustBar, CTABand } from '../components/Layout';
 import { SERVICE_DISTRICTS } from '../data/neighborhoods';
 import { MapPin } from 'lucide-react';
-import { BUSINESS_NAME, GOOGLE_MAPS_REVIEW_URL, GOOGLE_RATING, GOOGLE_REVIEW_COUNT, GREEK_IDENTITY } from '../config';
+import { BUSINESS_NAME, GOOGLE_MAPS_REVIEW_URL, GOOGLE_MAPS_EMBED_URL, GOOGLE_RATING, GOOGLE_REVIEW_COUNT, GREEK_IDENTITY } from '../config';
 
 export function ServiceAreas() {
   return (
@@ -53,7 +53,7 @@ export function ServiceAreas() {
           <div className="w-full max-w-[900px] aspect-video bg-[#242424] border border-white/10 rounded-[4px] relative overflow-hidden">
             <iframe
               title="Larnaca and Limassol Districts Coverage Map"
-              src="https://maps.google.com/maps?ll=34.80,33.32&z=10&ie=UTF8&output=embed"
+              src={GOOGLE_MAPS_EMBED_URL}
               className="w-full h-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
